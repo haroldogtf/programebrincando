@@ -8,6 +8,10 @@ PARSER_BEGIN(ProgrameBrincando)
 
 package plp.programebrincando.parser;
 
+import plp.programebrincando.*;
+import plp.programebrincando.expression.*;
+import plp.programebrincando.util.*;
+
 public class ProgrameBrincando
 {
   public static void main(String args []) throws ParseException
@@ -135,10 +139,10 @@ TOKEN : /* SEPARATORS */
 
 Programa Input() :
 {
-  Programa retorno;
+  Programa retorno = null;
 }
 {
-  retorno = PPrograma() < EOF >
+  //retorno = PPrograma() < EOF >
   {
     return retorno;
   }
@@ -214,7 +218,7 @@ Expressao PExpressaoPrimaria() :
 {
   (
     retorno = PValor()
-  | < LPAREN > retorno = PExpressao() < RPAREN >
+  //| < LPAREN > retorno = PExpressao() < RPAREN >
   )
   {
     return retorno;
