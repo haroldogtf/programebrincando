@@ -71,8 +71,13 @@ TOKEN : /* PRIMITIVES */
 
 TOKEN : /* DIGIT AND LITERAL */
 {
-	  < CONSTANT : (< DIGIT >)+ >
-	| < #DIGIT : [ "0"-"9" ] >
+	< INTEGER_LITERAL :
+    < DECIMAL_LITERAL > ([ "l", "L" ])?
+  	| < HEX_LITERAL > ([ "l", "L" ])?
+  	| < OCTAL_LITERAL > ([ "l", "L" ])? >
+	| < #DECIMAL_LITERAL : [ "1"-"9" ] ([ "0"-"9" ])* >
+	| < #HEX_LITERAL : "0" [ "x", "X" ] ([ "0"-"9", "a"-"f", "A"-"F" ])+ >
+	| < #OCTAL_LITERAL : "0" ([ "0"-"7" ])* >
 	| < STRING_LITERAL :
 	    "\""
 	    (
@@ -99,6 +104,7 @@ TOKEN : /* EXPRESSIONS OPERATORS */
 	| < GTE   : ">=" >
 	| < LTE   : "<=" >
 	| < UNION : "JUNTA" >
+	| < NOT : "NAO" >
 }
 
 TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
@@ -126,3 +132,94 @@ TOKEN : /* SEPARATORS */
 	| < RPAREN : ")" >
 	| < COMMA  : "," >
 }
+
+Programa Input() :
+{
+  Programa retorno;
+}
+{
+  retorno = PPrograma() < EOF >
+  {
+    return retorno;
+  }
+}
+
+/* -------------------- VALOR INICIO -------------------- */
+Valor PValorInteiro() :
+{
+  Token token;
+}
+{
+  token = < INTEGER_LITERAL >
+  {
+    return new ValorInteiro(Integer.parseInt(token.toString()));
+  }
+}
+
+Valor PValorBooleano() :
+{}
+{
+  < FALSE >
+  {
+    return new ValorBooleano(false);
+  }
+  | < TRUE >
+  {
+    return new ValorBooleano(true);
+  }
+}
+
+Valor PValorCor() :
+{
+  Token token;
+}
+{
+   < BLACK >
+  {
+    return new ValorCor(token.toString());
+  }
+  | < RED >
+  {
+    return new ValorCor(token.toString());
+  }
+  | < GREEN >
+  {
+    return new ValorCor(token.toString());
+  }
+  | < BLUE >
+  {
+    return new ValorCor(token.toString());
+  }
+}
+
+Valor PValor() :
+{
+  Valor retorno;
+}
+{
+  (
+    retorno = PValorInteiro()
+  | retorno = PValorBooleano()
+  | retorno = PValorCor()
+  )
+  {
+    return retorno;
+  }
+}
+/* -------------------- VALOR FIM -------------------- */
+
+/* -------------------- EXPRESSAO PRIMARIA INICIO -------------------- */
+Expressao PExpressaoPrimaria() :
+{
+  Expressao retorno;
+}
+{
+  (
+    retorno = PValor()
+  | < LPAREN > retorno = PExpressao() < RPAREN >
+  )
+  {
+    return retorno;
+  }
+}
+/* -------------------- EXPRESSAO PRIMARIA FIM -------------------- */
