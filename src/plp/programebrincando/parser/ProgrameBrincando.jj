@@ -170,25 +170,23 @@ Valor PValorBooleano() :
 }
 
 Valor PValorCor() :
-{
-  Token token;
-}
+{}
 {
    < BLACK >
   {
-    return new ValorCor(token.toString());
+    return new ValorCor(TipoCor.BLACK);
   }
   | < RED >
   {
-    return new ValorCor(token.toString());
+    return new ValorCor(TipoCor.RED);
   }
   | < GREEN >
   {
-    return new ValorCor(token.toString());
+    return new ValorCor(TipoCor.GREEN);
   }
   | < BLUE >
   {
-    return new ValorCor(token.toString());
+    return new ValorCor(TipoCor.BLUE);
   }
 }
 
