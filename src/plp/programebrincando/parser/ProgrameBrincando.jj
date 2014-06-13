@@ -4,7 +4,7 @@ options
   static = true;
 }
 
-PARSER_BEGIN(ProgrameBrincando)
+PARSER_BEGIN(ProgrameBrincandoParser)
 
 package plp.programebrincando.parser;
 
@@ -12,15 +12,51 @@ import plp.programebrincando.*;
 import plp.programebrincando.expression.*;
 import plp.programebrincando.util.*;
 
-public class ProgrameBrincando
+public class ProgrameBrincandoParser
 {
   public static void main(String args []) throws ParseException
   {
-    System.out.println("funcionando ok!");
+    ProgrameBrincandoParser parser;
+    if (args.length == 0)
+    {
+      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Reading from standard input . . .");
+      parser = new ProgrameBrincandoParser(System.in);
+    }
+    else if (args.length == 1)
+    {
+      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Reading from file " + args [0] + " . . .");
+      try
+      {
+        parser = new ProgrameBrincandoParser(new java.io.FileInputStream(args [0]));
+      }
+      catch (java.io.FileNotFoundException e)
+      {
+        System.out.println("Java Parser Version 1.0.2:  File " + args [0] + " not found.");
+        return;
+      }
+    }
+    else
+    {
+      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Usage is one of:");
+      System.out.println("         java ProgrameBrincandoParser < inputfile");
+      System.out.println("OR");
+      System.out.println("         java ProgrameBrincandoParser inputfile");
+      return;
+    }
+    try
+    {
+      Programa programa = parser.entrada();
+      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  ProgrameBrincando program parsed successfully.");
+//      if (!programa.checaTipo())//      {//        System.out.println("Erro de tipo");//      }//      else//      {//        programa.executar();//      }//        programa.executar();
+    }
+    catch (ParseException e)
+    {
+      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Encountered errors during parse.");
+    }
   }
 }
 
-PARSER_END(ProgrameBrincando)
+PARSER_END(ProgrameBrincandoParser)
 
 SKIP : /* WHITE SPACE */
 {
@@ -90,7 +126,7 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < THEN        : "FACA" >
 	| < ELSE        : "SENAOFACA" >
 	| < ENDIF       : "FIMSE" >
-	| < FOWARD      : "PARAFRENTE" > 
+	| < FORWARD      : "PARAFRENTE" > 
 	| < BACK 	    : "PARATRAS" > 
 	| < RIGHT       : "GIRARDIREITA" > 
 	| < LEFT        : "GIRARESQUERDA" > 
@@ -105,4 +141,83 @@ TOKEN : /* SEPARATORS */
 	  < LPAREN : "(" >
 	| < RPAREN : ")" >
 	| < COMMA  : "," >
+}
+
+Programa entrada() :
+{
+  Programa retorno;
+}
+{
+  retorno = PPrograma() < EOF >
+  {
+    return retorno;
+  }
+}
+
+Programa PPrograma() :
+{
+  Expressao retorno;
+}
+{
+  retorno = PExpressao()
+  {
+    return new Programa(retorno);
+  }
+}
+
+Expressao PExpressao() :
+{
+	Expressao retorno;  
+}
+{
+  	retorno = PExpressaoUnaria() 
+	{		return retorno;
+	}}
+
+ExpressaoUnaria PExpressaoUnaria() :
+{
+  	Expressao retorno;
+}
+{
+	retorno = PAcao()	
+  {
+    return new Acao();
+  }
+}
+
+Acao PAcao() :
+{
+	Token t1;
+	Token t2;
+	String output = "";
+}
+{
+	(
+		t1 = < FORWARD >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+		|
+		t1 = < BACK >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+		|
+		t1 = < RIGHT >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+		|
+		t1 = < LEFT >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+		|
+		t1 = < SETPENCOLOR >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+		|
+		t1 = < SETPENUSE >
+		t2 = < INTEGER_LITERAL >
+		{output += t1.image + " " + t2.image;}
+	)*
+	{		System.out.println(output);
+	    return new Acao();
+	}
 }

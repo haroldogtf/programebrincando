@@ -1,6 +1,5 @@
 package plp.programebrincando.expression;
 
-
-public class Valor implements Expressao {
+public class Acao extends ExpressaoUnaria {
 
 }
