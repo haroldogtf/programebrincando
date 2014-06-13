@@ -17,38 +17,6 @@ public class ProgrameBrincando
   public static void main(String args []) throws ParseException
   {
     System.out.println("funcionando ok!");
-//    ProgrameBrincando parser = new ProgrameBrincando(System.in);
-//    while (true)
-//    {
-//      System.out.println("Reading from standard input...");
-//      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-//      try
-//      {
-//        switch (ProgrameBrincando.one_line())
-//        {
-//          case 0 : 
-//          System.out.println("OK.");
-//          break;
-//          case 1 : 
-//          System.out.println("Goodbye.");
-//          break;
-//          default : 
-//          break;
-//        }
-//      }
-//      catch (Exception e)
-//      {
-//        System.out.println("NOK.");
-//        System.out.println(e.getMessage());
-//        ProgrameBrincando.ReInit(System.in);
-//      }
-//      catch (Error e)
-//      {
-//        System.out.println("Oops.");
-//        System.out.println(e.getMessage());
-//        break;
-//      }
-//    }
   }
 }
 
@@ -128,6 +96,8 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < LEFT        : "GIRARESQUERDA" > 
 	| < SETPENCOLOR : "CORCANETA" >
 	| < SETPENUSE   : "USARCANETA" >
+	| < COLOR  	    : "COR" >
+	| < DRAW  	    : "DESENHE" >
 }
 
 TOKEN : /* SEPARATORS */
@@ -136,92 +106,3 @@ TOKEN : /* SEPARATORS */
 	| < RPAREN : ")" >
 	| < COMMA  : "," >
 }
-
-Programa Input() :
-{
-  Programa retorno = null;
-}
-{
-  //retorno = PPrograma() < EOF >
-  {
-    return retorno;
-  }
-}
-
-/* -------------------- VALOR INICIO -------------------- */
-Valor PValorInteiro() :
-{
-  Token token;
-}
-{
-  token = < INTEGER_LITERAL >
-  {
-    return new ValorInteiro(Integer.parseInt(token.toString()));
-  }
-}
-
-Valor PValorBooleano() :
-{}
-{
-  < FALSE >
-  {
-    return new ValorBooleano(false);
-  }
-  | < TRUE >
-  {
-    return new ValorBooleano(true);
-  }
-}
-
-Valor PValorCor() :
-{}
-{
-   < BLACK >
-  {
-    return new ValorCor(TipoCor.BLACK);
-  }
-  | < RED >
-  {
-    return new ValorCor(TipoCor.RED);
-  }
-  | < GREEN >
-  {
-    return new ValorCor(TipoCor.GREEN);
-  }
-  | < BLUE >
-  {
-    return new ValorCor(TipoCor.BLUE);
-  }
-}
-
-Valor PValor() :
-{
-  Valor retorno;
-}
-{
-  (
-    retorno = PValorInteiro()
-  | retorno = PValorBooleano()
-  | retorno = PValorCor()
-  )
-  {
-    return retorno;
-  }
-}
-/* -------------------- VALOR FIM -------------------- */
-
-/* -------------------- EXPRESSAO PRIMARIA INICIO -------------------- */
-Expressao PExpressaoPrimaria() :
-{
-  Expressao retorno;
-}
-{
-  (
-    retorno = PValor()
-  //| < LPAREN > retorno = PExpressao() < RPAREN >
-  )
-  {
-    return retorno;
-  }
-}
-/* -------------------- EXPRESSAO PRIMARIA FIM -------------------- */
