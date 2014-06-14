@@ -113,7 +113,6 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	  < LEARN       : "APRENDA" >
 	| < ENDLEARN    : "FIMAPRENDA" >
 	| < REPEAT      : "REPETIR" >
-	| < TIMES       : "VEZES" >
 	| < ENDREPEAT   : "FIMREPETIR" >
 	| < IF          : "SE" >
 	| < THEN        : "FACA" >
@@ -197,6 +196,11 @@ Expressao PExpressaoSimples() :
     	retorno = PValor()
       	|
       	retorno = PExpressaoUnaria()
+//     	|
+//     	retorno = PExpressaoBinaria()       	|
+      	retorno = PIfThenElse()
+      	|
+      	retorno = PFor()
    	)
     {
         return retorno;
@@ -269,7 +273,7 @@ Expressao PExpressaoUnaria() :
 {
 	retorno = PAcao()	
   {
-    return new Acao();
+    return retorno;
   }
 }
 
@@ -317,5 +321,39 @@ Expressao PAcao() :
 		}
 	)
 	{	    return retorno;
+	}
+}
+
+//Expressao PExpressaoBinaria() ://{//	Expressao retorno = null;  //}//{//	(//		retorno = PExpressaoSoma()//		|//		retorno = PExpressaoIgual()////		|////		retorno = PExpressaoMaiorQue()////		|////		retorno = PExpressaoMenorQue()////		|////		retorno = PExpressaoMaiorIgualQue()////		|////		retorno = PExpressaoMenorIgualQue()////		|////		retorno = PExpressaoJunta()        //	)////	{//		return retorno;//	}//}
+
+//ExpressaoBinaria PExpressaoSoma() : //{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//	(//		expressaoEsquerda = PExpressao()//		< PLUS >//		expressaoDireita = PExpressao()//	)//	{//		retorno = new ExpressaoSoma(expressaoEsquerda, expressaoDireita);//		return retorno;//	} 	 	//}////Expressao PExpressaoIgual()://{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//  	(//  		expressaoEsquerda = PExpressao()//  		< EQUAL >//  		expressaoDireita = PExpressao()//  	)//	{//		retorno = new ExpressaoIgual(expressaoEsquerda, expressaoDireita);//	}//}
+
+IfThenElse PIfThenElse() :
+{
+	Expressao expressao;
+	Expressao expressaoThen;
+	Expressao expressaoElse;
+}
+{
+	<IF>
+		expressao = PExpressao()
+	<THEN>
+		expressaoThen = PExpressao()
+	<ELSE>
+		expressaoElse = PExpressao()
+	< ENDIF >
+	{
+		return new IfThenElse (expressao, expressaoThen, expressaoElse);
+	}
+}
+
+For PFor() :
+{
+	Expressao expressaoLoop;
+	Expressao expressaoExecucao;  
+}
+{
+	< REPEAT > expressaoLoop = PExpressao() < COMMA > expressaoExecucao = PExpressao() < ENDREPEAT >
+	{		return new For(expressaoLoop, expressaoExecucao);
 	}
 }
