@@ -92,6 +92,8 @@ TOKEN : /* PRIMITIVES */
 	      )
 	    )*
 	    "\"" >
+	| <CHARACTER_LITERAL : "\'" (~["\'","\\","\n","\r"] | "\\" (["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])? | ["0"-"3"] ["0"-"7"] ["0"-"7"])) "\'">
+	| <  IDENTIFIER: (< CHARACTER_LITERAL >)+ >
 	| < TRUE  : "VERDADEIRO" >
 	| < FALSE : "FALSO" >
 }
@@ -198,9 +200,13 @@ Expressao PExpressaoSimples() :
       	retorno = PExpressaoUnaria()
 //     	|
 //     	retorno = PExpressaoBinaria()       	|
+      	retorno = PDeclaracao()
+     	| //      	retorno = PExecucao()//      	|
       	retorno = PIfThenElse()
       	|
       	retorno = PFor()
+      	|
+      	retorno = PId()
    	)
     {
         return retorno;
@@ -328,6 +334,44 @@ Expressao PAcao() :
 
 //ExpressaoBinaria PExpressaoSoma() : //{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//	(//		expressaoEsquerda = PExpressao()//		< PLUS >//		expressaoDireita = PExpressao()//	)//	{//		retorno = new ExpressaoSoma(expressaoEsquerda, expressaoDireita);//		return retorno;//	} 	 	//}////Expressao PExpressaoIgual()://{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//  	(//  		expressaoEsquerda = PExpressao()//  		< EQUAL >//  		expressaoDireita = PExpressao()//  	)//	{//		retorno = new ExpressaoIgual(expressaoEsquerda, expressaoDireita);//	}//}
 
+Declaracao PDeclaracao() :
+{
+	Id id = null;
+	Expressao expressao = null;
+	ListaParametros listaParametros = null;  }
+{
+	< LEARN > id = PId() < LPAREN > listaParametros = PListaParametros() < RPAREN > expressao = PExpressao() < ENDLEARN >
+	{		return new Declaracao(id, listaParametros, expressao);
+	}
+}
+
+ListaParametros PListaParametros():
+{
+	Id id;
+	ListaParametros lista = null;
+}
+{
+	[  
+		id = PId() 
+		{
+			lista = new ListaParametros(id);
+		}
+	] 
+	( <COMMA> 
+		id = PId() 
+		{
+			lista = new ListaParametros(id, lista);
+		} 
+	)*
+	
+	{
+		if (lista == null) {
+			lista = new ListaParametros();
+		}	
+		return lista;
+	}
+}
+
 IfThenElse PIfThenElse() :
 {
 	Expressao expressao;
@@ -355,5 +399,17 @@ For PFor() :
 {
 	< REPEAT > expressaoLoop = PExpressao() < COMMA > expressaoExecucao = PExpressao() < ENDREPEAT >
 	{		return new For(expressaoLoop, expressaoExecucao);
+	}
+}
+
+Id PId() :
+{
+	Token token;
+}
+{
+  	//TODO Verificar que porra tá pegando no id. 
+	token = <STRING_LITERAL>
+	{
+		return new Id(token.toString());
 	}
 }
