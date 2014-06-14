@@ -65,19 +65,10 @@ SKIP : /* WHITE SPACE */
 	| "\n"
 	| "\r"
 	| "\f"
+	| "\r\n"
 }
 
 TOKEN : /* PRIMITIVES */
-{
-	  < BLACK : "PRETO" > 
-	| < RED   : "VERMELHO" > 
-	| < GREEN : "VERDE" > 
-	| < BLUE  : "AZUL" > 
-	| < TRUE  : "VERDADEIRO" >
-	| < FALSE : "FALSO" >
-}
-
-TOKEN : /* DIGIT AND LITERAL */
 {
 	< INTEGER_LITERAL :
     < DECIMAL_LITERAL > ([ "l", "L" ])?
@@ -101,6 +92,8 @@ TOKEN : /* DIGIT AND LITERAL */
 	      )
 	    )*
 	    "\"" >
+	| < TRUE  : "VERDADEIRO" >
+	| < FALSE : "FALSO" >
 }
 
 TOKEN : /* EXPRESSIONS OPERATORS */
@@ -112,7 +105,7 @@ TOKEN : /* EXPRESSIONS OPERATORS */
 	| < GTE   : ">=" >
 	| < LTE   : "<=" >
 	| < UNION : "JUNTA" >
-	| < NOT : "NAO" >
+	| < NOT   : "NAO" >
 }
 
 TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
@@ -126,7 +119,7 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < THEN        : "FACA" >
 	| < ELSE        : "SENAOFACA" >
 	| < ENDIF       : "FIMSE" >
-	| < FORWARD      : "PARAFRENTE" > 
+	| < FORWARD     : "PARAFRENTE" > 
 	| < BACK 	    : "PARATRAS" > 
 	| < RIGHT       : "GIRARDIREITA" > 
 	| < LEFT        : "GIRARESQUERDA" > 
@@ -170,11 +163,73 @@ Expressao PExpressao() :
 	Expressao retorno;  
 }
 {
-  	retorno = PExpressaoUnaria() 
+ 	(		retorno = PValor()
+ 		|
+  		retorno = PExpressaoUnaria()
+ 	)
 	{		return retorno;
 	}}
 
-ExpressaoUnaria PExpressaoUnaria() :
+Valor PValor():
+{
+	Valor retorno;}
+{
+	retorno = PValorConcreto()
+	{
+		return retorno;	  	}}
+
+Valor PValorConcreto() :
+{	Valor retorno;
+}
+{
+	(		retorno = PValorInteiro()
+		|
+		retorno = PValorBooleano()
+		|
+		retorno = PValorCor()
+	)
+	{
+	  return retorno;	}
+}
+
+Valor PValorInteiro():
+{
+	Token token;
+}
+{
+	token = <INTEGER_LITERAL>
+	{
+		return new ValorInteiro(Integer.parseInt(token.toString()));
+	}
+}
+
+Valor PValorBooleano() :
+{
+}
+{
+	<FALSE> { return new ValorBooleano(false); } 
+	|
+	<TRUE>  { return new ValorBooleano(true); }
+}
+
+Valor PValorCor() :
+{
+	Token token1;  	Token token2;  	Token token3;  }
+{
+	
+	<COLOR>
+	<LPAREN>
+	token1 = <INTEGER_LITERAL>
+	<COMMA>
+	token2 = <INTEGER_LITERAL>
+	<COMMA>
+	token3 = <INTEGER_LITERAL>
+	<RPAREN>
+
+	{	  return new ValorCor(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));
+	}   }
+
+Expressao PExpressaoUnaria() :
 {
   	Expressao retorno;
 }
@@ -185,39 +240,52 @@ ExpressaoUnaria PExpressaoUnaria() :
   }
 }
 
-Acao PAcao() :
+Expressao PAcao() :
 {
+ 	Expressao retorno = null;
 	Token t1;
 	Token t2;
 	String output = "";
+	Valor valor;
 }
 {
 	(
-		t1 = < FORWARD >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< FORWARD >
+		valor = PValorInteiro()
+		{
+			retorno = new ForwardMovement(valor);
+		}
 		|
-		t1 = < BACK >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< BACK >
+		valor = PValorInteiro()
+		{
+			retorno = new BackMovement(valor);
+		}
 		|
-		t1 = < RIGHT >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< RIGHT >
+		valor = PValorInteiro()
+		{
+			retorno = new RightMovement(valor);
+		}
 		|
-		t1 = < LEFT >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< LEFT >
+		valor = PValorInteiro()
+		{
+			retorno = new LeftMovement(valor);
+		}
 		|
-		t1 = < SETPENCOLOR >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< SETPENCOLOR >
+		valor = PValorCor()
+		{
+			retorno = new SetPenColor(valor);
+		}
 		|
-		t1 = < SETPENUSE >
-		t2 = < INTEGER_LITERAL >
-		{output += t1.image + " " + t2.image;}
+		< SETPENUSE >
+		valor = PValorBooleano()
+		{
+			retorno = new SetPenUse(valor);
+		}
 	)*
-	{		System.out.println(output);
-	    return new Acao();
+	{	    return retorno;
 	}
 }

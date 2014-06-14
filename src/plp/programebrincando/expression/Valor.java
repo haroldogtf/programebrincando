@@ -1,6 +1,5 @@
 package plp.programebrincando.expression;
 
-public interface Expressao {
-	
+public interface Valor extends Expressao{
 
 }
