@@ -6,11 +6,11 @@ public class Id implements Expressao {
 	
 	public Id(String idName) {
 		this.idName = idName;
-		System.out.println(this);
+		System.out.println(toString());
 	}
 	
 	@Override
 	public String toString() {
-		return idName;
+		return "id: " + idName;
 	}
 }
