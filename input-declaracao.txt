@@ -1,1 +1,1 @@
-APRENDA retangulo(altura, largura) PARAFRENTE 10 FIMAPRENDA
+APRENDA retangulo(altura, largura, terceiro, teste) PARAFRENTE 10 FIMAPRENDA
