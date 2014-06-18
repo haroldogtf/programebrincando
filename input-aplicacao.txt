@@ -1,15 +1,2 @@
-APRENDA retangulo(altura, largura, terceiro, teste)
+DESENHE retangulo(altura, largura, terceiro, teste)
 
-	SE 10 FACA
-		REPETIR 4,
-			PARAFRENTE 10; GIRARESQUERDA 10
-		FIMREPETIR
-	SENAOFACA
-		REPETIR 4,
-			PARAFRENTE 10; GIRARESQUERDA 10
-		FIMREPETIR
-	FIMSE
-	
-FIMAPRENDA
-
-retangulo(10, 10, 20, 20)

@@ -25,7 +25,7 @@ public class ListaParametros {
 			sb.append(head.toString());
 			toStringTail(sb, tail);
 		}
-		sb.append(")");
+		sb.append(") ");
 		return sb.toString();
 	}
 

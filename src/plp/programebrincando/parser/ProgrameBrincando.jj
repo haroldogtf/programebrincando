@@ -508,14 +508,13 @@ ListaParametros PListaParametros():
 		{
 			lista = new ListaParametros(id);
 		}
-	] 
-	( <COMMA> 
-		id = PId() 
-		{
-			lista = new ListaParametros(id, lista);
-		} 
-	)*
-	
+		( <COMMA> 
+			id = PId() 
+			{
+				lista = new ListaParametros(id, lista);
+			} 
+		)*
+	]
 	{
 		if (lista == null) {
 			lista = new ListaParametros();
@@ -526,11 +525,39 @@ ListaParametros PListaParametros():
 
 Aplicacao PAplicacao() :
 {
-	//TODO
+	Id id = null;
+	ListaExpressao listaExpressao = null;  
 }
 {
+	<DRAW>		id = PId()	<LPAREN>		listaExpressao = PListaExpressao()	<RPAREN>	{
+		return new Aplicacao(id, listaExpressao);
+	}
+}
+
+ListaExpressao PListaExpressao():
+{
+	Id id;
+	ListaExpressao lista = null;
+}
+{
+	[  
+		id = PId() 
+		{
+			lista = new ListaExpressao(id);
+		}
+		( <COMMA> 
+			id = PId() 
+			{
+				lista = new ListaExpressao(id, lista);
+			} 
+		)*
+	]
 	{
-	  	return new Aplicacao();	}
+		if (lista == null) {
+			lista = new ListaExpressao();
+		}	
+		return lista;
+	}
 }
 
 IfThenElse PIfThenElse() :

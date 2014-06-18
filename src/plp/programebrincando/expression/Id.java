@@ -11,6 +11,6 @@ public class Id implements Expressao {
 	
 	@Override
 	public String toString() {
-		return "id: " + idName;
+		return idName;
 	}
 }

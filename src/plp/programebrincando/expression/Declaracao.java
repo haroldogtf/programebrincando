@@ -16,6 +16,7 @@ public class Declaracao implements Expressao {
 	
 	@Override
 	public String toString() {
-		return "APRENDA " + id + lista.toString() + expressao.toString() + " FIMAPRENDA";
+		return "APRENDA " + lista.toString() + expressao.toString() + " FIMAPRENDA";
 	}
+
 }
