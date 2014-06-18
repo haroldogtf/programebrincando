@@ -6,9 +6,12 @@ public abstract class ExpressaoBinaria implements Expressao{
 	public Expressao expressaoDireita;
 	public String operador;
 	
-	public ExpressaoBinaria(Expressao expressaoEsquerda, Expressao expressaoDireita) {
+	public ExpressaoBinaria(Expressao expressaoEsquerda, Expressao expressaoDireita, String operator) {
 		this.expressaoEsquerda = expressaoEsquerda;
 		this.expressaoDireita = expressaoDireita;
+		this.operador = operator;
+		
+		System.out.println(toString());
 	}
 	
 	@Override

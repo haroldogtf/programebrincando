@@ -6,6 +6,8 @@ public class ValorInteiro implements Valor{
 	
 	public ValorInteiro(int valor){
 		this.valor = valor;
+		
+		System.out.println(toString());
 	}
 	
 	@Override

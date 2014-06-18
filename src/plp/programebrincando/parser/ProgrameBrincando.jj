@@ -18,39 +18,39 @@ public class ProgrameBrincandoParser
     ProgrameBrincandoParser parser;
     if (args.length == 0)
     {
-      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Reading from standard input . . .");
+      System.out.println("Programe Brincando Parser:  Lendo de entrada padrão...");
       parser = new ProgrameBrincandoParser(System.in);
     }
     else if (args.length == 1)
     {
-      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Reading from file " + args [0] + " . . .");
+      System.out.println("Programe Brincando Parser: Lendo do arquivo " + args [0] + "...");
       try
       {
         parser = new ProgrameBrincandoParser(new java.io.FileInputStream(args [0]));
       }
       catch (java.io.FileNotFoundException e)
       {
-        System.out.println("Java Parser Version 1.0.2:  File " + args [0] + " not found.");
+        System.out.println("Programe Brincando Parser: Arquivo " + args [0] + " não encontrado.");
         return;
       }
     }
     else
     {
-      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Usage is one of:");
+      System.out.println("Programe Brincando Parse:  Usage is one of:");
       System.out.println("         java ProgrameBrincandoParser < inputfile");
-      System.out.println("OR");
+      System.out.println("ou");
       System.out.println("         java ProgrameBrincandoParser inputfile");
       return;
     }
     try
     {
       Programa programa = parser.entrada();
-      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  ProgrameBrincando program parsed successfully.");
+      System.out.println("Programe Brincando Parser: Programa criado com sucesso.");
 //      if (!programa.checaTipo())//      {//        System.out.println("Erro de tipo");//      }//      else//      {//        programa.executar();//      }//        programa.executar();
     }
     catch (ParseException e)
     {
-      System.out.println("Programe Brincando PLP Parser Version 0.0.1:  Encountered errors during parse.");
+      System.out.println("Programe Brincando Parser: Erros encontrados durante o parse do programa.");
     }
   }
 }
@@ -105,7 +105,6 @@ TOKEN : /* EXPRESSIONS OPERATORS */
 	| < GTE   : ">=" >
 	| < LTE   : "<=" >
 	| < UNION : "JUNTA" >
-	| < NOT   : "NAO" >
 }
 
 TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
@@ -128,6 +127,14 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < DRAW  	    : "DESENHE" >
 }
 
+TOKEN : /* SEPARATORS */
+{
+	  < LPAREN : "(" >
+	| < RPAREN : ")" >
+	| < COMMA  : "," >
+	| < SEMICOLON  : ";" >
+}
+
 TOKEN : /* IDENTIFIERS */
 {
   < IDENTIFIER :
@@ -136,16 +143,8 @@ TOKEN : /* IDENTIFIERS */
       < LETTER >
     | < DIGIT >
     )* >
-| < #LETTER : [ "\u0024", "\u0041"-"\u005a", "\u005f", "\u0061"-"\u007a", "\u00c0"-"\u00d6", "\u00d8"-"\u00f6", "\u00f8"-"\u00ff", "\u0100"-"\u1fff", "\u3040"-"\u318f", "\u3300"-"\u337f", "\u3400"-"\u3d2d", "\u4e00"-"\u9fff", "\uf900"-"\ufaff" ] >
-| < #DIGIT : [ "\u0030"-"\u0039", "\u0660"-"\u0669", "\u06f0"-"\u06f9", "\u0966"-"\u096f", "\u09e6"-"\u09ef", "\u0a66"-"\u0a6f", "\u0ae6"-"\u0aef", "\u0b66"-"\u0b6f", "\u0be7"-"\u0bef", "\u0c66"-"\u0c6f", "\u0ce6"-"\u0cef", "\u0d66"-"\u0d6f", "\u0e50"-"\u0e59", "\u0ed0"-"\u0ed9", "\u1040"-"\u1049" ] >
-}
-
-TOKEN : /* SEPARATORS */
-{
-	  < LPAREN : "(" >
-	| < RPAREN : ")" >
-	| < COMMA  : "," >
-	| < SEMICOLON  : ";" >
+	| < #LETTER : [ "\u0024", "\u0041"-"\u005a", "\u005f", "\u0061"-"\u007a", "\u00c0"-"\u00d6", "\u00d8"-"\u00f6", "\u00f8"-"\u00ff", "\u0100"-"\u1fff", "\u3040"-"\u318f", "\u3300"-"\u337f", "\u3400"-"\u3d2d", "\u4e00"-"\u9fff", "\uf900"-"\ufaff" ] >
+	| < #DIGIT : [ "\u0030"-"\u0039", "\u0660"-"\u0669", "\u06f0"-"\u06f9", "\u0966"-"\u096f", "\u09e6"-"\u09ef", "\u0a66"-"\u0a6f", "\u0ae6"-"\u0aef", "\u0b66"-"\u0b6f", "\u0be7"-"\u0bef", "\u0c66"-"\u0c6f", "\u0ce6"-"\u0cef", "\u0d66"-"\u0d6f", "\u0e50"-"\u0e59", "\u0ed0"-"\u0ed9", "\u1040"-"\u1049" ] >
 }
 
 Programa entrada() :
@@ -178,6 +177,9 @@ Expressao PExpressao() :
  	(
 		LOOKAHEAD (PExpressaoSimples() <SEMICOLON>)
 		retorno = PSequenciaExpressao()
+	   	|	   	
+	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))
+		retorno = PExpressaoBinaria()
 	   	|
       	retorno = PExpressaoSimples()
  	)
@@ -207,11 +209,9 @@ Expressao PExpressaoSimples() :
     (
     	retorno = PValor()
       	|
-      	retorno = PExpressaoUnaria()
-//     	|
-//     	retorno = PExpressaoBinaria()       	|
+      	retorno = PExpressaoUnaria()      	|
       	retorno = PDeclaracao()
-     	| //      	retorno = PExecucao()//      	|
+     	| 	    retorno = PAplicacao()      	|
       	retorno = PIfThenElse()
       	|
       	retorno = PFor()
@@ -269,16 +269,14 @@ Valor PValorCor() :
 {
 	Token token1;  	Token token2;  	Token token3;  }
 {
-	
 	<COLOR>
 	<LPAREN>
-	token1 = <INTEGER_LITERAL>
+		token1 = <INTEGER_LITERAL>
 	<COMMA>
-	token2 = <INTEGER_LITERAL>
+		token2 = <INTEGER_LITERAL>
 	<COMMA>
-	token3 = <INTEGER_LITERAL>
+		token3 = <INTEGER_LITERAL>
 	<RPAREN>
-
 	{	  return new ValorCor(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));
 	}   }
 
@@ -340,9 +338,147 @@ Expressao PAcao() :
 	}
 }
 
-//Expressao PExpressaoBinaria() ://{//	Expressao retorno = null;  //}//{//	(//		retorno = PExpressaoSoma()//		|//		retorno = PExpressaoIgual()////		|////		retorno = PExpressaoMaiorQue()////		|////		retorno = PExpressaoMenorQue()////		|////		retorno = PExpressaoMaiorIgualQue()////		|////		retorno = PExpressaoMenorIgualQue()////		|////		retorno = PExpressaoJunta()        //	)////	{//		return retorno;//	}//}
+Expressao PExpressaoBinaria() :
+{
+	Expressao retorno;
+}
+{
+  	(
+	   	LOOKAHEAD (PExpressaoSimples() <PLUS>)
+		retorno = PExpressaoSoma()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <EQUAL>)
+		retorno = PExpressaoIgual()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <GT>)
+		retorno = PExpressaoMaiorQue()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <LT>)
+		retorno = PExpressaoMenorQue()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <GTE>)
+		retorno = PExpressaoMaiorIgualQue()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <LTE>)
+		retorno = PExpressaoMenorIgualQue()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <UNION>)
+		retorno = PExpressaoJunta()
+	)
+	{
+		return retorno;
+	}
+}
 
-//ExpressaoBinaria PExpressaoSoma() : //{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//	(//		expressaoEsquerda = PExpressao()//		< PLUS >//		expressaoDireita = PExpressao()//	)//	{//		retorno = new ExpressaoSoma(expressaoEsquerda, expressaoDireita);//		return retorno;//	} 	 	//}////Expressao PExpressaoIgual()://{//	Expressao expressaoEsquerda;//	Expressao expressaoDireita;//	Expressao retorno = null;//}//{//  	(//  		expressaoEsquerda = PExpressao()//  		< EQUAL >//  		expressaoDireita = PExpressao()//  	)//	{//		retorno = new ExpressaoIgual(expressaoEsquerda, expressaoDireita);//	}//}
+Expressao PExpressaoSoma() : {	Expressao expressaoEsquerda;	Expressao expressaoDireita;	Expressao retorno = null;}{	(		expressaoEsquerda = PExpressaoSimples()		<PLUS>		expressaoDireita = PExpressao()	)	{		retorno = new ExpressaoSoma(expressaoEsquerda, expressaoDireita);		return retorno;	} 	 	}
+
+Expressao PExpressaoIgual() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<EQUAL>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoIgual(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
+
+Expressao PExpressaoMaiorQue() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<GT>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoMaiorQue(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
+
+Expressao PExpressaoMenorQue() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<LT>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoMenorQue(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
+
+Expressao PExpressaoMaiorIgualQue() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<GTE>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoMaiorIgualQue(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
+
+Expressao PExpressaoMenorIgualQue() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<LTE>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoMenorIgualQue(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
+
+Expressao PExpressaoJunta() : 
+{
+	Expressao expressaoEsquerda;
+	Expressao expressaoDireita;
+	Expressao retorno = null;
+}
+{
+	(
+		expressaoEsquerda = PExpressaoSimples()
+		<UNION>
+		expressaoDireita = PExpressao()
+	)
+	{
+		retorno = new ExpressaoJunta(expressaoEsquerda, expressaoDireita);
+		return retorno;
+	} 	 	
+}
 
 Declaracao PDeclaracao() :
 {
@@ -350,7 +486,13 @@ Declaracao PDeclaracao() :
 	Expressao expressao = null;
 	ListaParametros listaParametros = null;  }
 {
-	< LEARN > id = PId() < LPAREN > listaParametros = PListaParametros() < RPAREN > expressao = PExpressao() < ENDLEARN >
+	<LEARN>
+		id = PId()
+	<LPAREN>
+		listaParametros = PListaParametros()
+	<RPAREN>
+		expressao = PExpressao()
+	<ENDLEARN>
 	{		return new Declaracao(id, listaParametros, expressao);
 	}
 }
@@ -382,6 +524,15 @@ ListaParametros PListaParametros():
 	}
 }
 
+Aplicacao PAplicacao() :
+{
+	//TODO
+}
+{
+	{
+	  	return new Aplicacao();	}
+}
+
 IfThenElse PIfThenElse() :
 {
 	Expressao expressao;
@@ -395,7 +546,7 @@ IfThenElse PIfThenElse() :
 		expressaoThen = PExpressao()
 	<ELSE>
 		expressaoElse = PExpressao()
-	< ENDIF >
+	<ENDIF>
 	{
 		return new IfThenElse (expressao, expressaoThen, expressaoElse);
 	}
@@ -407,7 +558,11 @@ For PFor() :
 	Expressao expressaoExecucao;  
 }
 {
-	< REPEAT > expressaoLoop = PExpressao() < COMMA > expressaoExecucao = PExpressao() < ENDREPEAT >
+	<REPEAT>
+		expressaoLoop = PExpressao()
+	<COMMA>
+		expressaoExecucao = PExpressao()
+	<ENDREPEAT>
 	{		return new For(expressaoLoop, expressaoExecucao);
 	}
 }
@@ -417,7 +572,6 @@ Id PId() :
 	Token token;
 }
 {
-  	//TODO Verificar que porra tá pegando no id. 
 	token = <IDENTIFIER>
 	{
 		return new Id(token.toString());

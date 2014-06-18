@@ -6,6 +6,8 @@ public class ValorBooleano implements Valor{
 	
 	public ValorBooleano(boolean valor) {
 		this.valor = valor;
+		
+		System.out.println(toString());
 	}
 	
 	@Override

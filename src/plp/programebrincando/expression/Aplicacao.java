@@ -1,5 +1,5 @@
 package plp.programebrincando.expression;
 
-public interface Expressao {
+public class Aplicacao implements Expressao {
 
 }

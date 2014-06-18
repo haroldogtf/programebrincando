@@ -10,5 +10,12 @@ public class ValorCor implements Valor {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
+		
+		System.out.println(toString());
+	}
+	
+	@Override
+	public String toString() {
+		return "ValorCor(R: " +red + " G: " +green + "B: "+blue +")";
 	}
 }

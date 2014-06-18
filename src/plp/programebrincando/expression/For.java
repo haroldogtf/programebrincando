@@ -9,7 +9,7 @@ public class For implements Expressao {
 		this.expressaoLoop = expressaoLoop;
 		this.expressaoExecucao = expressaoExecucao;
 
-		System.out.println(this);
+		System.out.println(toString());
 	}
 
 	@Override

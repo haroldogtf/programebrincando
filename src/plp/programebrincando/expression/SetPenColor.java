@@ -11,6 +11,6 @@ public class SetPenColor extends Acao {
 	
 	@Override
 	public String toString() {
-		return ((ValorCor)valor).red + " " + ((ValorCor)valor).green + " " + ((ValorCor)valor).blue;
+		return "CORCANETA " + ((ValorCor)valor).red + " " + ((ValorCor)valor).green + " " + ((ValorCor)valor).blue;
 	}
 }
