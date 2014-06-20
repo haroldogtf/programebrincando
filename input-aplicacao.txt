@@ -1,2 +1,1 @@
-DESENHE retangulo(altura, largura, terceiro, teste)
-
+DESENHE retangulo(10, largura, true, PARAFRENTE 10, 10 < 5)

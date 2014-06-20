@@ -3,10 +3,10 @@ package plp.programebrincando.expression;
 public class Declaracao implements Expressao {
 
 	public Id id;
-	public ListaParametros lista;
+	public ListaDeclaracaoParametro lista;
 	public Expressao expressao;
 	
-	public Declaracao(Id id, ListaParametros lista, Expressao expressao) {
+	public Declaracao(Id id, ListaDeclaracaoParametro lista, Expressao expressao) {
 		this.id = id;
 		this.lista = lista;
 		this.expressao = expressao;
@@ -16,7 +16,7 @@ public class Declaracao implements Expressao {
 	
 	@Override
 	public String toString() {
-		return "APRENDA " + lista.toString() + expressao.toString() + " FIMAPRENDA";
+		return "APRENDA " + id.toString() + " (" + lista.toString() + ") " + expressao.toString() + " FIMAPRENDA";
 	}
 
 }

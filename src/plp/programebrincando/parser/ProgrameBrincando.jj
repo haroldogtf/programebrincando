@@ -484,12 +484,12 @@ Declaracao PDeclaracao() :
 {
 	Id id = null;
 	Expressao expressao = null;
-	ListaParametros listaParametros = null;  }
+	ListaDeclaracaoParametro listaParametros = null;  }
 {
 	<LEARN>
 		id = PId()
 	<LPAREN>
-		listaParametros = PListaParametros()
+		listaParametros = PListaDeclaracaoParametro()
 	<RPAREN>
 		expressao = PExpressao()
 	<ENDLEARN>
@@ -497,27 +497,23 @@ Declaracao PDeclaracao() :
 	}
 }
 
-ListaParametros PListaParametros():
+ListaDeclaracaoParametro PListaDeclaracaoParametro():
 {
 	Id id;
-	ListaParametros lista = null;
+	ListaDeclaracaoParametro lista = null;
 }
 {
 	[  
 		id = PId() 
-		{
-			lista = new ListaParametros(id);
-		}
-		( <COMMA> 
-			id = PId() 
-			{
-				lista = new ListaParametros(id, lista);
-			} 
-		)*
+		{lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id));}
 	]
+	( <COMMA> 
+		id = PId() 
+		{lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id), lista);} 
+	)*
 	{
 		if (lista == null) {
-			lista = new ListaParametros();
+			lista = new ListaDeclaracaoParametro();
 		}	
 		return lista;
 	}
@@ -536,22 +532,20 @@ Aplicacao PAplicacao() :
 
 ListaExpressao PListaExpressao():
 {
-	Id id;
+	Expressao expressao;
 	ListaExpressao lista = null;
 }
 {
-	[  
-		id = PId() 
-		{
-			lista = new ListaExpressao(id);
-		}
+	[
+		expressao = PExpressao() 
+		{lista = new ListaExpressao(expressao);}
+	]
 		( <COMMA> 
-			id = PId() 
+			expressao = PExpressao() 
 			{
-				lista = new ListaExpressao(id, lista);
+				lista = new ListaExpressao(expressao, lista);
 			} 
 		)*
-	]
 	{
 		if (lista == null) {
 			lista = new ListaExpressao();

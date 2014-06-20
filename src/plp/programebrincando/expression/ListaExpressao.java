@@ -1,20 +1,19 @@
 package plp.programebrincando.expression;
 
-public class ListaExpressao {
+public class ListaExpressao extends Lista<Expressao> {
 
 	public Id head;
 	public ListaExpressao tail;
 
 	public ListaExpressao() {
+
 	}
 
-	public ListaExpressao(Id id) {
-		this.head = id;
+	public ListaExpressao(Expressao expressao) {
+		super(expressao, new ListaExpressao());
 	}
 
-	public ListaExpressao(Id id, ListaExpressao listaExpressao) {
-		this.head = id;
-		this.tail = listaExpressao;
+	public ListaExpressao(Expressao expressao, ListaExpressao listaExpressao) {
+		super(expressao, listaExpressao);
 	}
-
 }
