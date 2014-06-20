@@ -10,6 +10,13 @@ package plp.programebrincando.parser;
 
 import plp.programebrincando.*;
 import plp.programebrincando.expression.*;
+import plp.programebrincando.expression.application.*;
+import plp.programebrincando.expression.binary.*;
+import plp.programebrincando.expression.declaration.*;
+import plp.programebrincando.expression.unary.*;
+import plp.programebrincando.expression.unary.action.*;
+import plp.programebrincando.expression.value.*;
+import plp.programebrincando.memory.*;
 
 public class ProgrameBrincandoParser
 {
@@ -42,15 +49,20 @@ public class ProgrameBrincandoParser
       System.out.println("         java ProgrameBrincandoParser inputfile");
       return;
     }
-    try
-    {
-      Programa programa = parser.entrada();
-      System.out.println("Programe Brincando Parser: Programa criado com sucesso.");
-//      if (!programa.checaTipo())//      {//        System.out.println("Erro de tipo");//      }//      else//      {//        programa.executar();//      }//        programa.executar();
-    }
-    catch (ParseException e)
-    {
+
+    try {
+        Programa programa = parser.entrada();
+        System.out.println("Programe Brincando Parser parsed successfully.");
+        
+        if(programa.checaTipo(new ContextoCompilacao())) {
+            programa.executar(new ContextoExecucao());
+        }
+        else {
+            System.out.println("Erro de tipo");
+        }
+    }catch (ParseException e){
       System.out.println("Programe Brincando Parser: Erros encontrados durante o parse do programa.");
+      e.printStackTrace();
     }
   }
 }
@@ -301,37 +313,37 @@ Expressao PAcao() :
 		< FORWARD >
 		valor = PValorInteiro()
 		{
-			retorno = new ForwardMovement(valor);
+			retorno = new ActionForward(valor);
 		}
 		|
 		< BACK >
 		valor = PValorInteiro()
 		{
-			retorno = new BackMovement(valor);
+			retorno = new ActionBack(valor);
 		}
 		|
 		< RIGHT >
 		valor = PValorInteiro()
 		{
-			retorno = new RightMovement(valor);
+			retorno = new ActionRight(valor);
 		}
 		|
 		< LEFT >
 		valor = PValorInteiro()
 		{
-			retorno = new LeftMovement(valor);
+			retorno = new ActionLeft(valor);
 		}
 		|
 		< SETPENCOLOR >
 		valor = PValorCor()
 		{
-			retorno = new SetPenColor(valor);
+			retorno = new ActionSetPenColor(valor);
 		}
 		|
 		< SETPENUSE >
 		valor = PValorBooleano()
 		{
-			retorno = new SetPenUse(valor);
+			retorno = new ActionSetPenUse(valor);
 		}
 	)
 	{	    return retorno;
