@@ -9,7 +9,7 @@ public abstract class ExpressaoUnaria implements Expressao {
 	
 	protected Expressao expressao;
 
-	private String operador;
+	protected String operador;
 
 	public ExpressaoUnaria(Expressao expressao, String operador) {
 		this.expressao = expressao;

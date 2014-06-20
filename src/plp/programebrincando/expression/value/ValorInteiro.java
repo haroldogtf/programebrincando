@@ -8,8 +8,6 @@ import plp.programebrincando.util.TipoPrimitivo;
 
 public class ValorInteiro extends ValorConcreto<Integer>{
 
-	public Integer valor;
-	
 	public ValorInteiro(int valor){
 		super(valor);
 		

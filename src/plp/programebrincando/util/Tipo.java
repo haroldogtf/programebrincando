@@ -8,8 +8,6 @@ public interface Tipo {
 
 	public abstract boolean isBoolean();
 
-	public abstract boolean isString();
-
 	public abstract boolean isEqual(Tipo tipo);
 
 	public abstract boolean isValid();

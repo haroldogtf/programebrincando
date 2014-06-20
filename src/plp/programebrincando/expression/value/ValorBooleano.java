@@ -9,8 +9,6 @@ import plp.programebrincando.util.TipoPrimitivo;
 
 public class ValorBooleano extends ValorConcreto<Boolean>{
 
-	public boolean valor;
-	
 	public ValorBooleano(boolean valor) {
 		super(valor);
 	}

@@ -4,8 +4,7 @@ public enum TipoPrimitivo implements Tipo {
 
 	BOOLEAN("BOOLEAN"),
 	COR("COLOR"),
-	INTEGER("INTEGER"),
-	STRING("STRING");
+	INTEGER("INTEGER");
 
 	private String nome;
 
@@ -23,10 +22,6 @@ public enum TipoPrimitivo implements Tipo {
 
 	public boolean isBoolean() {
 		return this.isEqual(BOOLEAN);
-	}
-
-	public boolean isString() {
-		return this.isEqual(STRING);
 	}
 
 	public boolean isEqual(Tipo tipo) {

@@ -1,9 +1,10 @@
 package plp.programebrincando;
 
-import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
-import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
+import plp.programebrincando.exception.VariavelJaDeclaradaException;
+import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.memory.AmbienteCompilacao;
+import plp.programebrincando.memory.AmbienteExecucao;
 
 public class Programa {
 
@@ -21,8 +22,21 @@ public class Programa {
 		this.expressao = expressao;
 	}
 	
+	public boolean checaTipo(AmbienteCompilacao ambiente){
+		boolean valido = false;
+		try {
+			valido = expressao.checaTipo(ambiente);
+		} catch (VariavelNaoDeclaradaException | VariavelJaDeclaradaException e) {
+			e.printStackTrace();
+		}
+		return valido;
+	}
 	
-	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException{
-		return expressao.checaTipo(ambiente);
+	public void executar(AmbienteExecucao ambiente) {
+		try {
+			expressao.avaliar(ambiente);
+		} catch (VariavelNaoDeclaradaException | VariavelJaDeclaradaException e) {
+			e.printStackTrace();
+		}
 	}
 }

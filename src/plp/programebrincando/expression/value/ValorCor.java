@@ -6,9 +6,9 @@ import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.util.Tipo;
 import plp.programebrincando.util.TipoPrimitivo;
 
-public class ValorCor extends ValorConcreto<Cor>{
+public class ValorCor extends ValorConcreto<Color>{
 	
-	public ValorCor(Cor valor){
+	public ValorCor(Color valor){
 		super(valor);
 		
 		System.out.println(toString());

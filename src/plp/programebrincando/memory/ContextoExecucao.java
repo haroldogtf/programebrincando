@@ -5,11 +5,25 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 import plp.programebrincando.expression.Id;
+import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
-
 
 public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecucao {
 
+	//TODO Colocar como entrada o limites
+	private Integer degrees = 90;
+
+	private Integer limitAxisX = 600;
+	private Integer limitAxisY = 800;
+
+	private Integer currentAxisX = limitAxisX / 2;
+	private Integer currentAxisY = limitAxisY / 2;
+
+	private Boolean penUse = true;
+	
+	private Color penColor = new Color(0, 0, 0);
+	
+	
 	public ContextoExecucao clone() {
 		ContextoExecucao retorno = new ContextoExecucao();
 		
@@ -23,9 +37,63 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 				novoMap.put(entry.getKey(), entry.getValue());
 			}
 		}
-		
 		retorno.setPilha(novaPilha);
-		
 		return retorno;
+	}
+
+	public Integer getLimitAxisX() {
+		return limitAxisX;
+	}
+
+	public void setLimitAxisX(Integer limitAxisX) {
+		this.limitAxisX = limitAxisX;
+	}
+
+	public Integer getLimitAxisY() {
+		return limitAxisY;
+	}
+
+	public void setLimitAxisY(Integer limitAxisY) {
+		this.limitAxisY = limitAxisY;
+	}
+
+	public Integer getCurrentAxisX() {
+		return currentAxisX;
+	}
+
+	public void setCurrentAxisX(Integer currentAxisX) {
+		this.currentAxisX = currentAxisX;
+	}
+
+	public Integer getCurrentAxisY() {
+		return currentAxisY;
+	}
+
+	public void setCurrentAxisY(Integer currentAxisY) {
+		this.currentAxisY = currentAxisY;
+	}
+
+	public Boolean getPenUse() {
+		return penUse;
+	}
+
+	public void setPenUse(Boolean penUse) {
+		this.penUse = penUse;
+	}
+
+	public Color getPenColor() {
+		return penColor;
+	}
+
+	public void setPenColor(Color penColor) {
+		this.penColor = penColor;
+	}
+
+	public Integer getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(Integer degrees) {
+		this.degrees = degrees;
 	}
 }

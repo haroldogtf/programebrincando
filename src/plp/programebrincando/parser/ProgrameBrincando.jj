@@ -289,7 +289,8 @@ Valor PValorCor() :
 	<COMMA>
 		token3 = <INTEGER_LITERAL>
 	<RPAREN>
-	{	  return new ValorCor(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));
+	{
+	  Color color = new Color(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));	  return new ValorCor(color);
 	}   }
 
 Expressao PExpressaoUnaria() :
