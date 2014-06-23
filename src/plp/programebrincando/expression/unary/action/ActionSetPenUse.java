@@ -34,6 +34,6 @@ public class ActionSetPenUse extends Action {
 
 	@Override
 	protected boolean checaTipoElementoTerminal(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return (this.getExpressao().getTipo(amb).isInteger());
+		return (this.getExpressao().getTipo(amb).isBoolean());
 	}
 }

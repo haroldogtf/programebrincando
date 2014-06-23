@@ -29,10 +29,10 @@ public class ActionSetPenColor extends Action {
 		
 		Valor retorno = null;
 		
-		if((cor.red >=  0 || cor.red <= 255) || (cor.green >=  0 || cor.green <= 255) || (cor.blue >=  0 || cor.blue <= 255)){
+		if((cor.red >= 0 && cor.red <= 255) && (cor.green >=  0 && cor.green <= 255) && (cor.blue >= 0 && cor.blue <= 255)) {
 			amb.setPenColor(cor);
 			retorno = new ValorBooleano(true);
-			System.out.println(cor + " CORCANETA ");
+			System.out.println(cor + " RGB ");
 		}else{
 			retorno = new ValorBooleano(false);
 			System.out.println(" SKIP CORCANETA ");
@@ -47,6 +47,6 @@ public class ActionSetPenColor extends Action {
 
 	@Override
 	protected boolean checaTipoElementoTerminal(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return (this.getExpressao().getTipo(amb).isInteger());
+		return (this.getExpressao().getTipo(amb).isColor());
 	}
 }
