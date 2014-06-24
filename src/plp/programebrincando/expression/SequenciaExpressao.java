@@ -25,22 +25,19 @@ public class SequenciaExpressao implements Expressao{
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean checaTipo(AmbienteCompilacao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException { 
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Tipo getTipo(AmbienteCompilacao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return null;
 	}

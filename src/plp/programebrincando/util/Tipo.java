@@ -8,10 +8,12 @@ public interface Tipo {
 
 	public abstract boolean isBoolean();
 
+	public abstract boolean isAction();
+	
+	public abstract boolean isColor();
+
 	public abstract boolean isEqual(Tipo tipo);
 
 	public abstract boolean isValid();
 	
-	public abstract boolean isColor();
-
 }

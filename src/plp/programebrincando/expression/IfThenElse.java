@@ -7,6 +7,7 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
+import plp.programebrincando.util.TipoPrimitivo;
 
 public class IfThenElse implements Expressao {
 
@@ -42,13 +43,20 @@ public class IfThenElse implements Expressao {
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		//TODO
-		return false;
+		
+		boolean retorno;
+		
+		retorno = (expressaoCondicao.checaTipo(amb)
+				&& expressaoCondicao.getTipo(amb).isBoolean()
+				&& expressaoThen.checaTipo(amb)
+				&& expressaoElse.checaTipo(amb));
+		
+		return retorno;
 	}
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		//TODO
-		return null;
+		//TODO Confirma se este deve ser o retorno
+		return TipoPrimitivo.BOOLEAN;
 	}
 }

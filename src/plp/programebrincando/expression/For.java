@@ -1,11 +1,8 @@
 package plp.programebrincando.expression;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.value.Valor;
-import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
@@ -40,8 +37,7 @@ public class For implements Expressao {
 			
 			for(int i = 0; i < valor.valor(); i++) {
 				expressaoExecucao.avaliar(amb);
-			}
-			
+			}	
 			
 		}
 	
@@ -92,6 +88,7 @@ public class For implements Expressao {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		//TODO Confirma se este deve ser o retorno
 		return TipoPrimitivo.BOOLEAN;
 	}
 

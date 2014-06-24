@@ -9,8 +9,6 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.expression.value.ValorCor;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
-import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
 
 public class ActionSetPenColor extends Action {
 
@@ -38,11 +36,6 @@ public class ActionSetPenColor extends Action {
 			System.out.println(" SKIP CORCANETA ");
 		}
 		return retorno;
-	}
-
-	@Override
-	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoPrimitivo.BOOLEAN;
 	}
 
 	@Override
