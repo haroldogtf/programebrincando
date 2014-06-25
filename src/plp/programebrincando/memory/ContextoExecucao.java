@@ -13,8 +13,8 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 	//TODO Colocar como entrada o limites
 	private Integer degrees = 90;
 
-	private Integer limitAxisX = 600;
-	private Integer limitAxisY = 800;
+	private Integer limitAxisX = 10;
+	private Integer limitAxisY = 10;
 
 	private Integer currentAxisX = limitAxisX / 2;
 	private Integer currentAxisY = limitAxisY / 2;

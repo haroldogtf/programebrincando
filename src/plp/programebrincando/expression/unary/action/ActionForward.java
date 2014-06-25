@@ -8,6 +8,8 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
+import plp.programebrincando.util.AlgoritmoAndarUtil;
+import plp.programebrincando.util.ResultadoPodeAndar;
 
 public class ActionForward extends Action {
 
@@ -22,24 +24,17 @@ public class ActionForward extends Action {
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		/*
 		 * TODO Fazer representação visual
-		 * 1. Elaborar algoritmo para verificar se o robo pode andar.
-		 * 2. Caso, o robo possa andar, atualizar as coordenadas e retorne true
-		 * 3. Caso contrário, o robo não anda, e o método retorna false. 
 		 */
 		ValorInteiro number = (ValorInteiro) expressao.avaliar(amb);
-		Valor retorno = null;
+		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, number.valor());
 		
-		boolean valor = true;
+		ValorBooleano retorno = new ValorBooleano(resultadoPodeAndar.isPodeAndar());
 		
-		if(valor){
-			int x = amb.getCurrentAxisX();
-			
-			//TODO Fazer um algoritmo para atualizar as posições x e y.
-			amb.setCurrentAxisX(x + number.valor());
-			retorno = new ValorBooleano(true);
+		if(retorno.valor()){
+			amb.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
+			amb.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
 			System.out.println(number + " -> ");
 		}else{
-			retorno = new ValorBooleano(false);
 			System.out.println(" SKIP -> ");
 		}
 		return retorno;
@@ -48,5 +43,10 @@ public class ActionForward extends Action {
 	@Override
 	protected boolean checaTipoElementoTerminal(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return (this.getExpressao().getTipo(amb).isInteger());
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("Sin90 = " + Math.sin(Math.toRadians(90)));
+		System.out.println("Cos90 = " + Math.round(Math.cos(Math.toRadians(90))));
 	}
 }

@@ -8,6 +8,8 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
+import plp.programebrincando.util.AlgoritmoAndarUtil;
+import plp.programebrincando.util.ResultadoPodeAndar;
 
 public class ActionRight extends Action {
 
@@ -20,6 +22,12 @@ public class ActionRight extends Action {
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		/*
+		 * TODO Fazer representação visual
+		 */
+		ValorInteiro graus = (ValorInteiro) expressao.avaliar(amb);
+		amb.setDegrees(degrees);
+		
 		/*
 		 * TODO Fazer representação visual
 		 * 1. Elaborar algoritmo para verificar se o robo pode andar.
