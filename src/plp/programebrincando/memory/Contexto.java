@@ -44,12 +44,14 @@ public class Contexto<T> {
 				auxStack.push(aux);
 				result = aux.get(idArg);
 			}
+
 			while (!auxStack.empty()) {
 				pilha.push(auxStack.pop());
 			}
-			if (result == null)
-				throw new IdentificadorNaoDeclaradoException();
 
+			if (result == null){
+				throw new IdentificadorNaoDeclaradoException();
+			}
 			return result;
 		} catch (IdentificadorNaoDeclaradoException e) {
 			throw new VariavelNaoDeclaradaException(idArg);

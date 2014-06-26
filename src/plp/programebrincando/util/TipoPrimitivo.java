@@ -5,7 +5,11 @@ public enum TipoPrimitivo implements Tipo {
 	BOOLEAN("BOOLEAN"),
 	COR("COLOR"),
 	INTEGER("INTEGER"),
-	ACTION("ACTION");
+	ACTION("ACTION"),
+	IFTHENELSE("IFTHENELSE"),
+	FOR("FOR"),
+	LEARN("LEARN"),
+	SEQUENCE("SEQUENCE");
 	
 	private String nome;
 
@@ -33,6 +37,26 @@ public enum TipoPrimitivo implements Tipo {
 	@Override
 	public boolean isColor() {
 		return this.isEqual(COR);
+	}
+	
+	@Override
+	public boolean isSequence(){
+		return this.isEqual(SEQUENCE);
+	}
+	
+	@Override
+	public boolean isIfThenElse(){
+		return this.isEqual(IFTHENELSE);
+	}
+	
+	@Override
+	public boolean isFor(){
+		return this.isEqual(FOR);
+	}
+	
+	@Override
+	public boolean isLearn(){
+		return this.isEqual(LEARN);
 	}
 	
 	public boolean isEqual(Tipo tipo) {

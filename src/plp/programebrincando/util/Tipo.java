@@ -2,18 +2,26 @@ package plp.programebrincando.util;
 
 public interface Tipo {
 
-	public abstract String getName();
+	String getName();
 
-	public abstract boolean isInteger();
+	boolean isInteger();
 
-	public abstract boolean isBoolean();
+	boolean isBoolean();
 
-	public abstract boolean isAction();
+	boolean isAction();
 	
-	public abstract boolean isColor();
+	boolean isColor();
 
-	public abstract boolean isEqual(Tipo tipo);
+	boolean isEqual(Tipo tipo);
 
-	public abstract boolean isValid();
+	boolean isValid();
+
+	boolean isLearn();
+
+	boolean isFor();
+
+	boolean isIfThenElse();
+
+	boolean isSequence();
 	
 }

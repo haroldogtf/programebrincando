@@ -3,9 +3,11 @@ package plp.programebrincando.expression;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.value.Valor;
+import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
+import plp.programebrincando.util.TipoPrimitivo;
 
 public class SequenciaExpressao implements Expressao{
 
@@ -24,19 +26,19 @@ public class SequenciaExpressao implements Expressao{
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		// TODO Auto-generated method stub
-		return null;
+		expressao1.avaliar(amb); 
+		expressao2.avaliar(amb);
+		
+		return new ValorBooleano(true);
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException { 
-		// TODO Auto-generated method stub
-		return false;
+		return expressao1.checaTipo(amb) && expressao2.checaTipo(amb);
 	}
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		// TODO Auto-generated method stub
-		return null;
+		return TipoPrimitivo.SEQUENCE;
 	}
 }

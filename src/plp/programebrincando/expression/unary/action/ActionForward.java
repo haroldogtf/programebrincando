@@ -27,9 +27,11 @@ public class ActionForward extends Action {
 		ValorBooleano retorno = new ValorBooleano(resultadoPodeAndar.isPodeAndar());
 		
 		if(retorno.valor()){
+			System.out.println(numeroPassos + " -> Current Coordinates: " + amb.getCurrentAxisX() + " " + 
+					amb.getCurrentAxisY() + ". Current Degrees: " + amb.getDegrees()  + ". New Coordinates: " +
+					resultadoPodeAndar.getNewAxisX() + " " + resultadoPodeAndar.getNewAxisY());
 			amb.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
 			amb.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
-			System.out.println(numeroPassos + " -> ");
 		}else{
 			System.out.println(" SKIP -> ");
 		}
@@ -39,10 +41,5 @@ public class ActionForward extends Action {
 	@Override
 	protected boolean checaTipoElementoTerminal(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return (this.getExpressao().getTipo(amb).isInteger());
-	}
-	
-	public static void main(String[] args) {
-		System.out.println("Sin90 = " + Math.sin(Math.toRadians(90)));
-		System.out.println("Cos90 = " + Math.round(Math.cos(Math.toRadians(90))));
 	}
 }

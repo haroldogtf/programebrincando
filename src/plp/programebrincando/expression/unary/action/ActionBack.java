@@ -21,15 +21,17 @@ public class ActionBack extends Action {
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorInteiro number = (ValorInteiro) expressao.avaliar(amb);
-		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, number.valor());
+		ValorInteiro numeroPassos = (ValorInteiro) expressao.avaliar(amb);
+		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, numeroPassos.valor());
 		
 		ValorBooleano retorno = new ValorBooleano(resultadoPodeAndar.isPodeAndar());
 		
 		if(retorno.valor()){
+			System.out.println(numeroPassos + " <- Current Coordinates: " + amb.getCurrentAxisX() + " " + 
+					amb.getCurrentAxisY() + ". Current Degrees: " + amb.getDegrees() + ". New Coordinates: " +
+					resultadoPodeAndar.getNewAxisX() + " " + resultadoPodeAndar.getNewAxisY());
 			amb.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
 			amb.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
-			System.out.println(number + " back ");
 		}else{
 			System.out.println(" SKIP back");
 		}

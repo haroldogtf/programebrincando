@@ -21,23 +21,18 @@ public class Id implements Expressao {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		// TODO Auto-generated method stub
-		return null;
+	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		return amb.get(this);
 	}
 
 	@Override
-	public boolean checaTipo(AmbienteCompilacao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		amb.get(this);
+		return true;
 	}
 
 	@Override
-	public Tipo getTipo(AmbienteCompilacao amb)
-			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		// TODO Auto-generated method stub
-		return null;
+	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		return amb.get(this);
 	}
 }

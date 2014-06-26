@@ -22,9 +22,8 @@ public class ActionLeft extends Action {
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		ValorInteiro degrees = (ValorInteiro) expressao.avaliar(amb);
 		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, amb, degrees.valor());
+		System.out.println("Current Degrees: " + amb.getDegrees() + ". New Degree: " + newDegreesValue);
 		amb.setDegrees(newDegreesValue);
-		
-		System.out.println("Current Degrees: " + amb.getDegrees());
 		
 		return new ValorBooleano(true);
 	}
