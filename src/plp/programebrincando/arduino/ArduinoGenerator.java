@@ -57,7 +57,7 @@ public class ArduinoGenerator {
 					string.append("\t");
 					string.append(acao);
 					string.append("\n");
-					string.append("\t\\\\@ACAO@");
+					string.append("\t//@ACAO@");
 				} else {
 					string.append(linha);
 				}
@@ -112,7 +112,7 @@ public class ArduinoGenerator {
 	}
 	
 	public static void paraFrente(int valor) {
-		escreverAcao("parafrente(" + valor + ");");
+		escreverAcao("paraFrente(" + valor + ");");
 	}
 	
 	public static void paraTras(int valor) {
@@ -134,5 +134,5 @@ public class ArduinoGenerator {
 	public static void corCaneta(int valor1, int valor2, int valor3) {
 		escreverAcao("corCaneta(" + valor1 +"," +  valor2 + "," +valor3 +");");
 	}
-
+	
 }
