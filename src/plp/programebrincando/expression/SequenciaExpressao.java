@@ -15,8 +15,6 @@ public class SequenciaExpressao implements Expressao{
 	public SequenciaExpressao(Expressao expressao1, Expressao expressao2) {
 		this.expressao1 = expressao1;
 		this.expressao2 = expressao2;
-		
-		System.out.println(toString());
 	}
 	
 	@Override

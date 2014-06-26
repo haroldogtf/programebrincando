@@ -3,10 +3,10 @@ package plp.programebrincando.util;
 public class ResultadoPodeAndar {
 
 	private boolean podeAndar;
-	private Integer newAxisX;
-	private Integer newAxisY;
+	private Double newAxisX;
+	private Double newAxisY;
 	
-	public ResultadoPodeAndar(boolean podeAndar, Integer newAxisX, Integer newAxisY) {
+	public ResultadoPodeAndar(boolean podeAndar, Double newAxisX, Double newAxisY) {
 		this.podeAndar = podeAndar;
 		this.newAxisX = newAxisX;
 		this.newAxisY = newAxisY;
@@ -16,11 +16,11 @@ public class ResultadoPodeAndar {
 		return podeAndar;
 	}
 
-	public Integer getNewAxisX() {
+	public Double getNewAxisX() {
 		return newAxisX;
 	}
 
-	public Integer getNewAxisY() {
+	public Double getNewAxisY() {
 		return newAxisY;
 	}
 

@@ -17,14 +17,10 @@ public class ActionBack extends Action {
 	
 	public ActionBack(Expressao expressao) {
 		super(expressao, operador);
-		System.out.println(this);
 	}
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		/*
-		 * TODO Fazer representação visual
-		 */
 		ValorInteiro number = (ValorInteiro) expressao.avaliar(amb);
 		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, number.valor());
 		

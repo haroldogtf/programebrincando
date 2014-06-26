@@ -14,14 +14,14 @@ public class ActionSetPenUse extends Action {
 
 	public ActionSetPenUse(Expressao expressao) {
 		super(expressao, operador);
-		System.out.println(this);
 	}
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		ValorBooleano usarCaneta = (ValorBooleano) expressao.avaliar(amb);
 		amb.setPenUse(usarCaneta.valor());
-		System.out.println(usarCaneta + " USARCANETA ");
+
+		System.out.println("Usar Caneta: " + amb.getPenUse());
 		return new ValorBooleano(true);
 	}
 

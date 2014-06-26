@@ -4,14 +4,14 @@ import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
 
 public interface AmbienteExecucao extends Ambiente<Valor> {
-	public Integer getLimitAxisX();
-	public void setLimitAxisX(Integer limitAxisX);
-	public Integer getLimitAxisY();
-	public void setLimitAxisY(Integer limitAxisY);
-	public Integer getCurrentAxisX();
-	public void setCurrentAxisX(Integer currentAxisX);
-	public Integer getCurrentAxisY();
-	public void setCurrentAxisY(Integer currentAxisY);
+	public Double getLimitAxisX();
+	public void setLimitAxisX(Double limitAxisX);
+	public Double getLimitAxisY();
+	public void setLimitAxisY(Double limitAxisY);
+	public Double getCurrentAxisX();
+	public void setCurrentAxisX(Double currentAxisX);
+	public Double getCurrentAxisY();
+	public void setCurrentAxisY(Double currentAxisY);
 	public AmbienteExecucao clone();
 	public Integer getDegrees();
 	public void setDegrees(Integer degrees);

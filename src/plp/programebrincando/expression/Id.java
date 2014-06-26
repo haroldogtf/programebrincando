@@ -13,7 +13,6 @@ public class Id implements Expressao {
 	
 	public Id(String idName) {
 		this.idName = idName;
-		System.out.println(toString());
 	}
 	
 	@Override

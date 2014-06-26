@@ -16,7 +16,6 @@ public class ActionSetPenColor extends Action {
 	
 	public ActionSetPenColor(Expressao expressao) {
 		super(expressao, operador);
-		System.out.println(this);
 	}
 
 	@Override

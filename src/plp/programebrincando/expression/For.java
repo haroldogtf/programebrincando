@@ -17,8 +17,6 @@ public class For implements Expressao {
 	public For(Expressao expressaoLoop, Expressao expressaoExecucao) {
 		this.expressaoRepeticao = expressaoLoop;
 		this.expressaoExecucao = expressaoExecucao;
-
-		System.out.println(toString());
 	}
 
 	@Override
@@ -38,7 +36,6 @@ public class For implements Expressao {
 			for(int i = 0; i < valor.valor(); i++) {
 				expressaoExecucao.avaliar(amb);
 			}	
-			
 		}
 	
 		/*

@@ -10,8 +10,6 @@ public class ValorInteiro extends ValorConcreto<Integer>{
 
 	public ValorInteiro(int valor){
 		super(valor);
-		
-		System.out.println(toString());
 	}
 
 	@Override

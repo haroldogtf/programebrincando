@@ -19,7 +19,6 @@ public class IfThenElse implements Expressao {
 		this.expressaoCondicao = expressaoCondicao;
 		this.expressaoThen = expressaoThen;
 		this.expressaoElse = expressaoElse;
-		System.out.println(this);
 	}
 	
 	@Override

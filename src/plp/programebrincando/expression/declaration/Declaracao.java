@@ -19,8 +19,6 @@ public class Declaracao implements Expressao {
 		this.id = id;
 		this.lista = lista;
 		this.expressao = expressao;
-		
-		System.out.println(toString());
 	}
 	
 	@Override

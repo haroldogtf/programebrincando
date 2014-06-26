@@ -1,54 +1,43 @@
 package plp.programebrincando.util;
 
 import plp.programebrincando.expression.unary.action.Action;
-import plp.programebrincando.expression.unary.action.ActionBack;
-import plp.programebrincando.expression.unary.action.ActionForward;
 import plp.programebrincando.expression.unary.action.ActionLeft;
 import plp.programebrincando.expression.unary.action.ActionRight;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public class AlgoritmoGirarUtil {
 
-	public static Integer girar(Action action, AmbienteExecucao ambiente, Integer graus){
+	public static Integer girar(Action action, AmbienteExecucao ambiente, Integer degrees){
 		Integer retorno = null;
 		if(action instanceof ActionRight){
-			retorno = podeAndarFrente((ActionForward) action, ambiente, graus);
+			retorno = girarDireita((ActionRight) action, ambiente, degrees);
 		}else if(action instanceof ActionLeft){
-			retorno = podeAndarTras((ActionBack) action, ambiente, graus);
+			retorno = girarEsquerda((ActionLeft) action, ambiente, degrees);
 		}
 		return retorno;
 	}
 	
-	private static Integer podeAndarFrente(ActionForward actionForward, AmbienteExecucao ambiente, Integer graus){
-		Integer degree = ambiente.getDegrees();
+	private static Integer girarDireita(ActionRight actionRight, AmbienteExecucao ambiente, Integer degrees){
+		Integer currentDegrees = ambiente.getDegrees();
+		Integer newDegreesValue = currentDegrees - degrees;
+		newDegreesValue = normalizarDegrees(newDegreesValue);
 		
-		int fatorX = (int) Math.round(Math.cos(Math.toRadians(degree)));
-		int fatorY = (int) Math.round(Math.sin(Math.toRadians(degree)));
-		
-		int passosX = passos * fatorX;
-		int passosY = passos * fatorY;
-
-		return passouLimiteXouY(passosX, passosY, ambiente);
+		return newDegreesValue;
 	}
 	
-	private static Integer podeAndarTras(ActionBack actionBack, AmbienteExecucao ambiente, Integer graus){
-		Integer degree = ambiente.getDegrees();
+	private static Integer girarEsquerda(ActionLeft actionLeft, AmbienteExecucao ambiente, Integer degrees){
+		Integer currentDegrees = ambiente.getDegrees();
+		Integer newDegreesValue = currentDegrees + degrees;
+		newDegreesValue = normalizarDegrees(newDegreesValue);
 		
-		int fatorX = (int) Math.round(Math.cos(Math.toRadians(degree)));
-		int fatorY = (int) Math.round(Math.sin(Math.toRadians(degree)));
-		
-		int passosX = passos * fatorX;
-		int passosY = passos * fatorY;
-		
-		return passouLimiteXouY(-passosX, -passosY, ambiente);
+		return newDegreesValue;
 	}
 	
-	private static ResultadoPodeAndar passouLimiteXouY(int passosX, int passosY, AmbienteExecucao ambiente){
-		Integer newAxisX = passosX + ambiente.getCurrentAxisX(); 
-		Integer newAxisY = passosY + ambiente.getCurrentAxisY();
-		boolean podeAndar = (newAxisX <= ambiente.getLimitAxisX() && newAxisX >= 0) && 
-				(newAxisY <= ambiente.getLimitAxisY() && newAxisY >= 0);
-		
-		return new ResultadoPodeAndar(podeAndar, newAxisX, newAxisY);
+	private static Integer normalizarDegrees(Integer degrees){
+		degrees = degrees % 360;
+		if(degrees < 0){
+			degrees = 360 + degrees;
+		}
+		return degrees;
 	}
 }

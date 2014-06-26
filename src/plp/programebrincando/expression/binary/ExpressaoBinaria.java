@@ -12,8 +12,6 @@ public abstract class ExpressaoBinaria implements Expressao {
 		this.expressaoEsquerda = expressaoEsquerda;
 		this.expressaoDireita = expressaoDireita;
 		this.operador = operator;
-		
-		System.out.println(toString());
 	}
 	
 	@Override

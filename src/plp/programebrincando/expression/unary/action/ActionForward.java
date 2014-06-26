@@ -17,23 +17,19 @@ public class ActionForward extends Action {
 	
 	public ActionForward(Expressao expressao) {
 		super(expressao, operador);
-		System.out.println(this);
 	}
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		/*
-		 * TODO Fazer representação visual
-		 */
-		ValorInteiro number = (ValorInteiro) expressao.avaliar(amb);
-		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, number.valor());
+		ValorInteiro numeroPassos = (ValorInteiro) expressao.avaliar(amb);
+		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, numeroPassos.valor());
 		
 		ValorBooleano retorno = new ValorBooleano(resultadoPodeAndar.isPodeAndar());
 		
 		if(retorno.valor()){
 			amb.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
 			amb.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
-			System.out.println(number + " -> ");
+			System.out.println(numeroPassos + " -> ");
 		}else{
 			System.out.println(" SKIP -> ");
 		}

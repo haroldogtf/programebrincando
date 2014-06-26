@@ -17,8 +17,6 @@ public class Aplicacao implements Expressao {
 	public Aplicacao(Id id, ListaExpressao lista) {
 		this.id = id;
 		this.lista = lista;
-		
-		System.out.println(toString());
 	}
 	
 	@Override

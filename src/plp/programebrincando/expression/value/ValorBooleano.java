@@ -11,8 +11,6 @@ public class ValorBooleano extends ValorConcreto<Boolean>{
 
 	public ValorBooleano(boolean valor) {
 		super(valor);
-		
-		System.out.println(valor);
 	}
 
 	@Override

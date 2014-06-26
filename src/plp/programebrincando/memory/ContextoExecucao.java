@@ -13,11 +13,11 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 	//TODO Colocar como entrada o limites
 	private Integer degrees = 90;
 
-	private Integer limitAxisX = 10;
-	private Integer limitAxisY = 10;
+	private Double limitAxisX = 100.0;
+	private Double limitAxisY = 100.0;
 
-	private Integer currentAxisX = limitAxisX / 2;
-	private Integer currentAxisY = limitAxisY / 2;
+	private Double currentAxisX = limitAxisX / 2;
+	private Double currentAxisY = limitAxisY / 2;
 
 	private Boolean penUse = true;
 	
@@ -41,35 +41,35 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 		return retorno;
 	}
 
-	public Integer getLimitAxisX() {
+	public Double getLimitAxisX() {
 		return limitAxisX;
 	}
 
-	public void setLimitAxisX(Integer limitAxisX) {
+	public void setLimitAxisX(Double limitAxisX) {
 		this.limitAxisX = limitAxisX;
 	}
 
-	public Integer getLimitAxisY() {
+	public Double getLimitAxisY() {
 		return limitAxisY;
 	}
 
-	public void setLimitAxisY(Integer limitAxisY) {
+	public void setLimitAxisY(Double limitAxisY) {
 		this.limitAxisY = limitAxisY;
 	}
 
-	public Integer getCurrentAxisX() {
+	public Double getCurrentAxisX() {
 		return currentAxisX;
 	}
 
-	public void setCurrentAxisX(Integer currentAxisX) {
+	public void setCurrentAxisX(Double currentAxisX) {
 		this.currentAxisX = currentAxisX;
 	}
 
-	public Integer getCurrentAxisY() {
+	public Double getCurrentAxisY() {
 		return currentAxisY;
 	}
 
-	public void setCurrentAxisY(Integer currentAxisY) {
+	public void setCurrentAxisY(Double currentAxisY) {
 		this.currentAxisY = currentAxisY;
 	}
 

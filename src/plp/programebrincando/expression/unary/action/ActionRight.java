@@ -8,8 +8,7 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
-import plp.programebrincando.util.AlgoritmoAndarUtil;
-import plp.programebrincando.util.ResultadoPodeAndar;
+import plp.programebrincando.util.AlgoritmoGirarUtil;
 
 public class ActionRight extends Action {
 
@@ -17,40 +16,17 @@ public class ActionRight extends Action {
 	
 	public ActionRight(Expressao expressao) {
 		super(expressao, operador);
-		System.out.println(this);
 	}
 
 	@Override
 	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		/*
-		 * TODO Fazer representação visual
-		 */
-		ValorInteiro graus = (ValorInteiro) expressao.avaliar(amb);
-		amb.setDegrees(degrees);
+		ValorInteiro degrees = (ValorInteiro) expressao.avaliar(amb);
+		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, amb, degrees.valor());
+		amb.setDegrees(newDegreesValue);
 		
-		/*
-		 * TODO Fazer representação visual
-		 * 1. Elaborar algoritmo para verificar se o robo pode andar.
-		 * 2. Caso, o robo possa andar, atualizar as coordenadas e retorne true
-		 * 3. Caso contrário, o robo não anda, e o método retorna false. 
-		 */
-		ValorInteiro number = (ValorInteiro) expressao.avaliar(amb);
-		Valor retorno = null;
+		System.out.println("Current Degrees: " + amb.getDegrees());
 		
-		boolean valor = true;
-		
-		if(valor){
-			int x = amb.getCurrentAxisX();
-			
-			//TODO Fazer um algoritmo para atualizar o grau de inclinação.
-			amb.setDegrees(amb.getDegrees() + x);
-			retorno = new ValorBooleano(true);
-			System.out.println(number + " GD ");
-		}else{
-			retorno = new ValorBooleano(false);
-			System.out.println(" SKIP GD ");
-		}
-		return retorno;
+		return new ValorBooleano(true);
 	}
 
 	@Override

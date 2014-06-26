@@ -20,30 +20,30 @@ public class AlgoritmoAndarUtil {
 	private static ResultadoPodeAndar podeAndarFrente(ActionForward actionForward, AmbienteExecucao ambiente, Integer passos){
 		Integer degree = ambiente.getDegrees();
 		
-		int fatorX = (int) Math.round(Math.cos(Math.toRadians(degree)));
-		int fatorY = (int) Math.round(Math.sin(Math.toRadians(degree)));
+		Double fatorX = Math.cos(Math.toRadians(degree));
+		Double fatorY = Math.sin(Math.toRadians(degree));
 		
-		int passosX = passos * fatorX;
-		int passosY = passos * fatorY;
+		Double passosX = passos * fatorX;
+		Double passosY = passos * fatorY;
 
-		return passouLimiteXouY(passosX, passosY, ambiente);
+		return passouLimiteXY(passosX, passosY, ambiente);
 	}
 	
 	private static ResultadoPodeAndar podeAndarTras(ActionBack actionBack, AmbienteExecucao ambiente, Integer passos){
 		Integer degree = ambiente.getDegrees();
 		
-		int fatorX = (int) Math.round(Math.cos(Math.toRadians(degree)));
-		int fatorY = (int) Math.round(Math.sin(Math.toRadians(degree)));
+		Double fatorX = Math.cos(Math.toRadians(degree));
+		Double fatorY = Math.sin(Math.toRadians(degree));
 		
-		int passosX = passos * fatorX;
-		int passosY = passos * fatorY;
+		Double passosX = passos * fatorX;
+		Double passosY = passos * fatorY;
 		
-		return passouLimiteXouY(-passosX, -passosY, ambiente);
+		return passouLimiteXY(-passosX, -passosY, ambiente);
 	}
 	
-	private static ResultadoPodeAndar passouLimiteXouY(int passosX, int passosY, AmbienteExecucao ambiente){
-		Integer newAxisX = passosX + ambiente.getCurrentAxisX(); 
-		Integer newAxisY = passosY + ambiente.getCurrentAxisY();
+	private static ResultadoPodeAndar passouLimiteXY(Double passosX, Double passosY, AmbienteExecucao ambiente){
+		Double newAxisX = passosX + ambiente.getCurrentAxisX(); 
+		Double newAxisY = passosY + ambiente.getCurrentAxisY();
 		boolean podeAndar = (newAxisX <= ambiente.getLimitAxisX() && newAxisX >= 0) && 
 				(newAxisY <= ambiente.getLimitAxisY() && newAxisY >= 0);
 		

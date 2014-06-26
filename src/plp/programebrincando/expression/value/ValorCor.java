@@ -10,8 +10,6 @@ public class ValorCor extends ValorConcreto<Color>{
 	
 	public ValorCor(Color valor){
 		super(valor);
-		
-		System.out.println(toString());
 	}
 	
 	@Override
