@@ -9,10 +9,10 @@ PARSER_BEGIN(ProgrameBrincandoParser)
 package plp.programebrincando.parser;
 
 import plp.programebrincando.*;
+import plp.programebrincando.command.*;
+import plp.programebrincando.command.declaration.*;
 import plp.programebrincando.expression.*;
-import plp.programebrincando.expression.application.*;
 import plp.programebrincando.expression.binary.*;
-import plp.programebrincando.expression.declaration.*;
 import plp.programebrincando.expression.unary.*;
 import plp.programebrincando.expression.unary.action.*;
 import plp.programebrincando.expression.value.*;
@@ -234,7 +234,7 @@ SequenciaComando PSequenciaComando() :
 
 Declaracao PDeclaracao() :
 {
-	Camndo retorno;
+	Comando retorno;
 }
 {
     (

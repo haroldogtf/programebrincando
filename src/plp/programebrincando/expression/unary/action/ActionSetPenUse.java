@@ -17,11 +17,11 @@ public class ActionSetPenUse extends Action {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorBooleano usarCaneta = (ValorBooleano) expressao.avaliar(amb);
-		amb.setPenUse(usarCaneta.valor());
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		ValorBooleano usarCaneta = (ValorBooleano) expressao.avaliar(ambiente);
+		ambiente.setPenUse(usarCaneta.valor());
 
-		System.out.println("Usar Caneta: " + amb.getPenUse());
+		System.out.println("Usar Caneta: " + ambiente.getPenUse());
 		return new ValorBooleano(true);
 	}
 

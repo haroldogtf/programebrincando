@@ -11,7 +11,6 @@ import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
 import plp.programebrincando.util.TipoExpressao;
 
-
 public class ExpressaoMaiorQue extends ExpressaoBinaria {
 
 	public ExpressaoMaiorQue(Expressao expressaoEsquerda, Expressao expressaoDireita) {
@@ -19,9 +18,9 @@ public class ExpressaoMaiorQue extends ExpressaoBinaria {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorInteiro valorEsquerda = (ValorInteiro) expressaoEsquerda.avaliar(amb);
-		ValorInteiro valorDireita = (ValorInteiro) expressaoDireita.avaliar(amb);
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		ValorInteiro valorEsquerda = (ValorInteiro) expressaoEsquerda.avaliar(ambiente);
+		ValorInteiro valorDireita = (ValorInteiro) expressaoDireita.avaliar(ambiente);
 
 		return new ValorBooleano(valorEsquerda.valor() > valorDireita.valor());
 	}
@@ -35,5 +34,4 @@ public class ExpressaoMaiorQue extends ExpressaoBinaria {
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return expressaoEsquerda.getTipo(amb).isInteger() && expressaoDireita.getTipo(amb).isInteger();		
 	}
-
 }

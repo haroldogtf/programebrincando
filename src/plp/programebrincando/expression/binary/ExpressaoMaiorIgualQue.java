@@ -18,9 +18,9 @@ public class ExpressaoMaiorIgualQue extends ExpressaoBinaria {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorInteiro valorEsquerda = (ValorInteiro) expressaoEsquerda.avaliar(amb);
-		ValorInteiro valorDireita = (ValorInteiro) expressaoDireita.avaliar(amb);
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		ValorInteiro valorEsquerda = (ValorInteiro) expressaoEsquerda.avaliar(ambiente);
+		ValorInteiro valorDireita = (ValorInteiro) expressaoDireita.avaliar(ambiente);
 
 		return new ValorBooleano(valorEsquerda.valor() >= valorDireita.valor());
 	}
@@ -34,5 +34,4 @@ public class ExpressaoMaiorIgualQue extends ExpressaoBinaria {
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return expressaoEsquerda.getTipo(amb).isInteger() && expressaoDireita.getTipo(amb).isInteger();		
 	}
-
 }

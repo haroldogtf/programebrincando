@@ -6,6 +6,6 @@ import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public interface Comando {
-	AmbienteExecucao executar(AmbienteExecucao amb) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException;
-	boolean checaTipo(AmbienteCompilacao amb) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException;
+	AmbienteExecucao executar(AmbienteExecucao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException;
+	boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException;
 }

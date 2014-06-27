@@ -10,28 +10,26 @@ import plp.programebrincando.util.Tipo;
 
 public class ExpressaoJunta extends ExpressaoBinaria {
 
-	// TODO Auto-generated method stub
-	
 	public ExpressaoJunta(Expressao expressaoEsquerda, Expressao expressaoDireita) {
 		super(expressaoEsquerda, expressaoDireita, "JUNTA");
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb)
+	public Valor avaliar(AmbienteExecucao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean checaTipo(AmbienteCompilacao amb)
+	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Tipo getTipo(AmbienteCompilacao amb)
+	public Tipo getTipo(AmbienteCompilacao ambienteamb)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return null;

@@ -19,11 +19,11 @@ public class ActionLeft extends Action {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorInteiro degrees = (ValorInteiro) expressao.avaliar(amb);
-		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, amb, degrees.valor());
-		System.out.println("Current Degrees: " + amb.getDegrees() + ". New Degree: " + newDegreesValue);
-		amb.setDegrees(newDegreesValue);
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		ValorInteiro degrees = (ValorInteiro) expressao.avaliar(ambiente);
+		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
+		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
+		ambiente.setDegrees(newDegreesValue);
 		
 		return new ValorBooleano(true);
 	}

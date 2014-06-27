@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Stack;
 
+import plp.programebrincando.command.declaration.DefinicaoProcedimento;
+import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
+import plp.programebrincando.exception.ProcedimentoNaoDeclaradoException;
+import plp.programebrincando.exception.VariavelJaDeclaradaException;
+import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
@@ -22,6 +27,12 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 	private Boolean penUse = true;
 	
 	private Color penColor = new Color(0, 0, 0);
+	
+	private Contexto<DefinicaoProcedimento> contextoProcedimentos;
+	
+	public ContextoExecucao() {
+		contextoProcedimentos = new Contexto<DefinicaoProcedimento>();
+	}
 	
 	public ContextoExecucao clone() {
 		ContextoExecucao retorno = new ContextoExecucao();
@@ -94,5 +105,23 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 
 	public void setDegrees(Integer degrees) {
 		this.degrees = degrees;
+	}
+
+	@Override
+	public void mapProcedimento(Id idProcedimento, DefinicaoProcedimento definicaoProcedimento) throws ProcedimentoJaDeclaradoException {
+		try {
+			this.contextoProcedimentos.map(idProcedimento, definicaoProcedimento);
+		} catch (VariavelJaDeclaradaException e) {
+			throw new ProcedimentoJaDeclaradoException(idProcedimento);
+		}		
+	}
+
+	@Override
+	public DefinicaoProcedimento getProcedimento(Id idProcedimento) throws ProcedimentoNaoDeclaradoException {
+		try {
+			return this.contextoProcedimentos.get(idProcedimento);
+		} catch (VariavelNaoDeclaradaException e) {
+			throw new ProcedimentoNaoDeclaradoException(idProcedimento);
+		}
 	}
 }

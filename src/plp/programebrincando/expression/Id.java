@@ -9,7 +9,7 @@ import plp.programebrincando.util.Tipo;
 
 public class Id implements Expressao {
 
-	public String idName;
+	private String idName;
 	
 	public Id(String idName) {
 		this.idName = idName;
@@ -21,11 +21,6 @@ public class Id implements Expressao {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return amb.get(this);
-	}
-
-	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		amb.get(this);
 		return true;
@@ -34,5 +29,10 @@ public class Id implements Expressao {
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		return amb.get(this);
+	}
+
+	@Override
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException{
+		return ambiente.get(this);
 	}
 }

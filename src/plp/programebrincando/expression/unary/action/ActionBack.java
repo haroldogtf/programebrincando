@@ -20,18 +20,18 @@ public class ActionBack extends Action {
 	}
 
 	@Override
-	public Valor avaliar(AmbienteExecucao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		ValorInteiro numeroPassos = (ValorInteiro) expressao.avaliar(amb);
-		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, amb, numeroPassos.valor());
+	public Valor avaliar(AmbienteExecucao ambiente) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+		ValorInteiro numeroPassos = (ValorInteiro) expressao.avaliar(ambiente);
+		ResultadoPodeAndar resultadoPodeAndar = AlgoritmoAndarUtil.podeAndar(this, ambiente, numeroPassos.valor());
 		
 		ValorBooleano retorno = new ValorBooleano(resultadoPodeAndar.isPodeAndar());
 		
 		if(retorno.valor()){
-			System.out.println(numeroPassos + " <- Current Coordinates: " + amb.getCurrentAxisX() + " " + 
-					amb.getCurrentAxisY() + ". Current Degrees: " + amb.getDegrees() + ". New Coordinates: " +
+			System.out.println(numeroPassos + " <- Current Coordinates: " + ambiente.getCurrentAxisX() + " " + 
+					ambiente.getCurrentAxisY() + ". Current Degrees: " + ambiente.getDegrees() + ". New Coordinates: " +
 					resultadoPodeAndar.getNewAxisX() + " " + resultadoPodeAndar.getNewAxisY());
-			amb.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
-			amb.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
+			ambiente.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
+			ambiente.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
 		}else{
 			System.out.println(" SKIP back");
 		}

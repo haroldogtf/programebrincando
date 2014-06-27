@@ -18,5 +18,4 @@ public abstract class ExpressaoBinaria implements Expressao {
 	public String toString() {
 		return expressaoEsquerda.toString() + " " + operador + " " + expressaoDireita.toString();
 	}
-
 }
