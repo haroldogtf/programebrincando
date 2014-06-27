@@ -25,7 +25,7 @@ public class ProgrameBrincandoParser
     ProgrameBrincandoParser parser;
     if (args.length == 0)
     {
-      System.out.println("Programe Brincando Parser:  Lendo de entrada padrão...");
+      System.out.println("Programe Brincando Parser:  Lendo de entrada padrao...");
       parser = new ProgrameBrincandoParser(System.in);
     }
     else if (args.length == 1)
@@ -37,7 +37,7 @@ public class ProgrameBrincandoParser
       }
       catch (java.io.FileNotFoundException e)
       {
-        System.out.println("Programe Brincando Parser: Arquivo " + args [0] + " não encontrado.");
+        System.out.println("Programe Brincando Parser: Arquivo " + args [0] + " nao encontrado.");
         return;
       }
     }
@@ -174,16 +174,361 @@ Programa entrada() :
 
 Programa PPrograma() :
 {
-  Expressao retorno;
+  Comando retorno;
 }
 {
-  retorno = PExpressao()
+  retorno = PComando()
   {
     return new Programa(retorno);
   }
 }
 
+Comando PComando() :
+{
+	Comando retorno;  
+}
+{
+ 	(
+ 	  
+		LOOKAHEAD (PComandoSimples() <SEMICOLON>)		retorno = PSequenciaComando()	   	|      	retorno = PComandoSimples() 	)
+	{
+		return retorno;
+	}
+}
+
+Comando PComandoSimples() :
+{
+	Comando retorno;
+}
+{
+    (
+		//retorno = PDeclaracao()
+		//|
+		retorno = PAtribuicao()
+		|
+		retorno = PAplicacao()
+		|
+		retorno = PIfThenElse()
+		|
+		retorno = PFor()
+   	)
+    {
+        return retorno;
+    }
+}
+
+SequenciaComando PSequenciaComando() :
+{
+	Comando comando1 = null;  
+	Comando comando2 = null;  
+}
+{
+	comando1 = PComandoSimples()
+	<SEMICOLON>
+	comando2 = PComando()
+
+	{
+		return new SequenciaComando(comando1, comando1);
+	}
+}
+
+Declaracao PDeclaracao() :
+{
+	Camndo retorno;
+}
+{
+    (
+		retorno = PDeclaracaoVariavel()
+		|
+		retorno = PDeclaracaoProcedimento()
+   	)
+    {
+        return retorno;
+    }
+}
+
+DeclaracaoVariavel PDeclaracaoVariavel() :
+{
+  	Id id;
+	Expressao expressao;
+}
+{
+    (
+		< VAR >
+			id = PId()
+		< ASSIGN >
+			expressao = PExpressao()
+   	)
+    {
+        return new DeclaracaoVariavel(id, expressao);
+    }
+}
+
+DeclaracaoProcedimento PDeclaracaoProcedimento() :
+{
+  //DEFPROCEDIMENTO
+	Id id = null;	Expressao expressao = null;	ListaDeclaracaoProcedimentoParametro listaParametros = null;  
+}
+{
+//	<LEARN>//		id = PId()//	<LPAREN>//		listaParametros = PListaDeclaracaoProcedimentoParametro()//	<RPAREN>//		expressao = PExpressao()//	<ENDLEARN>
+	{
+		return new DeclaracaoProcedimento(id, listaParametros, expressao);
+	}
+}
+
+Atribuicao PAtribuicao() :
+{
+  	Id id;
+	Expressao expressao;
+}
+{
+    (
+ 		id = PId()
+		< ASSIGN >
+		expressao = PExpressao()
+   	)
+    {
+        return new DeclaracaoVariavel(id, expressao);
+    }
+}
+
+Aplicacao PAplicacao() :
+{
+	Id id = null;
+	ListaExpressao listaExpressao = null;  
+}
+{
+	<DRAW>
+		id = PId()
+	<LPAREN>
+		listaExpressao = PListaExpressao()
+	<RPAREN>
+	{
+		return new Aplicacao(id, listaExpressao);
+	}
+}
+
+ListaExpressao PListaExpressao():
+{
+	Expressao expressao;
+	ListaExpressao lista = null;
+}
+{
+	[
+		expressao = PExpressao() 
+	 	{
+	 	  lista = new ListaExpressao(expressao);
+		}
+ 	]
+	( <COMMA> 
+		expressao = PExpressao() 
+		{
+			lista = new ListaExpressao(expressao, lista);
+		} 
+	)*
+	{
+		if (lista == null) {
+			lista = new ListaExpressao();
+		} 
+		return lista;
+	}
+}
+	
+IfThenElse PIfThenElse() :
+{
+	Expressao expressao;
+	Expressao expressaoThen;
+	Expressao expressaoElse;
+}
+{
+	<IF>
+		expressao = PExpressao()
+	<THEN>
+		expressaoThen = PExpressao()
+	<ELSE>
+		expressaoElse = PExpressao()
+	<ENDIF>
+	{
+		return new IfThenElse (expressao, expressaoThen, expressaoElse);
+	}
+}
+
+For PFor() :
+{
+	Expressao expressaoLoop;
+	Expressao expressaoExecucao;  
+}
+{
+	<REPEAT>
+		expressaoLoop = PExpressao()
+	<COMMA>
+		expressaoExecucao = PExpressao()
+	<ENDREPEAT>
+	{
+		return new For(expressaoLoop, expressaoExecucao);
+	}
+}
+
 Expressao PExpressao() :
+{
+	Expressao retorno;
+}
+{
+	(
+		retorno = PExpressaoUnaria()
+		|
+		retorno = PValor()
+		|
+		retorno = PId()
+   	)
+    {
+        return retorno;
+    }
+}
+
+Expressao PExpressaoUnaria() :
+{
+  	Expressao retorno;
+}
+{
+	retorno = PAcao()	
+  {
+    return retorno;
+  }
+}
+
+Expressao PAcao() :
+{
+ 	Expressao retorno = null;
+	Valor valor;
+}
+{
+	(
+		< FORWARD >
+		valor = PValorInteiro()
+		{
+			retorno = new ActionForward(valor);
+		}
+		|
+		< BACK >
+		valor = PValorInteiro()
+		{
+			retorno = new ActionBack(valor);
+		}
+		|
+		< RIGHT >
+		valor = PValorInteiro()
+		{
+			retorno = new ActionRight(valor);
+		}
+		|
+		< LEFT >
+		valor = PValorInteiro()
+		{
+			retorno = new ActionLeft(valor);
+		}
+		|
+		< SETPENCOLOR >
+		valor = PValorCor()
+		{
+			retorno = new ActionSetPenColor(valor);
+		}
+		|
+		< SETPENUSE >
+		valor = PValorBooleano()
+		{
+			retorno = new ActionSetPenUse(valor);
+		}
+	)
+	{
+	    return retorno;
+	}
+}
+
+Valor PValor():
+{
+	Valor retorno;
+}
+{
+	retorno = PValorConcreto()
+	{
+		return retorno;   
+	}
+}
+
+Valor PValorConcreto() :
+{
+	Valor retorno;
+}
+{
+	(
+		retorno = PValorInteiro()
+		|
+		retorno = PValorBooleano()
+		|
+		retorno = PValorCor()
+	)
+	{
+		return retorno;
+	}
+}
+
+Valor PValorInteiro():
+{
+	Token token;
+}
+{
+	token = <INTEGER_LITERAL>
+	{
+		return new ValorInteiro(Integer.parseInt(token.toString()));
+	}
+}
+
+Valor PValorBooleano() :
+{
+}
+{
+	<FALSE> { return new ValorBooleano(false); } 
+	|
+	<TRUE>  { return new ValorBooleano(true); }
+}
+
+Valor PValorCor() :
+{
+	Token token1;  
+	Token token2;  
+	Token token3;  
+}
+{
+	<COLOR>
+	<LPAREN>
+		token1 = <INTEGER_LITERAL>
+	<COMMA>
+		token2 = <INTEGER_LITERAL>
+	<COMMA>
+		token3 = <INTEGER_LITERAL>
+	<RPAREN>
+	{
+		Color color = new Color(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));
+		return new ValorCor(color);
+	}   
+}
+
+Id PId() :
+{
+	Token token;
+}
+{
+	token = <IDENTIFIER>
+	{
+		return new Id(token.toString());
+	}
+}
+ 	  
+//		LOOKAHEAD (PExpressaoSimples() <SEMICOLON>)//		retorno = PSequenciaExpressao()//	   	|//	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))//		retorno = PExpressaoBinaria()//	   	|//      	retorno = PExpressaoSimples()// 	)
+
+
+/* Expressao PExpressao() :
 {
 	Expressao retorno;  
 }
@@ -250,63 +595,7 @@ Expressao PExpressaoSimples() :
     }
 }
 
-Valor PValor():
-{
-	Valor retorno;}
-{
-	retorno = PValorConcreto()
-	{
-		return retorno;	  	}}
 
-Valor PValorConcreto() :
-{	Valor retorno;
-}
-{
-	(		retorno = PValorInteiro()
-		|
-		retorno = PValorBooleano()
-		|
-		retorno = PValorCor()
-	)
-	{
-	  return retorno;	}
-}
-
-Valor PValorInteiro():
-{
-	Token token;
-}
-{
-	token = <INTEGER_LITERAL>
-	{
-		return new ValorInteiro(Integer.parseInt(token.toString()));
-	}
-}
-
-Valor PValorBooleano() :
-{
-}
-{
-	<FALSE> { return new ValorBooleano(false); } 
-	|
-	<TRUE>  { return new ValorBooleano(true); }
-}
-
-Valor PValorCor() :
-{
-	Token token1;  	Token token2;  	Token token3;  }
-{
-	<COLOR>
-	<LPAREN>
-		token1 = <INTEGER_LITERAL>
-	<COMMA>
-		token2 = <INTEGER_LITERAL>
-	<COMMA>
-		token3 = <INTEGER_LITERAL>
-	<RPAREN>
-	{
-	  Color color = new Color(Integer.parseInt(token1.toString()), Integer.parseInt(token2.toString()), Integer.parseInt(token3.toString()));	  return new ValorCor(color);
-	}   }
 
 Expressao PExpressaoUnaria() :
 {
@@ -558,63 +847,7 @@ Aplicacao PAplicacao() :
 	}
 }
 
-ListaExpressao PListaExpressao():
-{
-	Expressao expressao;
-	ListaExpressao lista = null;
-}
-{
-	[
-		expressao = PExpressao() 
-		{lista = new ListaExpressao(expressao);}
-	]
-		( <COMMA> 
-			expressao = PExpressao() 
-			{
-				lista = new ListaExpressao(expressao, lista);
-			} 
-		)*
-	{
-		if (lista == null) {
-			lista = new ListaExpressao();
-		}	
-		return lista;
-	}
-}
 
-IfThenElse PIfThenElse() :
-{
-	Expressao expressao;
-	Expressao expressaoThen;
-	Expressao expressaoElse;
-}
-{
-	<IF>
-		expressao = PExpressao()
-	<THEN>
-		expressaoThen = PExpressao()
-	<ELSE>
-		expressaoElse = PExpressao()
-	<ENDIF>
-	{
-		return new IfThenElse (expressao, expressaoThen, expressaoElse);
-	}
-}
-
-For PFor() :
-{
-	Expressao expressaoLoop;
-	Expressao expressaoExecucao;  
-}
-{
-	<REPEAT>
-		expressaoLoop = PExpressao()
-	<COMMA>
-		expressaoExecucao = PExpressao()
-	<ENDREPEAT>
-	{		return new For(expressaoLoop, expressaoExecucao);
-	}
-}
 
 Id PId() :
 {
@@ -625,4 +858,4 @@ Id PId() :
 	{
 		return new Id(token.toString());
 	}
-}
+} */
