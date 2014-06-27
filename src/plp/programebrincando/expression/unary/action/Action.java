@@ -6,7 +6,7 @@ import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.unary.ExpressaoUnaria;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
+import plp.programebrincando.util.TipoExpressao;
 
 public abstract class Action extends ExpressaoUnaria {
 
@@ -21,7 +21,7 @@ public abstract class Action extends ExpressaoUnaria {
 	
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoPrimitivo.ACTION;
+		return TipoExpressao.ACTION;
 	}
 
 }

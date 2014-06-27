@@ -8,6 +8,7 @@ import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Id;
+import plp.programebrincando.expression.value.Valor;
 
 public class Contexto<T> {
 
@@ -35,6 +36,10 @@ public class Contexto<T> {
 		}
 	}
 
+	public void changeValor(Id id, Valor valor){
+		//TODO Fazer método para alterar valor.
+	}
+	
 	public T get(Id idArg) throws VariavelNaoDeclaradaException {
 		try {
 			T result = null;

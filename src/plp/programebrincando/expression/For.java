@@ -7,7 +7,7 @@ import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
+import plp.programebrincando.util.TipoExpressao;
 
 public class For implements Expressao {
 
@@ -65,7 +65,6 @@ public class For implements Expressao {
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		
-		
 		boolean retorno;
 		
 		/*
@@ -85,8 +84,6 @@ public class For implements Expressao {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		//TODO Confirma se este deve ser o retorno
-		return TipoPrimitivo.BOOLEAN;
+		return TipoExpressao.FOR;
 	}
-
 }

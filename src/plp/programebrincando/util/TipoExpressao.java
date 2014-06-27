@@ -1,6 +1,6 @@
 package plp.programebrincando.util;
 
-public enum TipoPrimitivo implements Tipo {
+public enum TipoExpressao implements Tipo {
 
 	BOOLEAN("BOOLEAN"),
 	COR("COLOR"),
@@ -9,11 +9,12 @@ public enum TipoPrimitivo implements Tipo {
 	IFTHENELSE("IFTHENELSE"),
 	FOR("FOR"),
 	LEARN("LEARN"),
+	ASSIGN("ASSIGN"),
 	SEQUENCE("SEQUENCE");
 	
 	private String nome;
 
-	private TipoPrimitivo(String nome) {
+	private TipoExpressao(String nome) {
 		this.nome = nome;
 	}
 	
@@ -57,6 +58,11 @@ public enum TipoPrimitivo implements Tipo {
 	@Override
 	public boolean isLearn(){
 		return this.isEqual(LEARN);
+	}
+	
+	@Override
+	public boolean isAssign(){
+		return this.isEqual(ASSIGN);
 	}
 	
 	public boolean isEqual(Tipo tipo) {

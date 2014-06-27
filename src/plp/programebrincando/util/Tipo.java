@@ -23,5 +23,7 @@ public interface Tipo {
 	boolean isIfThenElse();
 
 	boolean isSequence();
+
+	boolean isAssign();
 	
 }

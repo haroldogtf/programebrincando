@@ -1,5 +1,6 @@
 package plp.programebrincando.memory;
 
+import plp.programebrincando.expression.Id;
 import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
 
@@ -19,4 +20,5 @@ public interface AmbienteExecucao extends Ambiente<Valor> {
 	public void setPenUse(Boolean penUse);
 	public Color getPenColor();
 	public void setPenColor(Color penColor);
+	public void changeValor(Id id, Valor avaliar);	
 }

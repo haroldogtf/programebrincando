@@ -8,7 +8,7 @@ import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
+import plp.programebrincando.util.TipoExpressao;
 
 public class ExpressaoSoma extends ExpressaoBinaria {
 
@@ -26,7 +26,7 @@ public class ExpressaoSoma extends ExpressaoBinaria {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoPrimitivo.INTEGER;
+		return TipoExpressao.INTEGER;
 	}
 
 	@Override

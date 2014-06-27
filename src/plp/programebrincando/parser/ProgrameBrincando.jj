@@ -111,6 +111,7 @@ TOKEN : /* PRIMITIVES */
 TOKEN : /* EXPRESSIONS OPERATORS */
 {
 	  < PLUS  : "+" >
+	| < ASSIGN : "=" >
 	| < EQUAL : "==" >
 	| < GT    : ">" >
 	| < LT    : "<" >
@@ -137,6 +138,7 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < SETPENUSE   : "USARCANETA" >
 	| < COLOR  	    : "COR" >
 	| < DRAW  	    : "DESENHE" >
+	| < VAR  	    : "VAR" >
 }
 
 TOKEN : /* SEPARATORS */
@@ -189,7 +191,7 @@ Expressao PExpressao() :
  	(
 		LOOKAHEAD (PExpressaoSimples() <SEMICOLON>)
 		retorno = PSequenciaExpressao()
-	   	|	   	
+	   	|
 	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))
 		retorno = PExpressaoBinaria()
 	   	|
@@ -197,6 +199,18 @@ Expressao PExpressao() :
  	)
 	{		return retorno;
 	}}
+
+Atribuicao PAtribuicao() :
+{
+	Id id;
+	Expressao expressao;
+}
+{
+	<VAR> id  = PId() <ASSIGN> expressao = PExpressao()
+	{
+		return new Atribuicao(id, expressao);
+	}
+}
 
 SequenciaExpressao PSequenciaExpressao() :
 {
@@ -219,9 +233,10 @@ Expressao PExpressaoSimples() :
 }
 {
     (
-    	retorno = PValor()
+      	retorno = PAtribuicao()
       	|
-      	retorno = PExpressaoUnaria()      	|
+    	retorno = PValor()
+      	|      	retorno = PExpressaoUnaria()      	|
       	retorno = PDeclaracao()
      	| 	    retorno = PAplicacao()      	|
       	retorno = PIfThenElse()

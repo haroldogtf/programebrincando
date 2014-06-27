@@ -7,7 +7,7 @@ import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
+import plp.programebrincando.util.TipoExpressao;
 
 public class SequenciaExpressao implements Expressao{
 
@@ -39,6 +39,6 @@ public class SequenciaExpressao implements Expressao{
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoPrimitivo.SEQUENCE;
+		return TipoExpressao.SEQUENCE;
 	}
 }

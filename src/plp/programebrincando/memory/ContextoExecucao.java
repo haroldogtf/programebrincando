@@ -23,7 +23,6 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 	
 	private Color penColor = new Color(0, 0, 0);
 	
-	
 	public ContextoExecucao clone() {
 		ContextoExecucao retorno = new ContextoExecucao();
 		

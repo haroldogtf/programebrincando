@@ -4,7 +4,7 @@ import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoPrimitivo;
+import plp.programebrincando.util.TipoExpressao;
 
 
 public class ValorBooleano extends ValorConcreto<Boolean>{
@@ -15,6 +15,6 @@ public class ValorBooleano extends ValorConcreto<Boolean>{
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoPrimitivo.BOOLEAN;
+		return TipoExpressao.BOOLEAN;
 	}
 }
