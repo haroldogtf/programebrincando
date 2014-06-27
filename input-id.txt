@@ -1,1 +1,2 @@
-VAR booeal = VERDADEIRO
+VAR b = VERDADEIRO;
+b

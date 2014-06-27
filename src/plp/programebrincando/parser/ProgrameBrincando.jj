@@ -200,7 +200,7 @@ Expressao PExpressao() :
 	{		return retorno;
 	}}
 
-Atribuicao PAtribuicao() :
+DeclaracaoVariavel PDeclaracaoVariavel() :
 {
 	Id id;
 	Expressao expressao;
@@ -208,7 +208,7 @@ Atribuicao PAtribuicao() :
 {
 	<VAR> id  = PId() <ASSIGN> expressao = PExpressao()
 	{
-		return new Atribuicao(id, expressao);
+		return new DeclaracaoVariavel(id, expressao);
 	}
 }
 
@@ -233,11 +233,11 @@ Expressao PExpressaoSimples() :
 }
 {
     (
-      	retorno = PAtribuicao()
+      	retorno = PDeclaracaoVariavel()
       	|
     	retorno = PValor()
       	|      	retorno = PExpressaoUnaria()      	|
-      	retorno = PDeclaracao()
+      	retorno = PDeclaracaoProcedimento()
      	| 	    retorno = PAplicacao()      	|
       	retorno = PIfThenElse()
       	|
@@ -508,40 +508,40 @@ Expressao PExpressaoJunta() :
 	} 	 	
 }
 
-Declaracao PDeclaracao() :
+DeclaracaoProcedimento PDeclaracaoProcedimento() :
 {
 	Id id = null;
 	Expressao expressao = null;
-	ListaDeclaracaoParametro listaParametros = null;  }
+	ListaDeclaracaoProcedimentoParametro listaParametros = null;  }
 {
 	<LEARN>
 		id = PId()
 	<LPAREN>
-		listaParametros = PListaDeclaracaoParametro()
+		listaParametros = PListaDeclaracaoProcedimentoParametro()
 	<RPAREN>
 		expressao = PExpressao()
 	<ENDLEARN>
-	{		return new Declaracao(id, listaParametros, expressao);
+	{		return new DeclaracaoProcedimento(id, listaParametros, expressao);
 	}
 }
 
-ListaDeclaracaoParametro PListaDeclaracaoParametro():
+ListaDeclaracaoProcedimentoParametro PListaDeclaracaoProcedimentoParametro():
 {
 	Id id;
-	ListaDeclaracaoParametro lista = null;
+	ListaDeclaracaoProcedimentoParametro lista = null;
 }
 {
 	[  
 		id = PId() 
-		{lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id));}
+		{lista = new ListaDeclaracaoProcedimentoParametro(new DeclaracaoParametro(id));}
 	]
 	( <COMMA> 
 		id = PId() 
-		{lista = new ListaDeclaracaoParametro(new DeclaracaoParametro(id), lista);} 
+		{lista = new ListaDeclaracaoProcedimentoParametro(new DeclaracaoParametro(id), lista);} 
 	)*
 	{
 		if (lista == null) {
-			lista = new ListaDeclaracaoParametro();
+			lista = new ListaDeclaracaoProcedimentoParametro();
 		}	
 		return lista;
 	}

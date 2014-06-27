@@ -9,12 +9,12 @@ import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
 import plp.programebrincando.util.TipoExpressao;
 
-public class Atribuicao implements Expressao {
+public class DeclaracaoVariavel implements Expressao {
 
 	private Id id;
 	private Expressao expressao;
 
-	public Atribuicao(Id id, Expressao expressao) {
+	public DeclaracaoVariavel(Id id, Expressao expressao) {
 		this.id = id;
 		this.expressao = expressao;
 	}

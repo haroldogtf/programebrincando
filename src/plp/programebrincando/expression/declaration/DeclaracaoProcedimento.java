@@ -9,13 +9,13 @@ import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
 
-public class Declaracao implements Expressao {
+public class DeclaracaoProcedimento implements Expressao {
 
 	public Id id;
-	public ListaDeclaracaoParametro lista;
+	public ListaDeclaracaoProcedimentoParametro lista;
 	public Expressao expressao;
 	
-	public Declaracao(Id id, ListaDeclaracaoParametro lista, Expressao expressao) {
+	public DeclaracaoProcedimento(Id id, ListaDeclaracaoProcedimentoParametro lista, Expressao expressao) {
 		this.id = id;
 		this.lista = lista;
 		this.expressao = expressao;

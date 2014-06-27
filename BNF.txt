@@ -1,0 +1,60 @@
+Programa ::= Comando
+
+Comando ::= Sequencia 
+  		  | Declaracao
+		  | Atribuicao
+		  | Aplicacao
+		  | If-Then-Else
+		  | For
+		  
+Sequencia ::= Comando ";" Comando
+
+Declaracao ::= DeclaracaoVariavel
+			| DeclaracaoProcedimento
+
+DeclaracaoVariavel ::= "VAR" Id "=" Expressao
+DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Expressao "FIMAPRENDA"
+ListaParametros ::= Id | Id "," ListaParametros
+
+Atribuicao ::= Id "=" Expressao
+
+Aplicacao ::= "DESENHE" Id"(" [ListaExpressao] ")"
+ListaExpressao ::= Expressao | Expressao "," ListaExpressao
+
+If-Then-Else ::= "SE" Expressao "FACA" Comando "SENAOFACA" Comando "FIMSE"
+
+For ::= "REPETIR" Expressao "," Comando "FIMREPETIR"
+
+Expressao ::= Valor
+		  | ExpressaoUnaria
+		  | ExpressaoBinaria	  
+		  | Id
+
+Valor ::= ValorConcreto
+ValoracConcreto ::= ValorInteiro
+				| ValorBooleano
+				| ValorCor
+
+ValorInteiro  ::= [0-9]+
+ValorBooleano ::= "VERDADEIRO" | "FALSO"
+ValorCor      ::= "COR("expressao"," expressao"," expressao")"				
+				
+ExpressaoUnaria ::= Acao
+
+Acao ::= "PARAFRENTE" Expressao
+		| "PARATRAAS" Expressao
+		| "GIRARDIREITA" Expressao
+		| "GIRARESQUERDA" Expressao
+		| "CORCANETA" Expressao
+		| "USARCANETA" Expressao
+	   
+ExpressaoBinaria ::= Expressao "+" Expressao
+				   | Expressao "==" Expressao
+				   | Expressao ">"  Expressao  
+				   | Expressao "<"  Expressao  
+				   | Expressao ">=" Expressao  
+				   | Expressao "<=" Expressao 
+				   | Expressao "Junta" Expressao 
+
+
+Id ::= [a-zA-Z]+
