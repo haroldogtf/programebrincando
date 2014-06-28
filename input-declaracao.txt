@@ -1,6 +1,4 @@
-APRENDA retangulo(primeiro, segundo, terceiro, quarto)
-	REPETIR 4,
-		PARAFRENTE 10;
-		GIRARDIREITA 10
-	FIMREPETIR
+APRENDA retangulo()
+	PARAFRENTE 10;
+	GIRARDIREITA 10
 FIMAPRENDA

@@ -1,8 +1,8 @@
 package plp.programebrincando.util;
 
-import plp.programebrincando.expression.unary.action.Action;
-import plp.programebrincando.expression.unary.action.ActionLeft;
-import plp.programebrincando.expression.unary.action.ActionRight;
+import plp.programebrincando.command.action.Action;
+import plp.programebrincando.command.action.ActionLeft;
+import plp.programebrincando.command.action.ActionRight;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public class AlgoritmoGirarUtil {

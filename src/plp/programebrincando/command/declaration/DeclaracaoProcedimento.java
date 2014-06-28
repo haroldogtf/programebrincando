@@ -1,13 +1,12 @@
 package plp.programebrincando.command.declaration;
 
-import plp.programebrincando.command.Comando;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
-public class DeclaracaoProcedimento implements Comando {
+public class DeclaracaoProcedimento implements Declaracao {
 
 	private Id id;
 	private DefinicaoProcedimento definicaoProcedimento;

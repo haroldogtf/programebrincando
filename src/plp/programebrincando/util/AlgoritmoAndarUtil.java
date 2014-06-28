@@ -1,8 +1,8 @@
 package plp.programebrincando.util;
 
-import plp.programebrincando.expression.unary.action.Action;
-import plp.programebrincando.expression.unary.action.ActionBack;
-import plp.programebrincando.expression.unary.action.ActionForward;
+import plp.programebrincando.command.action.Action;
+import plp.programebrincando.command.action.ActionBack;
+import plp.programebrincando.command.action.ActionForward;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public class AlgoritmoAndarUtil {

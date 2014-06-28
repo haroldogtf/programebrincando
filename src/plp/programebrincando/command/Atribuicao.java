@@ -7,7 +7,7 @@ import plp.programebrincando.expression.Id;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
-public class Atribuicao {
+public class Atribuicao implements Comando {
 
 	private Id id;
 
