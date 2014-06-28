@@ -25,5 +25,4 @@ public interface Tipo {
 	boolean isSequence();
 
 	boolean isAssign();
-	
 }

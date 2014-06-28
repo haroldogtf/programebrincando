@@ -1,23 +1,23 @@
 package plp.programebrincando.util;
 
-import plp.programebrincando.expression.unary.action.Action;
-import plp.programebrincando.expression.unary.action.ActionLeft;
-import plp.programebrincando.expression.unary.action.ActionRight;
+import plp.programebrincando.command.action.Acao;
+import plp.programebrincando.command.action.AcaoGirarEsquerda;
+import plp.programebrincando.command.action.AcaoGirarDireita;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public class AlgoritmoGirarUtil {
 
-	public static Integer girar(Action action, AmbienteExecucao ambiente, Integer degrees){
+	public static Integer girar(Acao action, AmbienteExecucao ambiente, Integer degrees){
 		Integer retorno = null;
-		if(action instanceof ActionRight){
-			retorno = girarDireita((ActionRight) action, ambiente, degrees);
-		}else if(action instanceof ActionLeft){
-			retorno = girarEsquerda((ActionLeft) action, ambiente, degrees);
+		if(action instanceof AcaoGirarDireita){
+			retorno = girarDireita((AcaoGirarDireita) action, ambiente, degrees);
+		}else if(action instanceof AcaoGirarEsquerda){
+			retorno = girarEsquerda((AcaoGirarEsquerda) action, ambiente, degrees);
 		}
 		return retorno;
 	}
 	
-	private static Integer girarDireita(ActionRight actionRight, AmbienteExecucao ambiente, Integer degrees){
+	private static Integer girarDireita(AcaoGirarDireita actionRight, AmbienteExecucao ambiente, Integer degrees){
 		Integer currentDegrees = ambiente.getDegrees();
 		Integer newDegreesValue = currentDegrees - degrees;
 		newDegreesValue = normalizarDegrees(newDegreesValue);
@@ -25,7 +25,7 @@ public class AlgoritmoGirarUtil {
 		return newDegreesValue;
 	}
 	
-	private static Integer girarEsquerda(ActionLeft actionLeft, AmbienteExecucao ambiente, Integer degrees){
+	private static Integer girarEsquerda(AcaoGirarEsquerda actionLeft, AmbienteExecucao ambiente, Integer degrees){
 		Integer currentDegrees = ambiente.getDegrees();
 		Integer newDegreesValue = currentDegrees + degrees;
 		newDegreesValue = normalizarDegrees(newDegreesValue);

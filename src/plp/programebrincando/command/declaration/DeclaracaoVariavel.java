@@ -20,7 +20,7 @@ public class DeclaracaoVariavel implements Declaracao {
 	}
 
 	@Override
-	public AmbienteExecucao elabora(AmbienteExecucao ambiente)
+	public AmbienteExecucao executar(AmbienteExecucao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		try {
 			//TODO Ver qual método está lançando o erro. 
