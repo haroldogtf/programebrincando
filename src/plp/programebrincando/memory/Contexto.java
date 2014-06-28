@@ -1,6 +1,7 @@
 package plp.programebrincando.memory;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
@@ -8,7 +9,6 @@ import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Id;
-import plp.programebrincando.expression.value.Valor;
 
 public class Contexto<T> {
 
@@ -26,18 +26,42 @@ public class Contexto<T> {
 		pilha.pop();
 	}
 
-	public void map(Id idArg, T valorId) throws VariavelJaDeclaradaException {
+	public void map(Id id, T valor) throws VariavelJaDeclaradaException {
 		try {
-			HashMap<Id, T> aux = pilha.peek();
-			if (aux.put(idArg, valorId) != null)
-				throw new IdentificadorJaDeclaradoException();
+			if(!pilha.isEmpty()){
+				HashMap<Id, T> aux = pilha.peek();
+				if (aux.put(id, valor) != null){
+					throw new IdentificadorJaDeclaradoException();
+				}
+			}else{
+				Map<Id, T> map = new HashMap<Id, T>();
+				map.put(id, valor);
+				pilha.push((HashMap<Id, T>) map);
+			}
 		} catch (IdentificadorJaDeclaradoException e) {
-			throw new VariavelJaDeclaradaException(idArg);
+			throw new VariavelJaDeclaradaException(id);
 		}
 	}
 
-	public void changeValor(Id id, Valor valor){
-		//TODO Fazer método para alterar valor.
+	public void changeValor(Id id, T valor) throws VariavelNaoDeclaradaException{
+		Object result = null;
+		Stack<HashMap<Id, T>> auxStack = new Stack<HashMap<Id, T>>();
+		Stack<HashMap<Id, T>> stack = this.pilha;
+		
+		while (result == null && !stack.empty()) {
+			HashMap<Id,T> aux = stack.pop();
+			auxStack.push(aux);
+			result = aux.get(id);
+			if (result != null) {
+				aux.put(id, valor);
+			}
+		}
+		while (!auxStack.empty()) {
+			stack.push(auxStack.pop());
+		}
+		if (result == null) {
+			throw new VariavelNaoDeclaradaException(id);
+		}
 	}
 	
 	public T get(Id idArg) throws VariavelNaoDeclaradaException {

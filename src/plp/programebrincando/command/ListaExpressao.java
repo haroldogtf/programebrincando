@@ -53,4 +53,17 @@ public class ListaExpressao extends Lista<Expressao> {
 		}
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		String retorno = "";
+		if(head != null){
+			retorno = head.toString();
+		}
+		
+		if(tail != null){
+			retorno += " " + tail.toString();
+		}
+		return retorno;
+	}
 }

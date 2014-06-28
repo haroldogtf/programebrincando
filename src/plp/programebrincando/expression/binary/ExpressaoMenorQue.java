@@ -9,7 +9,7 @@ import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoExpressao;
+import plp.programebrincando.util.TipoExpressaoComando;
 
 public class ExpressaoMenorQue extends ExpressaoBinaria {
 
@@ -27,11 +27,12 @@ public class ExpressaoMenorQue extends ExpressaoBinaria {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoExpressao.BOOLEAN;
+		return TipoExpressaoComando.BOOLEAN;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return expressaoEsquerda.getTipo(amb).isInteger() && expressaoDireita.getTipo(amb).isInteger();		
+		return (expressaoEsquerda.getTipo(amb).isInteger() || expressaoEsquerda.getTipo(amb).isParametro())
+				&& (expressaoDireita.getTipo(amb).isInteger() || expressaoDireita.getTipo(amb).isParametro());
 	}
 }

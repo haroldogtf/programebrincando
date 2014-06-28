@@ -24,4 +24,9 @@ public class SequenciaComando implements Comando {
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException{
 		return comando1.checaTipo(ambiente) && comando2.checaTipo(ambiente);
 	}
+	
+	@Override
+	public String toString() {
+		return comando1 + "; " + comando2;
+	}
 }

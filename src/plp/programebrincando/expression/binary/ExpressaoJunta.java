@@ -29,10 +29,9 @@ public class ExpressaoJunta extends ExpressaoBinaria {
 	}
 
 	@Override
-	public Tipo getTipo(AmbienteCompilacao ambienteamb)
+	public Tipo getTipo(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

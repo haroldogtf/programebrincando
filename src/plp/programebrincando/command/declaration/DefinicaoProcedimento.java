@@ -4,11 +4,11 @@ import plp.programebrincando.command.Comando;
 
 public class DefinicaoProcedimento {
 
-	private ListaDeclaracaoProcedimentoParametro parametrosFormais;
+	private ListaDeclaracaoProcedimentoParametro parametros;
 	private Comando comando;
 
-	public DefinicaoProcedimento(ListaDeclaracaoProcedimentoParametro parametrosFormais, Comando comando) {
-		this.parametrosFormais = parametrosFormais;
+	public DefinicaoProcedimento(ListaDeclaracaoProcedimentoParametro parametros, Comando comando) {
+		this.parametros = parametros;
 		this.comando = comando;
 	}
 
@@ -16,7 +16,18 @@ public class DefinicaoProcedimento {
 		return comando;
 	}
 
-	public ListaDeclaracaoProcedimentoParametro getParametrosFormais() {
-		return parametrosFormais;
+	public ListaDeclaracaoProcedimentoParametro getParametros() {
+		return parametros;
+	}
+	
+	@Override
+	public String toString() {
+		String retorno = " ";
+		if(parametros.getHead() == null){
+			retorno += "() ";
+		}else{
+			retorno += "(" + parametros.toString() + ") ";
+		}
+		return retorno + comando.toString();
 	}
 }

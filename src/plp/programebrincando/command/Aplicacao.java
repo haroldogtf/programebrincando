@@ -37,7 +37,7 @@ public class Aplicacao implements Comando {
 			procedimento = ambiente.getProcedimento(id);
 			ambiente.incrementa();
 			
-			ListaDeclaracaoProcedimentoParametro parametros = procedimento.getParametrosFormais();
+			ListaDeclaracaoProcedimentoParametro parametros = procedimento.getParametros();
 			ambienteAux = bindParameters(ambiente, parametros);
 			ambienteAux = procedimento.getComando().executar(ambienteAux);
 			ambienteAux.restaura();

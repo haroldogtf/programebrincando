@@ -229,7 +229,7 @@ SequenciaComando PSequenciaComando() :
 	comando2 = PComando()
 
 	{
-		return new SequenciaComando(comando1, comando1);
+		return new SequenciaComando(comando1, comando2);
 	}
 }
 

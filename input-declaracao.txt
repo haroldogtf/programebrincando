@@ -1,10 +1,13 @@
+VAR operando1 = 1;
+VAR operando2 = 3;
+VAR soma = operando1 + operando2;
+
 APRENDA retangulo(param)
-	VAR numeroIteracoes = param;
-	REPETIR numeroIteracoes > 0,
+	REPETIR param > 0,
 		PARAFRENTE 10;
 		GIRARDIREITA 10;
-		numeroIteracoes = numeroIteracoes - 1
+		param = param - 1
 	FIMREPETIR
 FIMAPRENDA;
 
-DESENHE retangulo(5)
+DESENHE retangulo(soma)

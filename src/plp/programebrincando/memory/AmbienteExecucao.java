@@ -3,6 +3,7 @@ package plp.programebrincando.memory;
 import plp.programebrincando.command.declaration.DefinicaoProcedimento;
 import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
 import plp.programebrincando.exception.ProcedimentoNaoDeclaradoException;
+import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
@@ -23,7 +24,7 @@ public interface AmbienteExecucao extends Ambiente<Valor> {
 	public void setPenUse(Boolean penUse);
 	public Color getPenColor();
 	public void setPenColor(Color penColor);
-	public void changeValor(Id id, Valor avaliar);
+	public void changeValor(Id id, Valor avaliar) throws VariavelNaoDeclaradaException;
 	public void mapProcedimento(Id idProcedimento, DefinicaoProcedimento definicaoProcedimento) throws ProcedimentoJaDeclaradoException;
 	public DefinicaoProcedimento getProcedimento(Id idProcedimento) throws ProcedimentoNaoDeclaradoException;
 }

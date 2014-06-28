@@ -8,7 +8,7 @@ import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoExpressao;
+import plp.programebrincando.util.TipoExpressaoComando;
 
 public class ExpressaoSoma extends ExpressaoBinaria {
 
@@ -26,11 +26,12 @@ public class ExpressaoSoma extends ExpressaoBinaria {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoExpressao.INTEGER;
+		return TipoExpressaoComando.INTEGER;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return expressaoEsquerda.getTipo(amb).isInteger() && (expressaoDireita.getTipo(amb).isInteger());		
+		return (expressaoEsquerda.getTipo(amb).isInteger() || expressaoEsquerda.getTipo(amb).isParametro())
+				&& (expressaoDireita.getTipo(amb).isInteger() || expressaoDireita.getTipo(amb).isParametro());
 	}
 }

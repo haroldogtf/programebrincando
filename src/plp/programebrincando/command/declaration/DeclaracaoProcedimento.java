@@ -2,9 +2,11 @@ package plp.programebrincando.command.declaration;
 
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
+import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
+import plp.programebrincando.util.TipoExpressaoComando;
 
 public class DeclaracaoProcedimento implements Declaracao {
 
@@ -23,19 +25,23 @@ public class DeclaracaoProcedimento implements Declaracao {
 
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		return null;
+		try {
+			ambiente.mapProcedimento(id, definicaoProcedimento);
+		} catch (ProcedimentoJaDeclaradoException e) {
+			e.printStackTrace();
+		}
+		return ambiente;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		boolean resposta;
 
-		//TODO Verificar o getTipo da definição de procedimento
-//		ambiente.map(id, definicaoProcedimento.getTipo());
+		ambiente.map(id, TipoExpressaoComando.PROCEDIMENTO);
 
-		ListaDeclaracaoProcedimentoParametro parametrosFormais = definicaoProcedimento.getParametrosFormais();
+		ListaDeclaracaoProcedimentoParametro parametros = definicaoProcedimento.getParametros();
 		ambiente.incrementa();
-		ambiente = parametrosFormais.elabora(ambiente);
+		ambiente = parametros.elabora(ambiente);
 		resposta = definicaoProcedimento.getComando().checaTipo(ambiente);
 		ambiente.restaura();
 		return resposta;

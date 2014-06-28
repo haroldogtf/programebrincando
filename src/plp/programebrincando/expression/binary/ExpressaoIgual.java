@@ -9,7 +9,7 @@ import plp.programebrincando.expression.value.ValorConcreto;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.Tipo;
-import plp.programebrincando.util.TipoExpressao;
+import plp.programebrincando.util.TipoExpressaoComando;
 
 public class ExpressaoIgual extends ExpressaoBinaria {
 
@@ -28,7 +28,7 @@ public class ExpressaoIgual extends ExpressaoBinaria {
 
 	@Override
 	public Tipo getTipo(AmbienteCompilacao amb) throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return TipoExpressao.BOOLEAN;
+		return TipoExpressaoComando.BOOLEAN;
 	}
 
 	@Override

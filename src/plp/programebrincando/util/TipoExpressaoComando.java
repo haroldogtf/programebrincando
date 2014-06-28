@@ -1,20 +1,16 @@
 package plp.programebrincando.util;
 
-public enum TipoExpressao implements Tipo {
+public enum TipoExpressaoComando implements Tipo {
 
 	BOOLEAN("BOOLEAN"),
 	COR("COLOR"),
 	INTEGER("INTEGER"),
-	ACTION("ACTION"),
-	IFTHENELSE("IFTHENELSE"),
-	FOR("FOR"),
-	LEARN("LEARN"),
-	ASSIGN("ASSIGN"),
-	SEQUENCE("SEQUENCE");
+	PARAMETRO("PARAMETRO"),
+	PROCEDIMENTO("PROCEDIMENTO");
 	
 	private String nome;
 
-	private TipoExpressao(String nome) {
+	private TipoExpressaoComando(String nome) {
 		this.nome = nome;
 	}
 	
@@ -31,40 +27,21 @@ public enum TipoExpressao implements Tipo {
 	}
 
 	@Override
-	public boolean isAction() {
-		return this.isEqual(ACTION);
-	}
-	
-	@Override
 	public boolean isColor() {
 		return this.isEqual(COR);
 	}
-	
+
 	@Override
-	public boolean isSequence(){
-		return this.isEqual(SEQUENCE);
+	public boolean isProcedimento(){
+		return this.isEqual(PROCEDIMENTO);
 	}
 	
 	@Override
-	public boolean isIfThenElse(){
-		return this.isEqual(IFTHENELSE);
+	public boolean isParametro(){
+		return this.isEqual(PARAMETRO);
 	}
 	
 	@Override
-	public boolean isFor(){
-		return this.isEqual(FOR);
-	}
-	
-	@Override
-	public boolean isLearn(){
-		return this.isEqual(LEARN);
-	}
-	
-	@Override
-	public boolean isAssign(){
-		return this.isEqual(ASSIGN);
-	}
-	
 	public boolean isEqual(Tipo tipo) {
 		boolean ret = false;
 		if (isValid()) {
@@ -85,5 +62,4 @@ public enum TipoExpressao implements Tipo {
 	public String toString() {
 		return this.nome;
 	}
-
 }

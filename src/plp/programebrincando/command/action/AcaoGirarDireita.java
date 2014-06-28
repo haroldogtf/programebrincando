@@ -19,6 +19,7 @@ public class AcaoGirarDireita extends Acao {
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
+		
 		ValorInteiro degrees = (ValorInteiro) super.getExpressao().avaliar(ambiente);
 		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
 		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);

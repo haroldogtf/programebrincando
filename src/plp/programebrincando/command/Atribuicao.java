@@ -26,7 +26,11 @@ public class Atribuicao implements Comando {
 
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-		return expressao.checaTipo(ambiente)
-				&& id.getTipo(ambiente).isEqual(expressao.getTipo(ambiente));
+		return expressao.checaTipo(ambiente);
+	}
+	
+	@Override
+	public String toString() {
+		return id + " = " + expressao;
 	}
 }
