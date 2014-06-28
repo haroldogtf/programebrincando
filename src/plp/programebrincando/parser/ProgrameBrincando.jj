@@ -51,7 +51,7 @@ public class ProgrameBrincandoParser
 
     try {
         Programa programa = parser.entrada();
-        System.out.println("Programe Brincando Parser parsed successfully.");
+        System.out.println("Programe Brincando Parser executado com sucesso.");
         
         if(programa.checaTipo(new ContextoCompilacao())) {
             programa.executar(new ContextoExecucao());

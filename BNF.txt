@@ -6,7 +6,7 @@ Comando ::= Sequencia
 		  | Aplicacao
 		  | If-Then-Else
 		  | For
-  		  | Acao 
+ 		  | Acao 
 		  	
 Sequencia ::= Comando ";" Comando
 
@@ -45,6 +45,7 @@ ValoracConcreto ::= ValorInteiro
 ValorInteiro  ::= [0-9]+
 ValorBooleano ::= "VERDADEIRO" | "FALSO"
 ValorCor      ::= "COR("expressao"," expressao"," expressao")"
+
 ExpressaoBinaria ::= Expressao "+" Expressao
 				   | Expressao "==" Expressao
 				   | Expressao ">"  Expressao  
@@ -52,6 +53,5 @@ ExpressaoBinaria ::= Expressao "+" Expressao
 				   | Expressao ">=" Expressao  
 				   | Expressao "<=" Expressao 
 				   | Expressao "Junta" Expressao 
-
 
 Id ::= [a-zA-Z]+
