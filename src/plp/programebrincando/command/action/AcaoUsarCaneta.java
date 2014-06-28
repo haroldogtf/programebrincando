@@ -3,33 +3,30 @@ package plp.programebrincando.command.action;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
-import plp.programebrincando.expression.value.ValorInteiro;
+import plp.programebrincando.expression.value.ValorBooleano;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
-import plp.programebrincando.util.AlgoritmoGirarUtil;
 
-public class ActionLeft extends Action {
+public class AcaoUsarCaneta extends Acao {
 
-	private static final String operador = "GIRARESQUERDA";
-	
-	public ActionLeft(Expressao expressao) {
+	private static final String operador = "USARCANETA";
+
+	public AcaoUsarCaneta(Expressao expressao) {
 		super(expressao, operador);
 	}
 
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		ValorInteiro degrees = (ValorInteiro) super.getExpressao().avaliar(ambiente);
-		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
-		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
-		ambiente.setDegrees(newDegreesValue);
-
+		ValorBooleano usarCaneta = (ValorBooleano) super.getExpressao().avaliar(ambiente);
+		ambiente.setPenUse(usarCaneta.valor());
+		System.out.println("Usar Caneta: " + ambiente.getPenUse());
 		return ambiente;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		return (this.getExpressao().getTipo(ambiente).isInteger());
+		return (this.getExpressao().getTipo(ambiente).isBoolean());
 	}
 }

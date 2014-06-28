@@ -1,23 +1,23 @@
 package plp.programebrincando.util;
 
-import plp.programebrincando.command.action.Action;
-import plp.programebrincando.command.action.ActionBack;
-import plp.programebrincando.command.action.ActionForward;
+import plp.programebrincando.command.action.Acao;
+import plp.programebrincando.command.action.AcaoParaTras;
+import plp.programebrincando.command.action.AcaoParaFrente;
 import plp.programebrincando.memory.AmbienteExecucao;
 
 public class AlgoritmoAndarUtil {
 
-	public static ResultadoPodeAndar podeAndar(Action action, AmbienteExecucao ambiente, Integer passos){
+	public static ResultadoPodeAndar podeAndar(Acao action, AmbienteExecucao ambiente, Integer passos){
 		ResultadoPodeAndar retorno = null;
-		if(action instanceof ActionForward){
-			retorno = podeAndarFrente((ActionForward) action, ambiente, passos);
-		}else if(action instanceof ActionBack){
-			retorno = podeAndarTras((ActionBack) action, ambiente, passos);
+		if(action instanceof AcaoParaFrente){
+			retorno = podeAndarFrente((AcaoParaFrente) action, ambiente, passos);
+		}else if(action instanceof AcaoParaTras){
+			retorno = podeAndarTras((AcaoParaTras) action, ambiente, passos);
 		}
 		return retorno;
 	}
 	
-	private static ResultadoPodeAndar podeAndarFrente(ActionForward actionForward, AmbienteExecucao ambiente, Integer passos){
+	private static ResultadoPodeAndar podeAndarFrente(AcaoParaFrente actionForward, AmbienteExecucao ambiente, Integer passos){
 		Integer degree = ambiente.getDegrees();
 		
 		Double fatorX = Math.cos(Math.toRadians(degree));
@@ -29,7 +29,7 @@ public class AlgoritmoAndarUtil {
 		return passouLimiteXY(passosX, passosY, ambiente);
 	}
 	
-	private static ResultadoPodeAndar podeAndarTras(ActionBack actionBack, AmbienteExecucao ambiente, Integer passos){
+	private static ResultadoPodeAndar podeAndarTras(AcaoParaTras actionBack, AmbienteExecucao ambiente, Integer passos){
 		Integer degree = ambiente.getDegrees();
 		
 		Double fatorX = Math.cos(Math.toRadians(degree));

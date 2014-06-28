@@ -426,37 +426,37 @@ Comando PAcao() :
 		< FORWARD >
 		valor = PValorInteiro()
 		{
-			retorno = new ActionForward(valor);
+			retorno = new AcaoParaFrente(valor);
 		}
 		|
 		< BACK >
 		valor = PValorInteiro()
 		{
-			retorno = new ActionBack(valor);
+			retorno = new AcaoParaTras(valor);
 		}
 		|
 		< RIGHT >
 		valor = PValorInteiro()
 		{
-			retorno = new ActionRight(valor);
+			retorno = new AcaoGirarDireita(valor);
 		}
 		|
 		< LEFT >
 		valor = PValorInteiro()
 		{
-			retorno = new ActionLeft(valor);
+			retorno = new AcaoGirarEsquerda(valor);
 		}
 		|
 		< SETPENCOLOR >
 		valor = PValorCor()
 		{
-			retorno = new ActionSetPenColor(valor);
+			retorno = new AcaoCorCaneta(valor);
 		}
 		|
 		< SETPENUSE >
 		valor = PValorBooleano()
 		{
-			retorno = new ActionSetPenUse(valor);
+			retorno = new AcaoUsarCaneta(valor);
 		}
 	)
 	{
@@ -470,7 +470,7 @@ Expressao PExpressao() :
 }
 {
 	(
-	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))
+	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <MINUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))
 		retorno = PExpressaoBinaria()
 	   	|
       	retorno = PExpressaoSimples()
@@ -503,6 +503,9 @@ Expressao PExpressaoBinaria() :
   	(
 	   	LOOKAHEAD (PExpressaoSimples() <PLUS>)
 		retorno = PExpressaoSoma()
+		|
+	  	LOOKAHEAD (PExpressaoSimples() <MINUS>)
+		retorno = PExpressaoSubtracao()
 		|
 	  	LOOKAHEAD (PExpressaoSimples() <EQUAL>)
 		retorno = PExpressaoIgual()

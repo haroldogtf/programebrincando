@@ -64,10 +64,7 @@ public class Aplicacao implements Comando {
 	}
 
 	@Override
-	public boolean checaTipo(AmbienteCompilacao ambiente)
-			throws IdentificadorJaDeclaradoException,
-			IdentificadorNaoDeclaradoException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
+		return true;
 	}
 }

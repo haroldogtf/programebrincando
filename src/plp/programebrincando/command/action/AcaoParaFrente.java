@@ -9,11 +9,11 @@ import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.AlgoritmoAndarUtil;
 import plp.programebrincando.util.ResultadoPodeAndar;
 
-public class ActionForward extends Action {
+public class AcaoParaFrente extends Acao {
 
 	private static final String operador = "PARAFRENTE";
 	
-	public ActionForward(Expressao expressao) {
+	public AcaoParaFrente(Expressao expressao) {
 		super(expressao, operador);
 	}
 

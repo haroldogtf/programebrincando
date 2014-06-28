@@ -8,11 +8,11 @@ import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.util.AlgoritmoGirarUtil;
 
-public class ActionRight extends Action {
+public class AcaoGirarEsquerda extends Acao {
 
-	private static final String operador = "GIRARDIREITA";
+	private static final String operador = "GIRARESQUERDA";
 	
-	public ActionRight(Expressao expressao) {
+	public AcaoGirarEsquerda(Expressao expressao) {
 		super(expressao, operador);
 	}
 
@@ -23,7 +23,7 @@ public class ActionRight extends Action {
 		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
 		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
 		ambiente.setDegrees(newDegreesValue);
-		
+
 		return ambiente;
 	}
 

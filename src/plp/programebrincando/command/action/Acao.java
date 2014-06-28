@@ -3,12 +3,12 @@ package plp.programebrincando.command.action;
 import plp.programebrincando.command.Comando;
 import plp.programebrincando.expression.Expressao;
 
-public abstract class Action implements Comando {
+public abstract class Acao implements Comando {
 	
 	private Expressao expressao;
 	private String operador;
 	
-	public Action(Expressao expressao, String operador) {
+	public Acao(Expressao expressao, String operador) {
 		this.expressao = expressao;
 		this.operador = operador;
 	}

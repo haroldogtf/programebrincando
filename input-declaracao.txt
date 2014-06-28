@@ -1,4 +1,10 @@
-APRENDA retangulo()
-	PARAFRENTE 10;
-	GIRARDIREITA 10
-FIMAPRENDA
+APRENDA retangulo(param)
+	VAR numeroIteracoes = param;
+	REPETIR numeroIteracoes > 0,
+		PARAFRENTE 10;
+		GIRARDIREITA 10;
+		numeroIteracoes = numeroIteracoes - 1
+	FIMREPETIR
+FIMAPRENDA;
+
+DESENHE retangulo(5)

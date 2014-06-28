@@ -3,37 +3,33 @@ package plp.programebrincando.command.action;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
-import plp.programebrincando.expression.value.Color;
-import plp.programebrincando.expression.value.ValorCor;
+import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
+import plp.programebrincando.util.AlgoritmoGirarUtil;
 
-public class ActionSetPenColor extends Action {
+public class AcaoGirarDireita extends Acao {
 
-	private static final String operador = "CORCANETA";
+	private static final String operador = "GIRARDIREITA";
 	
-	public ActionSetPenColor(Expressao expressao) {
+	public AcaoGirarDireita(Expressao expressao) {
 		super(expressao, operador);
 	}
 
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		ValorCor valorCor = (ValorCor) super.getExpressao().avaliar(ambiente);
-		Color cor = valorCor.valor();
+		ValorInteiro degrees = (ValorInteiro) super.getExpressao().avaliar(ambiente);
+		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
+		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
+		ambiente.setDegrees(newDegreesValue);
 		
-		if((cor.red >= 0 && cor.red <= 255) && (cor.green >=  0 && cor.green <= 255) && (cor.blue >= 0 && cor.blue <= 255)) {
-			ambiente.setPenColor(cor);
-			System.out.println(cor + " RGB ");
-		}else{
-			System.out.println(" SKIP CORCANETA ");
-		}
 		return ambiente;
 	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		return (this.getExpressao().getTipo(ambiente).isColor());
+		return (this.getExpressao().getTipo(ambiente).isInteger());
 	}
 }
