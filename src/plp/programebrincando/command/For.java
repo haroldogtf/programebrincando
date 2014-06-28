@@ -4,6 +4,7 @@ import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.value.ValorBooleano;
+import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
@@ -24,8 +25,14 @@ public class For implements Comando {
 
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		while (((ValorBooleano) expressaoLoop.avaliar(ambiente)).valor()) {
-			ambiente = comandoExecucao.executar(ambiente);
+		if(expressaoLoop.avaliar(ambiente)instanceof ValorBooleano){
+			while (((ValorBooleano) expressaoLoop.avaliar(ambiente)).valor()) {
+				ambiente = comandoExecucao.executar(ambiente);
+			}
+		}else if(expressaoLoop.avaliar(ambiente)instanceof ValorInteiro){
+			for (int i = 0; i < ((ValorInteiro) expressaoLoop.avaliar(ambiente)).valor(); i++) {
+				ambiente = comandoExecucao.executar(ambiente);
+			}
 		}
 		return ambiente;
 	}
@@ -33,7 +40,8 @@ public class For implements Comando {
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		return expressaoLoop.checaTipo(ambiente)
-				&& expressaoLoop.getTipo(ambiente).isBoolean()
+				&& (expressaoLoop.getTipo(ambiente).isBoolean() || 
+						(expressaoLoop.getTipo(ambiente).isInteger() || expressaoLoop.getTipo(ambiente).isParametro()))
 				&& comandoExecucao.checaTipo(ambiente);
 	}
 }

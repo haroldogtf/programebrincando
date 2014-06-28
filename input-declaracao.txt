@@ -3,7 +3,7 @@ VAR operando2 = 3;
 VAR soma = operando1 + operando2;
 
 APRENDA retangulo(param)
-	REPETIR param > 0,
+	REPETIR param,
 		PARAFRENTE 10;
 		GIRARDIREITA 10;
 		param = param - 1
