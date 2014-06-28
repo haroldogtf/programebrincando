@@ -1,19 +1,20 @@
 Programa ::= Comando
 
 Comando ::= Sequencia 
-  		  | Declaracao
+ 		  | Declaracao
 		  | Atribuicao
 		  | Aplicacao
 		  | If-Then-Else
 		  | For
-		  
+  		  | Acao 
+		  	
 Sequencia ::= Comando ";" Comando
 
 Declaracao ::= DeclaracaoVariavel
 			| DeclaracaoProcedimento
 
 DeclaracaoVariavel ::= "VAR" Id "=" Expressao
-DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Expressao "FIMAPRENDA"
+DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Comando "FIMAPRENDA"
 ListaParametros ::= Id | Id "," ListaParametros
 
 Atribuicao ::= Id "=" Expressao
@@ -25,8 +26,14 @@ If-Then-Else ::= "SE" Expressao "FACA" Comando "SENAOFACA" Comando "FIMSE"
 
 For ::= "REPETIR" Expressao "," Comando "FIMREPETIR"
 
+Acao ::= "PARAFRENTE" Expressao
+		| "PARATRAAS" Expressao
+		| "GIRARDIREITA" Expressao
+		| "GIRARESQUERDA" Expressao
+		| "CORCANETA" Expressao
+		| "USARCANETA" Expressao
+
 Expressao ::= Valor
-		  | ExpressaoUnaria
 		  | ExpressaoBinaria	  
 		  | Id
 
@@ -37,17 +44,7 @@ ValoracConcreto ::= ValorInteiro
 
 ValorInteiro  ::= [0-9]+
 ValorBooleano ::= "VERDADEIRO" | "FALSO"
-ValorCor      ::= "COR("expressao"," expressao"," expressao")"				
-				
-ExpressaoUnaria ::= Acao
-
-Acao ::= "PARAFRENTE" Expressao
-		| "PARATRAAS" Expressao
-		| "GIRARDIREITA" Expressao
-		| "GIRARESQUERDA" Expressao
-		| "CORCANETA" Expressao
-		| "USARCANETA" Expressao
-	   
+ValorCor      ::= "COR("expressao"," expressao"," expressao")"
 ExpressaoBinaria ::= Expressao "+" Expressao
 				   | Expressao "==" Expressao
 				   | Expressao ">"  Expressao  
