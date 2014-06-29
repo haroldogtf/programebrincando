@@ -75,7 +75,7 @@ public class ArduinoGenerator {
 
 	}
 
-	public static void inicializarTemplate() {
+	public static void inicializar() {
 		
 		try {
 	

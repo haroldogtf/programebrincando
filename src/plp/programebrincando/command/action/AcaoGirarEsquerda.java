@@ -6,7 +6,7 @@ import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
-import plp.programebrincando.util.AlgoritmoGirarUtil;
+import plp.programebrincando.move.AlgoritmoGirar;
 
 public class AcaoGirarEsquerda extends Acao {
 
@@ -20,7 +20,7 @@ public class AcaoGirarEsquerda extends Acao {
 	public AmbienteExecucao executar(AmbienteExecucao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		ValorInteiro degrees = (ValorInteiro) super.getExpressao().avaliar(ambiente);
-		Integer newDegreesValue = AlgoritmoGirarUtil.girar(this, ambiente, degrees.valor());
+		Integer newDegreesValue = AlgoritmoGirar.girar(this, ambiente, degrees.valor());
 		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
 		ambiente.setDegrees(newDegreesValue);
 

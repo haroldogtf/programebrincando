@@ -1,4 +1,4 @@
-package plp.programebrincando.util;
+package plp.programebrincando.move;
 
 public class ResultadoPodeAndar {
 

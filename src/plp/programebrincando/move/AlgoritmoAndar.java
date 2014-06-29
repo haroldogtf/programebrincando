@@ -1,11 +1,11 @@
-package plp.programebrincando.util;
+package plp.programebrincando.move;
 
 import plp.programebrincando.command.action.Acao;
 import plp.programebrincando.command.action.AcaoParaTras;
 import plp.programebrincando.command.action.AcaoParaFrente;
 import plp.programebrincando.memory.AmbienteExecucao;
 
-public class AlgoritmoAndarUtil {
+public class AlgoritmoAndar {
 
 	public static ResultadoPodeAndar podeAndar(Acao action, AmbienteExecucao ambiente, Integer passos){
 		ResultadoPodeAndar retorno = null;

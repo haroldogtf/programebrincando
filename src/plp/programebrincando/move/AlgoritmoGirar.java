@@ -1,11 +1,11 @@
-package plp.programebrincando.util;
+package plp.programebrincando.move;
 
 import plp.programebrincando.command.action.Acao;
 import plp.programebrincando.command.action.AcaoGirarEsquerda;
 import plp.programebrincando.command.action.AcaoGirarDireita;
 import plp.programebrincando.memory.AmbienteExecucao;
 
-public class AlgoritmoGirarUtil {
+public class AlgoritmoGirar {
 
 	public static Integer girar(Acao action, AmbienteExecucao ambiente, Integer degrees){
 		Integer retorno = null;
