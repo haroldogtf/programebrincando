@@ -38,6 +38,6 @@ public class AcaoCorCaneta extends Acao {
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		return (this.getExpressao().getTipo(ambiente).isColor());
+		return this.getExpressao().getTipo(ambiente).isColor() || this.getExpressao().getTipo(ambiente).isParametro();		
 	}
 }

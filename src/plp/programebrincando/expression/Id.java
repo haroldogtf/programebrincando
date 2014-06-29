@@ -60,4 +60,8 @@ public class Id implements Expressao {
 			return false;
 		return true;
 	}
+
+	public String getIdName() {
+		return idName;
+	}
 }

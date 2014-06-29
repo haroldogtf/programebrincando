@@ -6,7 +6,7 @@ public class GraphicalBoard extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int DELAY_TIME = 4000;
+	private static final int DELAY_TIME = 2000;
 	
 	private Koopa tartaruga;
 	private int sizeX;

@@ -34,6 +34,6 @@ public class AcaoGirarDireita extends Acao {
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente)
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		return (this.getExpressao().getTipo(ambiente).isInteger());
+		return this.getExpressao().getTipo(ambiente).isInteger() || this.getExpressao().getTipo(ambiente).isParametro();
 	}
 }

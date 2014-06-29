@@ -12,9 +12,11 @@ Sequencia ::= Comando ";" Comando
 
 Declaracao ::= DeclaracaoVariavel
 			| DeclaracaoProcedimento
+			| DeclaracaoJunta
 
 DeclaracaoVariavel ::= "VAR" Id "=" Expressao
 DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Comando "FIMAPRENDA"
+DeclaracaoJunta ::= "CRIA" Id "=" Expressao "JUNTA" Expressao
 ListaParametros ::= Id | Id "," ListaParametros
 
 Atribuicao ::= Id "=" Expressao
@@ -51,7 +53,6 @@ ExpressaoBinaria ::= Expressao "+" Expressao
 				   | Expressao ">"  Expressao  
 				   | Expressao "<"  Expressao  
 				   | Expressao ">=" Expressao  
-				   | Expressao "<=" Expressao 
-				   | Expressao "Junta" Expressao 
+				   | Expressao "<=" Expressao  
 
 Id ::= [a-zA-Z]+
