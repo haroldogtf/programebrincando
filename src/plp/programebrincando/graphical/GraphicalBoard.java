@@ -1,12 +1,14 @@
 package plp.programebrincando.graphical;
 
+import java.awt.ComponentOrientation;
+
 import javax.swing.JFrame;
 
 public class GraphicalBoard extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int DELAY_TIME = 4000;
+	private static final int DELAY_TIME = 500;
 	
 	private Koopa tartaruga;
 	private int sizeX;
@@ -19,6 +21,8 @@ public class GraphicalBoard extends JFrame{
 		this.sizeY = sizeY;
 		this.currentX = sizeX / 2;
 		this.currentY = sizeY / 2;
+		
+		this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
@@ -40,6 +44,11 @@ public class GraphicalBoard extends JFrame{
 			           boolean caneta,
 			           int r, int g, int b) {		
 		
+		newY = getHeight() - newY;
+		if(newY < 0){
+			newY *= -1;
+		}
+		
 		try {
 			Thread.sleep(DELAY_TIME);
 		} catch (InterruptedException e) {
@@ -48,7 +57,7 @@ public class GraphicalBoard extends JFrame{
 		
 		this.add(new Movimento(sizeX, sizeY, currentX, currentY, newX, newY, caneta, r, g, b));
 		this.tartaruga.setBounds(newX - Koopa.WIDTH/2, newY - Koopa.HEIGHT, Koopa.WIDTH, Koopa.HEIGHT);
-		this.tartaruga.setAngulo(angulo);
+		this.tartaruga.setAngulo(-angulo);
 		this.tartaruga.repaint();
 		this.repaint();
 		

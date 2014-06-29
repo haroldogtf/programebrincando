@@ -26,7 +26,7 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 
 	private Boolean penUse = true;
 	
-	private Color penColor = new Color(255, 255, 255);
+	private Color penColor = new Color(0, 0, 0);
 	
 	private Contexto<DefinicaoProcedimento> contextoProcedimentos;
 	

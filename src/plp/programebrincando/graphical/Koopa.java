@@ -9,8 +9,8 @@ public class Koopa extends JLabel {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final int WIDTH = 62;
-	public static final int HEIGHT = 73;
+	public static final int WIDTH = 31;
+	public static final int HEIGHT = 37;
 	
 	private int angulo = 0;
 	
