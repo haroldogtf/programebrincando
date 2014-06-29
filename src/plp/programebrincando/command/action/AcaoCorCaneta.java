@@ -5,6 +5,7 @@ import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.ValorCor;
+import plp.programebrincando.graphical.GraphicalGenerator;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
@@ -24,7 +25,10 @@ public class AcaoCorCaneta extends Acao {
 		
 		if((cor.red >= 0 && cor.red <= 255) && (cor.green >=  0 && cor.green <= 255) && (cor.blue >= 0 && cor.blue <= 255)) {
 			ambiente.setPenColor(cor);
+			
 			System.out.println(cor + " RGB ");
+			GraphicalGenerator.pintar(ambiente);
+			
 		}else{
 			System.out.println(" SKIP CORCANETA ");
 		}

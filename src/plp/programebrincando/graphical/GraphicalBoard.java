@@ -35,10 +35,7 @@ public class GraphicalBoard extends JFrame{
 		this.repaint();
 	}
 	
-	public void inicializar(int x, int y) {
-		
-	}
-	
+	//TODO cordenadas invertidas (x e y invertidos)
 	public void pintar(int newX, int newY, int angulo,
 			           boolean caneta,
 			           int r, int g, int b) {		

@@ -12,30 +12,44 @@ import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.expression.value.Color;
 import plp.programebrincando.expression.value.Valor;
+import plp.programebrincando.graphical.GraphicalGenerator;
 
 public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecucao {
 
-	//TODO Colocar como entrada o limites
-	private Integer degrees = 90;
+	private Integer degrees;
 
-	private Double limitAxisX = 100.0;
-	private Double limitAxisY = 100.0;
+	private Double limitAxisX;
+	private Double limitAxisY;
 
-	private Double currentAxisX = limitAxisX / 2;
-	private Double currentAxisY = limitAxisY / 2;
+	private Double currentAxisX;
+	private Double currentAxisY;
 
 	private Boolean penUse = true;
 	
-	private Color penColor = new Color(0, 0, 0);
+	private Color penColor = new Color(255, 255, 255);
 	
 	private Contexto<DefinicaoProcedimento> contextoProcedimentos;
 	
-	public ContextoExecucao() {
+	public ContextoExecucao(int limitX, int limitY) {
 		contextoProcedimentos = new Contexto<DefinicaoProcedimento>();
+		
+		degrees = 0;
+
+		limitAxisX = (double) limitX;
+		limitAxisY = (double) limitY;
+		
+		currentAxisX = limitAxisX / 2;
+		currentAxisY = limitAxisY / 2;
+				
+		GraphicalGenerator.inicializar(limitX, limitY);						
 	}
-	
+
 	public ContextoExecucao clone() {
-		ContextoExecucao retorno = new ContextoExecucao();
+		
+		int limitX = ((int)((double) limitAxisX));
+		int limitY = ((int)((double) limitAxisY));
+		
+		ContextoExecucao retorno = new ContextoExecucao(limitX, limitY);
 		
 		Stack<HashMap<Id, Valor>> novaPilha = new Stack<HashMap<Id, Valor>>();
 		

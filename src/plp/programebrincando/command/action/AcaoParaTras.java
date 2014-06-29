@@ -4,6 +4,7 @@ import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.value.ValorInteiro;
+import plp.programebrincando.graphical.GraphicalGenerator;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.move.AlgoritmoAndar;
@@ -30,6 +31,8 @@ public class AcaoParaTras extends Acao {
 					resultadoPodeAndar.getNewAxisX() + " " + resultadoPodeAndar.getNewAxisY());
 			ambiente.setCurrentAxisX(resultadoPodeAndar.getNewAxisX());
 			ambiente.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
+			
+			GraphicalGenerator.pintar(ambiente);
 		}else{
 			System.out.println(" SKIP back");
 		}

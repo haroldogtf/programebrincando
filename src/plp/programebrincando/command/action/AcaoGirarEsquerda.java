@@ -4,6 +4,7 @@ import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.expression.value.ValorInteiro;
+import plp.programebrincando.graphical.GraphicalGenerator;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 import plp.programebrincando.move.AlgoritmoGirar;
@@ -24,6 +25,8 @@ public class AcaoGirarEsquerda extends Acao {
 		System.out.println("Current Degrees: " + ambiente.getDegrees() + ". New Degree: " + newDegreesValue);
 		ambiente.setDegrees(newDegreesValue);
 
+		GraphicalGenerator.pintar(ambiente);
+		
 		return ambiente;
 	}
 

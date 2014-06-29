@@ -47,8 +47,7 @@ public class Movimento extends JPanel {
 		if(this.caneta) {
 			graphical2D.setColor(new Color(r, g, b, 255));
 		} else {
-			graphical2D.setColor(new Color(0, 0, 0, 0));
-
+			graphical2D.setColor(new Color(r, g, b, 0));
 		}	
 		graphical2D.drawLine(this.currentX, this.currentY, this.newX, this.newY);
 	}

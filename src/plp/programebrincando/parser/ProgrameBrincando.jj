@@ -54,7 +54,7 @@ public class ProgrameBrincandoParser
 			System.out.println("Programe Brincando Parser executado com sucesso.");
         
 			if(programa.checaTipo(new ContextoCompilacao())) {
-				programa.executar(new ContextoExecucao());
+				programa.executar(new ContextoExecucao(800, 600));
 			}
 			else
 			{
