@@ -19,51 +19,52 @@ import plp.programebrincando.memory.*;
 
 public class ProgrameBrincandoParser
 {
-  public static void main(String args []) throws ParseException
-  {
-    ProgrameBrincandoParser parser;
-    if (args.length == 0)
-    {
-      System.out.println("Programe Brincando Parser:  Lendo de entrada padrao...");
-      parser = new ProgrameBrincandoParser(System.in);
-    }
-    else if (args.length == 1)
-    {
-      System.out.println("Programe Brincando Parser: Lendo do arquivo " + args [0] + "...");
-      try
-      {
-        parser = new ProgrameBrincandoParser(new java.io.FileInputStream(args [0]));
-      }
-      catch (java.io.FileNotFoundException e)
-      {
-        System.out.println("Programe Brincando Parser: Arquivo " + args [0] + " nao encontrado.");
-        return;
-      }
-    }
-    else
-    {
-      System.out.println("Programe Brincando Parse:  Usage is one of:");
-      System.out.println("         java ProgrameBrincandoParser < inputfile");
-      System.out.println("ou");
-      System.out.println("         java ProgrameBrincandoParser inputfile");
-      return;
-    }
+	public static void main(String args []) throws ParseException
+ 	{
+		ProgrameBrincandoParser parser;
+		if (args.length == 0)
+		{
+			System.out.println("Programe Brincando Parser:  Lendo de entrada padrao...");
+			parser = new ProgrameBrincandoParser(System.in);
+		}
+		else if (args.length == 1)
+		{
+			System.out.println("Programe Brincando Parser: Lendo do arquivo " + args [0] + "...");
+			try
+			{
+				parser = new ProgrameBrincandoParser(new java.io.FileInputStream(args [0]));
+			}
+			catch (java.io.FileNotFoundException e)
+			{
+				System.out.println("Programe Brincando Parser: Arquivo " + args [0] + " nao encontrado.");
+				return;
+			}
+		}
+		else
+		{
+			System.out.println("Programe Brincando Parse:  Usage is one of:");
+			System.out.println("         java ProgrameBrincandoParser < inputfile");
+			System.out.println("ou");
+			System.out.println("         java ProgrameBrincandoParser inputfile");
+			return;
+		}
 
-    try {
-        Programa programa = parser.entrada();
-        System.out.println("Programe Brincando Parser executado com sucesso.");
+		try {
+			Programa programa = parser.entrada();
+			System.out.println("Programe Brincando Parser executado com sucesso.");
         
-        if(programa.checaTipo(new ContextoCompilacao())) {
-            programa.executar(new ContextoExecucao());
-        }
-        else {
-            System.out.println("Erro de tipo");
-        }
-    }catch (ParseException e){
-      System.out.println("Programe Brincando Parser: Erros encontrados durante o parse do programa.");
-      e.printStackTrace();
-    }
-  }
+			if(programa.checaTipo(new ContextoCompilacao())) {
+				programa.executar(new ContextoExecucao());
+			}
+			else
+			{
+				System.out.println("Erro de tipo");
+			}
+		} catch (ParseException e){
+			System.out.println("Programe Brincando Parser: Erros encontrados durante o parse do programa.");
+			e.printStackTrace();
+		}
+	}
 }
 
 PARSER_END(ProgrameBrincandoParser)
