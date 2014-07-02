@@ -8,7 +8,7 @@ public class GraphicalBoard extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int DELAY_TIME = 500;
+	private static final int DELAY_TIME = 250;
 	
 	private Koopa tartaruga;
 	private int sizeX;
@@ -21,8 +21,6 @@ public class GraphicalBoard extends JFrame{
 		this.sizeY = sizeY;
 		this.currentX = sizeX / 2;
 		this.currentY = sizeY / 2;
-		
-		this.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);

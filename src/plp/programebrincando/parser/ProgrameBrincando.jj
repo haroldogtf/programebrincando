@@ -140,6 +140,7 @@ TOKEN : /* PROGRAMEBRINCANDO LANGUAGE */
 	| < COLOR  	    : "COR" >
 	| < DRAW  	    : "DESENHE" >
 	| < VAR  	    : "VAR" >
+	| < CREATE  	: "CRIA" >
 }
 
 TOKEN : /* SEPARATORS */
@@ -219,6 +220,23 @@ Comando PComandoSimples() :
     }
 }
 
+DeclaracaoJunta PDeclaracaoJunta() : 
+{
+	Expressao aprenda1;
+	Expressao aprenda2;
+	Id id;
+	DeclaracaoJunta retorno = null;
+}
+{
+	(
+		<CREATE> id = PId() <ASSIGN> aprenda1 = PExpressao() <UNION> aprenda2 = PExpressao()
+	)
+	{
+		retorno = new DeclaracaoJunta(id, aprenda1, aprenda2);
+		return retorno;
+	} 	 	
+}
+
 SequenciaComando PSequenciaComando() :
 {
 	Comando comando1 = null;  
@@ -243,6 +261,8 @@ Declaracao PDeclaracao() :
 		retorno = PDeclaracaoVariavel()
 		|
 		retorno = PDeclaracaoProcedimento()
+		|
+		retorno = PDeclaracaoJunta()
    	)
     {
         return retorno;
@@ -420,42 +440,42 @@ For PFor() :
 Comando PAcao() :
 {
  	Comando retorno = null;
-	Valor valor;
+	Expressao valor;
 }
 {
 	(
 		< FORWARD >
-		valor = PValorInteiro()
+		valor = PExpressao()
 		{
 			retorno = new AcaoParaFrente(valor);
 		}
 		|
 		< BACK >
-		valor = PValorInteiro()
+		valor = PExpressao()
 		{
 			retorno = new AcaoParaTras(valor);
 		}
 		|
 		< RIGHT >
-		valor = PValorInteiro()
+		valor = PExpressao()
 		{
 			retorno = new AcaoGirarDireita(valor);
 		}
 		|
 		< LEFT >
-		valor = PValorInteiro()
+		valor = PExpressao()
 		{
 			retorno = new AcaoGirarEsquerda(valor);
 		}
 		|
 		< SETPENCOLOR >
-		valor = PValorCor()
+		valor = PExpressao()
 		{
 			retorno = new AcaoCorCaneta(valor);
 		}
 		|
 		< SETPENUSE >
-		valor = PValorBooleano()
+		valor = PExpressao()
 		{
 			retorno = new AcaoUsarCaneta(valor);
 		}
@@ -471,7 +491,7 @@ Expressao PExpressao() :
 }
 {
 	(
-	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <MINUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE> | <UNION>))
+	   	LOOKAHEAD (PExpressaoSimples() (<PLUS> | <MINUS> | <EQUAL> | <GT> | <LT> | <GTE> | <LTE>))
 		retorno = PExpressaoBinaria()
 	   	|
       	retorno = PExpressaoSimples()
@@ -522,9 +542,6 @@ Expressao PExpressaoBinaria() :
 		|
 	  	LOOKAHEAD (PExpressaoSimples() <LTE>)
 		retorno = PExpressaoMenorIgualQue()
-		|
-	  	LOOKAHEAD (PExpressaoSimples() <UNION>)
-		retorno = PExpressaoJunta()
 	)
 	{
 		return retorno;
@@ -653,24 +670,6 @@ Expressao PExpressaoMenorIgualQue() :
 	)
 	{
 		retorno = new ExpressaoMenorIgualQue(expressaoEsquerda, expressaoDireita);
-		return retorno;
-	} 	 	
-}
-
-Expressao PExpressaoJunta() : 
-{
-	Expressao expressaoEsquerda;
-	Expressao expressaoDireita;
-	Expressao retorno = null;
-}
-{
-	(
-		expressaoEsquerda = PExpressaoSimples()
-		<UNION>
-		expressaoDireita = PExpressao()
-	)
-	{
-		retorno = new ExpressaoJunta(expressaoEsquerda, expressaoDireita);
 		return retorno;
 	} 	 	
 }
