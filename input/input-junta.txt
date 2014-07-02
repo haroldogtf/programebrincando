@@ -1,0 +1,17 @@
+APRENDA quadrado(largura)
+	REPETIR 4,
+		PARAFRENTE largura;
+		GIRARDIREITA 90
+	FIMREPETIR
+FIMAPRENDA;
+
+APRENDA triangulo(largura2)
+	REPETIR 3,
+		GIRARDIREITA 60;
+		PARAFRENTE largura2
+	FIMREPETIR
+FIMAPRENDA;
+
+CRIA casa = quadrado JUNTA triangulo;
+
+DESENHE casa(50, 100)

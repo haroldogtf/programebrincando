@@ -1,7 +1,5 @@
 package plp.programebrincando.graphical;
 
-import java.awt.ComponentOrientation;
-
 import javax.swing.JFrame;
 
 public class GraphicalBoard extends JFrame{

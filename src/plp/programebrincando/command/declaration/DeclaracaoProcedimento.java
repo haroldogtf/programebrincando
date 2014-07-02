@@ -10,8 +10,11 @@ import plp.programebrincando.util.TipoExpressaoComando;
 
 public class DeclaracaoProcedimento implements Declaracao {
 
-	private Id id;
-	private DefinicaoProcedimento definicaoProcedimento;
+	protected Id id;
+	protected DefinicaoProcedimento definicaoProcedimento;
+	
+	public DeclaracaoProcedimento() {
+	}
 	
 	public DeclaracaoProcedimento(Id id, DefinicaoProcedimento definicaoProcedimento) {
 		this.id = id;
