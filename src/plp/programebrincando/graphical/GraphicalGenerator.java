@@ -17,14 +17,14 @@ public class GraphicalGenerator {
 		board.pintar((int)newX, (int)newY, angulo, caneta, r, g, b);
 	}
 	
-	public static void pintar(AmbienteExecucao ambiente) {
-		pintar(ambiente.getCurrentAxisX(),
-				  ambiente.getCurrentAxisY(),
-				  ambiente.getDegrees(),
-				  ambiente.getPenUse(),
-				  ambiente.getPenColor().red,
-				  ambiente.getPenColor().green,
-				  ambiente.getPenColor().blue);
+	 public static void pintar(AmbienteExecucao ambiente) {
+		  pintar(ambiente.getCurrentAxisX(),
+		      ambiente.getCurrentAxisY(),
+		      ambiente.getDegrees(),
+		      ambiente.getPenUse(),
+		      ambiente.getPenColor().red,
+		      ambiente.getPenColor().green,
+		      ambiente.getPenColor().blue);
 	}
 	
 }

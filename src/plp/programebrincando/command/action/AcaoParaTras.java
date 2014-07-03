@@ -1,8 +1,10 @@
 package plp.programebrincando.command.action;
 
+import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
+import plp.programebrincando.expression.value.Valor;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.graphical.GraphicalGenerator;
 import plp.programebrincando.memory.AmbienteCompilacao;
@@ -33,6 +35,7 @@ public class AcaoParaTras extends Acao {
 			ambiente.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
 			
 			GraphicalGenerator.pintar(ambiente);
+			ArduinoGenerator.paraTras(numeroPassos.valor());
 		}else{
 			System.out.println(" SKIP back");
 		}
