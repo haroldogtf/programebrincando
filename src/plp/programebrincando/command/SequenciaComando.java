@@ -1,5 +1,8 @@
 package plp.programebrincando.command;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.memory.AmbienteCompilacao;
@@ -28,5 +31,12 @@ public class SequenciaComando implements Comando {
 	@Override
 	public String toString() {
 		return comando1 + "; " + comando2;
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		comando1 = comando1.redefinirParametro(map);
+		comando2 = comando2.redefinirParametro(map);
+		return this;
 	}
 }

@@ -5,10 +5,10 @@ APRENDA quadrado(largura)
 	FIMREPETIR
 FIMAPRENDA;
 
-APRENDA triangulo(largura2)
+APRENDA triangulo(largura)
 	REPETIR 3,
 		GIRARDIREITA 60;
-		PARAFRENTE largura2
+		PARAFRENTE largura
 	FIMREPETIR
 FIMAPRENDA;
 
