@@ -1,5 +1,8 @@
 package plp.programebrincando.command;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
@@ -39,5 +42,10 @@ public class IfThenElse implements Comando {
 			IdentificadorNaoDeclaradoException {
 		return expressaoCondicao.checaTipo(ambiente) && expressaoCondicao.getTipo(ambiente).isBoolean()
 				&& comandoThen.checaTipo(ambiente) && comandoElse.checaTipo(ambiente);
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		return this;
 	}
 }

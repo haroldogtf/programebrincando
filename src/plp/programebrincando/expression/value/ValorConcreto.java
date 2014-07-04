@@ -1,5 +1,9 @@
 package plp.programebrincando.expression.value;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
+import plp.programebrincando.expression.Expressao;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
 
@@ -52,6 +56,11 @@ public abstract class ValorConcreto<T> implements Valor {
 		} else if (!valor.equals(other.valor))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public Expressao redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map){
+		return this;
 	}
 	
 	@Override

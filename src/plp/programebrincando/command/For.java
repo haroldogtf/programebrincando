@@ -1,5 +1,8 @@
 package plp.programebrincando.command;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
@@ -43,5 +46,11 @@ public class For implements Comando {
 				&& (expressaoLoop.getTipo(ambiente).isBoolean() || 
 						(expressaoLoop.getTipo(ambiente).isInteger() || expressaoLoop.getTipo(ambiente).isParametro()))
 				&& comandoExecucao.checaTipo(ambiente);
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		comandoExecucao = comandoExecucao.redefinirParametro(map);
+		return this;
 	}
 }

@@ -1,5 +1,8 @@
 package plp.programebrincando.command.declaration;
 
+import java.util.Map;
+
+import plp.programebrincando.command.Comando;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
@@ -48,5 +51,10 @@ public class DeclaracaoProcedimento implements Declaracao {
 		resposta = definicaoProcedimento.getComando().checaTipo(ambiente);
 		ambiente.restaura();
 		return resposta;
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		return this;
 	}
 }

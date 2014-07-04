@@ -62,6 +62,7 @@ public class DeclaracaoJunta extends DeclaracaoProcedimento {
 
 		DefinicaoProcedimento definicaoProcedimento2 = ambiente.getProcedimento((Id) aprenda2);
 		Comando comando2 = definicaoProcedimento2.getComando();
+		comando2.redefinirParametro(mapRedefinicao);
 		
 		return new SequenciaComando(comando1, comando2);
 	}

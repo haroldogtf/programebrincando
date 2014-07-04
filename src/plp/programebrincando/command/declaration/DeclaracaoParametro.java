@@ -1,5 +1,8 @@
 package plp.programebrincando.command.declaration;
 
+import java.util.Map;
+
+import plp.programebrincando.command.Comando;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
@@ -34,17 +37,13 @@ public class DeclaracaoParametro implements Declaracao {
 
 	@Override
 	public AmbienteExecucao executar(AmbienteExecucao ambiente)
-			throws IdentificadorJaDeclaradoException,
-			IdentificadorNaoDeclaradoException {
-		// TODO Auto-generated method stub
-		return null;
+			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
+		return ambiente;
 	}
 
 	@Override
-	public boolean checaTipo(AmbienteCompilacao ambiente)
-			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
+		return true;
 	}
 
 	@Override
@@ -70,5 +69,13 @@ public class DeclaracaoParametro implements Declaracao {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		if(map.get(id) != null){
+			this.id = map.get(id).getId();
+		}
+		return this;
 	}
 }
