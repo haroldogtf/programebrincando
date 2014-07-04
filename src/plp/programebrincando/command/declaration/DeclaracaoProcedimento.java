@@ -9,6 +9,7 @@ import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
+import plp.programebrincando.memory.ContextoCompilacao;
 import plp.programebrincando.util.TipoExpressaoComando;
 
 public class DeclaracaoProcedimento implements Declaracao {
@@ -41,16 +42,17 @@ public class DeclaracaoProcedimento implements Declaracao {
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
-		boolean resposta;
-
-		ambiente.map(id, TipoExpressaoComando.PROCEDIMENTO);
-
 		ListaDeclaracaoProcedimentoParametro parametros = definicaoProcedimento.getParametros();
+		
 		ambiente.incrementa();
 		ambiente = parametros.elabora(ambiente);
-		resposta = definicaoProcedimento.getComando().checaTipo(ambiente);
+
+		boolean valido = definicaoProcedimento.getComando().checaTipo(ambiente);
 		ambiente.restaura();
-		return resposta;
+		
+		ambiente.map(id, TipoExpressaoComando.PROCEDIMENTO);
+		
+		return valido;
 	}
 
 	@Override
