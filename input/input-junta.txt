@@ -9,9 +9,15 @@ APRENDA triangulo(largura)
 	REPETIR 3,
 		GIRARDIREITA 60;
 		PARAFRENTE largura
-	FIMREPETIR
-FIMAPRENDA;
+	FIMREPETIR;
 
-CRIA casa = quadrado JUNTA triangulo;
-
-DESENHE casa(50, 100)
+	APRENDA monstro(largura)
+		REPETIR 3,
+			GIRARDIREITA 60;
+			PARAFRENTE largura
+		FIMREPETIR		
+	FIMAPRENDA;
+	
+	CRIA casa = quadrado JUNTA triangulo;
+	DESENHE casa(50, 100)
+FIMAPRENDA
