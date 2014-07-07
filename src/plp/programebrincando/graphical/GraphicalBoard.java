@@ -24,6 +24,8 @@ public class GraphicalBoard extends JFrame{
 		this.setResizable(false);
 		this.setSize(sizeX, sizeY);
 		this.setTitle("Programe Brincando");
+		this.setUndecorated(true);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		
 		this.tartaruga = new Koopa();
