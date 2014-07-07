@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Stack;
 
+import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.command.declaration.DefinicaoProcedimento;
 import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
 import plp.programebrincando.exception.ProcedimentoNaoDeclaradoException;
@@ -41,7 +42,8 @@ public class ContextoExecucao extends Contexto<Valor> implements AmbienteExecuca
 		currentAxisX = limitAxisX / 2;
 		currentAxisY = limitAxisY / 2;
 				
-		GraphicalGenerator.inicializar(limitX, limitY);						
+		GraphicalGenerator.inicializar(limitX, limitY);
+		ArduinoGenerator.inicializar();
 	}
 
 	public ContextoExecucao clone() {

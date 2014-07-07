@@ -1,5 +1,6 @@
 package plp.programebrincando.command.action;
 
+import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
@@ -28,6 +29,7 @@ public class AcaoCorCaneta extends Acao {
 			
 			System.out.println(cor + " RGB ");
 			GraphicalGenerator.pintar(ambiente);
+			ArduinoGenerator.corCaneta(cor.red, cor.green, cor.blue);
 			
 		}else{
 			System.out.println(" SKIP CORCANETA ");

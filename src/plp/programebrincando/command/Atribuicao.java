@@ -1,5 +1,8 @@
 package plp.programebrincando.command;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.Expressao;
@@ -32,5 +35,13 @@ public class Atribuicao implements Comando {
 	@Override
 	public String toString() {
 		return id + " = " + expressao;
+	}
+
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		if(map.get(id) != null){
+			this.id = map.get(id).getId();
+		}
+		return this;
 	}
 }

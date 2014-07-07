@@ -1,5 +1,6 @@
 package plp.programebrincando.command.action;
 
+import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
@@ -26,6 +27,7 @@ public class AcaoGirarEsquerda extends Acao {
 		ambiente.setDegrees(newDegreesValue);
 
 		GraphicalGenerator.pintar(ambiente);
+		ArduinoGenerator.girarEsquerda(degrees.valor());
 		
 		return ambiente;
 	}

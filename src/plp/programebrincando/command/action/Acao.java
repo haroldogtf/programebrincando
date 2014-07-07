@@ -1,6 +1,9 @@
 package plp.programebrincando.command.action;
 
+import java.util.Map;
+
 import plp.programebrincando.command.Comando;
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.expression.Expressao;
 
 public abstract class Acao implements Comando {
@@ -11,6 +14,12 @@ public abstract class Acao implements Comando {
 	public Acao(Expressao expressao, String operador) {
 		this.expressao = expressao;
 		this.operador = operador;
+	}
+	
+	@Override
+	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map){
+		expressao = expressao.redefinirParametro(map);
+		return this;
 	}
 	
 	@Override

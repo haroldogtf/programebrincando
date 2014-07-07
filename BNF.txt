@@ -40,7 +40,7 @@ Expressao ::= Valor
 		  | Id
 
 Valor ::= ValorConcreto
-ValoracConcreto ::= ValorInteiro
+ValorConcreto ::= ValorInteiro
 				| ValorBooleano
 				| ValorCor
 
@@ -49,6 +49,7 @@ ValorBooleano ::= "VERDADEIRO" | "FALSO"
 ValorCor      ::= "COR("expressao"," expressao"," expressao")"
 
 ExpressaoBinaria ::= Expressao "+" Expressao
+				   | Expressao "-" Expressao
 				   | Expressao "==" Expressao
 				   | Expressao ">"  Expressao  
 				   | Expressao "<"  Expressao  

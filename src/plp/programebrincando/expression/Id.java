@@ -1,5 +1,8 @@
 package plp.programebrincando.expression;
 
+import java.util.Map;
+
+import plp.programebrincando.command.declaration.DeclaracaoParametro;
 import plp.programebrincando.exception.VariavelJaDeclaradaException;
 import plp.programebrincando.exception.VariavelNaoDeclaradaException;
 import plp.programebrincando.expression.value.Valor;
@@ -63,5 +66,14 @@ public class Id implements Expressao {
 
 	public String getIdName() {
 		return idName;
+	}
+
+	@Override
+	public Expressao redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		DeclaracaoParametro declaracaoParametro = new DeclaracaoParametro(new Id(idName));
+		if(map.get(declaracaoParametro) != null){
+			idName = map.get(declaracaoParametro).getId().getIdName();
+		}
+		return this;
 	}
 }

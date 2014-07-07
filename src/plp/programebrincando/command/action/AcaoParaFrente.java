@@ -1,5 +1,6 @@
 package plp.programebrincando.command.action;
 
+import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
@@ -32,6 +33,7 @@ public class AcaoParaFrente extends Acao {
 			ambiente.setCurrentAxisY(resultadoPodeAndar.getNewAxisY());
 			
 			GraphicalGenerator.pintar(ambiente);
+			ArduinoGenerator.paraFrente(numeroPassos.valor());
 		}else{
 			System.out.println(" SKIP -> ");
 		}
