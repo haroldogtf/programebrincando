@@ -50,7 +50,6 @@ public class For implements Comando {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
-		comandoExecucao = comandoExecucao.redefinirParametro(map);
-		return this;
+		return new For(expressaoLoop, comandoExecucao.redefinirParametro(map));
 	}
 }

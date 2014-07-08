@@ -46,6 +46,6 @@ public class IfThenElse implements Comando {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
-		return this;
+		return new IfThenElse(expressaoCondicao, comandoThen, comandoElse);
 	}
 }

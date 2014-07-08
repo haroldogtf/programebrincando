@@ -35,8 +35,6 @@ public class SequenciaComando implements Comando {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
-		comando1 = comando1.redefinirParametro(map);
-		comando2 = comando2.redefinirParametro(map);
-		return this;
+		return new SequenciaComando(comando1.redefinirParametro(map), comando2.redefinirParametro(map));
 	}
 }

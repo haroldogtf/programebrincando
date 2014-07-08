@@ -73,9 +73,12 @@ public class Aplicacao implements Comando {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		Aplicacao aplicacao;
 		if(map.get(id) != null){
-			this.id = map.get(id).getId();
+			aplicacao = new Aplicacao(map.get(id).getId(), lista);
+		}else{
+			aplicacao = new Aplicacao(id, lista);
 		}
-		return this;
+		return aplicacao;
 	}
 }

@@ -39,9 +39,12 @@ public class Atribuicao implements Comando {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		Atribuicao atribuicao = this;
 		if(map.get(id) != null){
-			this.id = map.get(id).getId();
+			atribuicao = new Atribuicao(map.get(id).getId(), expressao);
+		}else{
+			atribuicao = new Atribuicao(id, expressao);
 		}
-		return this;
+		return atribuicao;
 	}
 }

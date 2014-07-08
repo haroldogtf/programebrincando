@@ -50,9 +50,12 @@ public class DeclaracaoVariavel implements Declaracao {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		DeclaracaoVariavel declaracaoVariavel;
 		if(map.get(id) != null){
-			this.id = map.get(id).getId();
+			declaracaoVariavel = new DeclaracaoVariavel(map.get(id).getId(), expressao);
+		}else{
+			declaracaoVariavel = new DeclaracaoVariavel(id, expressao);
 		}
-		return this;
+		return declaracaoVariavel;
 	}
 }

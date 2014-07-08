@@ -19,6 +19,7 @@ public abstract class ExpressaoBinaria implements Expressao {
 	
 	@Override
 	public Expressao redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map){
+		//TODO Verificar como fazer o expressao binaria
 		expressaoEsquerda = expressaoEsquerda.redefinirParametro(map);
 		expressaoDireita = expressaoDireita.redefinirParametro(map);
 		return this;

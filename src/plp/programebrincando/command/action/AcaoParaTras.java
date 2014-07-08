@@ -47,4 +47,9 @@ public class AcaoParaTras extends Acao {
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		return this.getExpressao().getTipo(ambiente).isInteger() || this.getExpressao().getTipo(ambiente).isParametro();
 	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new AcaoParaTras(super.getExpressao());
+	}
 }

@@ -73,9 +73,12 @@ public class DeclaracaoParametro implements Declaracao {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		DeclaracaoParametro declaracaoParametro;
 		if(map.get(id) != null){
-			this.id = map.get(id).getId();
+			declaracaoParametro = new DeclaracaoParametro(map.get(id).getId());
+		}else{
+			declaracaoParametro = new DeclaracaoParametro(id);
 		}
-		return this;
+		return declaracaoParametro;
 	}
 }

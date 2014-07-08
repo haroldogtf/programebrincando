@@ -42,4 +42,9 @@ public class AcaoCorCaneta extends Acao {
 			throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		return this.getExpressao().getTipo(ambiente).isColor() || this.getExpressao().getTipo(ambiente).isParametro();		
 	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new AcaoCorCaneta(super.getExpressao());
+	}
 }

@@ -70,10 +70,13 @@ public class Id implements Expressao {
 
 	@Override
 	public Expressao redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
+		Id id;
 		DeclaracaoParametro declaracaoParametro = new DeclaracaoParametro(new Id(idName));
 		if(map.get(declaracaoParametro) != null){
-			idName = map.get(declaracaoParametro).getId().getIdName();
+			id = new Id(map.get(declaracaoParametro).getId().getIdName());
+		}else{
+			id = new Id(idName);
 		}
-		return this;
+		return id;
 	}
 }

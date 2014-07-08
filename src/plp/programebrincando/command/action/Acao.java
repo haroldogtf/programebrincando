@@ -18,8 +18,14 @@ public abstract class Acao implements Comando {
 	
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map){
-		expressao = expressao.redefinirParametro(map);
-		return this;
+		Acao acao = null;
+		try {
+			acao = (Acao) this.clone();
+			acao.setExpressao(expressao.redefinirParametro(map));
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return acao;
 	}
 	
 	@Override
@@ -33,5 +39,9 @@ public abstract class Acao implements Comando {
 
 	public String getOperador() {
 		return operador;
+	}
+
+	private void setExpressao(Expressao expressao) {
+		this.expressao = expressao;
 	}
 }

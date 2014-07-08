@@ -34,4 +34,9 @@ public class AcaoUsarCaneta extends Acao {
 	public boolean checaTipo(AmbienteCompilacao ambiente) throws IdentificadorJaDeclaradoException, IdentificadorNaoDeclaradoException {
 		return this.getExpressao().getTipo(ambiente).isBoolean() || this.getExpressao().getTipo(ambiente).isParametro();
 	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new AcaoUsarCaneta(super.getExpressao());
+	}
 }

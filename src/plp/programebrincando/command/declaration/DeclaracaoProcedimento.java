@@ -57,6 +57,6 @@ public class DeclaracaoProcedimento implements Declaracao {
 
 	@Override
 	public Comando redefinirParametro(Map<DeclaracaoParametro, DeclaracaoParametro> map) {
-		return this;
+		return new DeclaracaoProcedimento(id, definicaoProcedimento);
 	}
 }
