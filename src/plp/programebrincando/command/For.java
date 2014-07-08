@@ -23,7 +23,7 @@ public class For implements Comando {
 
 	@Override
 	public String toString() {
-		return "for " + expressaoLoop.toString() + ", " + comandoExecucao.toString();	
+		return "REPETIR " + expressaoLoop.toString() + ", " + comandoExecucao.toString();	
 	}
 
 	@Override
