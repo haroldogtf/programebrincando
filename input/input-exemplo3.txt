@@ -13,4 +13,4 @@ FIMAPRENDA;
 
 CRIA casa = quadrado JUNTA triangulo;
 
-DESENHE casa(100, 200)
+DESENHE casa(100, 100)

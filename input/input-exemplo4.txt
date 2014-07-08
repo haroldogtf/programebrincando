@@ -1,0 +1,57 @@
+APRENDA casa (tamanho, quantidade)
+	
+	VAR alturaPorta = 0;
+	VAR larguraPorta = 0;
+	VAR desenharPorta = VERDADEIRO;
+	
+	SE	tamanho >= 100 
+	FACA
+		alturaPorta = 45;
+		larguraPorta = 20
+	SENAOFACA
+		desenharPorta = FALSO
+	FIMSE;
+	
+	REPETIR quantidade,
+		CORCANETA COR(0, 0, 0);
+		DESENHE quadrado(tamanho);
+		
+		
+		CORCANETA COR(165, 42, 42);
+		DESENHE triangulo(tamanho);
+		
+		USARCANETA FALSO;
+		
+		SE	desenharPorta 
+		FACA
+			CORCANETA COR(0, 0, 255);
+			GIRARESQUERDA 90;
+			PARAFRENTE tamanho;
+			GIRARESQUERDA 90;
+			PARAFRENTE larguraPorta;
+			GIRARESQUERDA 90;
+			PARAFRENTE alturaPorta;
+			GIRARDIREITA 90;
+			USARCANETA VERDADEIRO;
+			
+			DESENHE retangulo(alturaPorta, larguraPorta);
+			
+			USARCANETA FALSO;
+			GIRARDIREITA 90;
+			PARAFRENTE alturaPorta;
+			GIRARDIREITA 90;
+			PARAFRENTE larguraPorta;
+			GIRARDIREITA 90;
+			PARAFRENTE tamanho;
+			GIRARDIREITA 90;
+			
+			PARAFRENTE tamanho
+		SENAOFACA
+			CORCANETA COR (255, 0, 0)	
+		FIMSE;
+		USARCANETA VERDADEIRO
+	FIMREPETIR
+	
+FIMAPRENDA;
+
+DESENHE casa(100, 2)
