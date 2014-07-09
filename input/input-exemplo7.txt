@@ -1,0 +1,19 @@
+APRENDA movimento (andar, girar)
+	CORCANETA COR(255, 0, 0);
+	PARAFRENTE andar;
+	
+	CORCANETA COR(255, 255, 0);
+	GIRARDIREITA girar;
+	
+	CORCANETA COR(0, 255, 0);
+	PARATRAS andar;
+	
+	CORCANETA COR(0, 0, 255);
+	GIRARESQUERDA girar;
+	
+	CORCANETA COR(255, 0, 0);
+	PARAFRENTE andar+andar
+FIMAPRENDA;
+
+
+DESENHE movimento(10, 180)
