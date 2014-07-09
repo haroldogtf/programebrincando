@@ -1,8 +1,10 @@
 #include <Servo.h>
 
-int START_DELAY = 10000;
-int MOTOR_DELAY = 800;
-int ACAO_DELAY  = 2000;
+int START_DELAY  = 200;
+int ACAO_DELAY  = 1000;
+
+int MOVER_DELAY = 100;
+double GIRAR_DELAY = 8.5;
 
 int DIRECAO_PARAFRENTE =  100;
 int DIRECAO_PARATRAS   = -100;
@@ -25,13 +27,20 @@ int blue   = 255;
 boolean executar = true;
 
 void setup() {
-    usarCaneta(true);
-    delay(START_DELAY);
+  usarCaneta(true);
 }
 
 void loop() {
+  
+  for(int i = 0; i < 10; i++) {
+    delay(START_DELAY);
+    usarCaneta(false);
+    delay(START_DELAY);
+    usarCaneta(true);
+  }
+  
   if(executar) {
-    //@ACAO@
+    //@ACAO@   
     desativar();
   }
 }
@@ -42,15 +51,24 @@ void ligarMotores() {
 }
 
 void desligarMotores() {
-  motor1.detach();
   motor2.detach();
+  motor1.detach();
 }
 
-void mover(int direcao1, int direcao2, int tempo) {
+void mover(int direcao, int tempo) {
+  ligarMotores();
+  motor1.write(direcao);
+  motor2.write(direcao * 0.93);
+  delay(MOVER_DELAY * tempo);
+  desligarMotores();
+  delay(ACAO_DELAY);
+}
+
+void girar(int direcao1, int direcao2, int tempo) {
   ligarMotores();
   motor1.write(direcao1);
-  motor2.write(direcao2);
-  delay(MOTOR_DELAY * tempo);
+  motor2.write(direcao2 * 0.93);
+  delay(GIRAR_DELAY * tempo);
   desligarMotores();
   delay(ACAO_DELAY);
 }
@@ -58,23 +76,23 @@ void mover(int direcao1, int direcao2, int tempo) {
 void desativar() {
   executar = false;
   desligarMotores();
-  usarCaneta(false);
+  corCaneta(255,255,255);
 }
 
 void paraFrente(int valor) {
-  mover(DIRECAO_PARAFRENTE, DIRECAO_PARAFRENTE, valor);
+  mover(DIRECAO_PARAFRENTE, valor);
 }
 
 void paraTras(int valor) {
-  mover(DIRECAO_PARATRAS, DIRECAO_PARATRAS, valor);
+  mover(DIRECAO_PARATRAS, valor);
 }
 
 void girarEsquerda(int valor) {
-  mover(DIRECAO_PARATRAS, DIRECAO_PARAFRENTE, valor); 
+  girar(DIRECAO_PARATRAS, DIRECAO_PARAFRENTE, valor); 
 }
 
 void girarDireita(int valor) {
-  mover(DIRECAO_PARAFRENTE, DIRECAO_PARATRAS, valor); 
+  girar(DIRECAO_PARAFRENTE, DIRECAO_PARATRAS, valor); 
 }
 
 void setCores(int r, int g, int b) {
