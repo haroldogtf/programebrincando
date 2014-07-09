@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<style TYPE="text/css">
+	body{
+		font-family: monospace;
+	}
+	</style>
+</head>
+<body>
+	<p>
+	Programa ::= Comando
+	</p>
+
+	<p>
+	Comando ::= Sequencia <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| Declaracao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| Atribuicao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| Aplicacao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| If-Then-Else <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| For <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| Acao
+	</p>
+			  	
+	<p>
+	Sequencia ::= Comando ";" Comando
+	</p>
+
+	<p>
+	Declaracao ::= DeclaracaoVariavel <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| DeclaracaoProcedimento <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				| DeclaracaoJunta
+	</p>
+
+	<p>
+	DeclaracaoVariavel ::= "VAR" Id "=" Expressao <br>
+	DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Comando "FIMAPRENDA" <br>
+	DeclaracaoJunta ::= "CRIA" Id "=" Expressao "JUNTA" Expressao <br>
+	ListaParametros ::= Id | Id "," ListaParametros 
+	</p>
+
+	<p>
+	Atribuicao ::= Id "=" Expressao <br>
+	</p>
+
+	<p>
+	Aplicacao ::= "DESENHE" Id"(" [ListaExpressao] ")" <br>
+	ListaExpressao ::= Expressao | Expressao "," ListaExpressao <br>
+	</p>
+
+	<p>
+	If-Then-Else ::= "SE" Expressao "FACA" Comando "SENAOFACA" Comando "FIMSE" <br>
+	</p>
+
+	<p>
+	For ::= "REPETIR" Expressao "," Comando "FIMREPETIR"
+	</p>
+
+	<p>
+	Acao ::= "PARAFRENTE" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			| "PARATRAAS" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			| "GIRARDIREITA" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			| "GIRARESQUERDA" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			| "CORCANETA" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			| "USARCANETA" Expressao
+	</p>
+
+	<p>
+	Expressao ::= Valor <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			  | ExpressaoBinaria	  <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			  | Id
+	</p>
+
+	<p>
+	Valor ::= ValorConcreto
+	ValorConcreto ::= ValorInteiro <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					| ValorBooleano <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					| ValorCor
+	</p>
+
+	<p>
+	ValorInteiro  ::= [0-9]+ <br>
+	ValorBooleano ::= "VERDADEIRO" | "FALSO" <br>
+	ValorCor      ::= "COR("expressao"," expressao"," expressao")"
+	</p>
+
+	<p>
+	ExpressaoBinaria ::= Expressao "+" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao "-" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao "==" Expressao <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao ">"  Expressao   <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao "<"  Expressao   <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao ">=" Expressao   <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					   | Expressao "<=" Expressao
+	</p>
+
+	<p>
+	Id ::= [a-zA-Z]+
+	</p>
+</body>
+</html>
