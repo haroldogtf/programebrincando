@@ -6,8 +6,12 @@ APRENDA triangulo (tamanho)
 FIMAPRENDA;
 
 APRENDA quadrado (tamanho)
-	REPETIR 4,
-	 PARAFRENTE tamanho; GIRARDIREITA 90
+	VAR i = 4;
+	
+	REPETIR i > 0,
+		PARAFRENTE tamanho;
+		GIRARDIREITA 90;
+		i = i - 1 
 	FIMREPETIR
 FIMAPRENDA;
 

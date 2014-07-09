@@ -5,7 +5,7 @@ APRENDA retangulo (largura, altura)
 	FIMREPETIR
 FIMAPRENDA;
 
-APRENDA losangulo(tamanho)
+APRENDA losango(tamanho)
 	
 	GIRARESQUERDA 150;
 	
@@ -48,7 +48,7 @@ APRENDA bandeiraBrasil()
 	CORCANETA COR(255, 255, 0);
 	USARCANETA VERDADEIRO;
 	
-	DESENHE losangulo(180);
+	DESENHE losango(180);
 	
 	USARCANETA FALSO;
 	GIRARDIREITA 150;

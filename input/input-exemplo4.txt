@@ -1,3 +1,20 @@
+APRENDA triangulo (tamanho)
+	GIRARESQUERDA 60; PARAFRENTE tamanho;
+	GIRARDIREITA 120; PARAFRENTE tamanho;
+	GIRARDIREITA 120; PARAFRENTE tamanho
+FIMAPRENDA;
+
+APRENDA quadrado (tamanho)
+	DESENHE retangulo(tamanho, tamanho)
+FIMAPRENDA;
+
+APRENDA retangulo (altura, largura)
+	REPETIR 2,
+	 PARAFRENTE largura; GIRARDIREITA 90;
+	 PARAFRENTE altura; GIRARDIREITA 90
+	FIMREPETIR
+FIMAPRENDA;
+
 APRENDA casa (tamanho, quantidade)
 	
 	VAR alturaPorta = 0;
@@ -7,7 +24,21 @@ APRENDA casa (tamanho, quantidade)
 	SE	tamanho >= 100 
 	FACA
 		alturaPorta = 45;
-		larguraPorta = 20
+		larguraPorta = 20;
+	
+		VAR tamanhoMaximo = FALSO;
+		VAR diferenca = 0;
+		
+		REPETIR tamanhoMaximo == FALSO,
+			diferenca = tamanho - alturaPorta;			 
+			SE diferenca > 60
+			FACA
+				alturaPorta = alturaPorta + 45;
+				larguraPorta = larguraPorta + 20
+			SENAOFACA
+				tamanhoMaximo = VERDADEIRO
+			FIMSE
+		FIMREPETIR
 	SENAOFACA
 		desenharPorta = FALSO
 	FIMSE;
@@ -54,4 +85,4 @@ APRENDA casa (tamanho, quantidade)
 	
 FIMAPRENDA;
 
-DESENHE casa(100, 2)
+DESENHE casa(150, 2)
