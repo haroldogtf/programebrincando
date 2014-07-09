@@ -9,7 +9,6 @@ import plp.programebrincando.exception.ProcedimentoJaDeclaradoException;
 import plp.programebrincando.expression.Id;
 import plp.programebrincando.memory.AmbienteCompilacao;
 import plp.programebrincando.memory.AmbienteExecucao;
-import plp.programebrincando.memory.ContextoCompilacao;
 import plp.programebrincando.util.TipoExpressaoComando;
 
 public class DeclaracaoProcedimento implements Declaracao {

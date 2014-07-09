@@ -4,7 +4,6 @@ import plp.programebrincando.arduino.ArduinoGenerator;
 import plp.programebrincando.exception.IdentificadorJaDeclaradoException;
 import plp.programebrincando.exception.IdentificadorNaoDeclaradoException;
 import plp.programebrincando.expression.Expressao;
-import plp.programebrincando.expression.value.Valor;
 import plp.programebrincando.expression.value.ValorInteiro;
 import plp.programebrincando.graphical.GraphicalGenerator;
 import plp.programebrincando.memory.AmbienteCompilacao;
