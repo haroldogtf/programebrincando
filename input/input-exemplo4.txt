@@ -42,46 +42,55 @@ APRENDA casa (tamanho, quantidade)
 	SENAOFACA
 		desenharPorta = FALSO
 	FIMSE;
+		
+	USARCANETA VERDADEIRO;
 	
-	REPETIR quantidade,
-		CORCANETA COR(0, 0, 0);
-		DESENHE quadrado(tamanho);
+	CORCANETA COR(0, 0, 0);
+	DESENHE quadrado(tamanho);
+	
+	
+	CORCANETA COR(165, 42, 42);
+	DESENHE triangulo(tamanho);
+	
+	USARCANETA FALSO;
+	
+	SE	desenharPorta 
+	FACA
+		CORCANETA COR(0, 0, 255);
+		GIRARESQUERDA 90;
+		PARAFRENTE tamanho;
+		GIRARESQUERDA 90;
+		PARAFRENTE larguraPorta;
+		GIRARESQUERDA 90;
+		PARAFRENTE alturaPorta;
+		GIRARDIREITA 90;
+		USARCANETA VERDADEIRO;
 		
-		
-		CORCANETA COR(165, 42, 42);
-		DESENHE triangulo(tamanho);
+		DESENHE retangulo(alturaPorta, larguraPorta);
 		
 		USARCANETA FALSO;
+		GIRARDIREITA 90;
+		PARAFRENTE alturaPorta;
+		GIRARDIREITA 90;
+		PARAFRENTE larguraPorta;
+		GIRARDIREITA 90;
+		PARAFRENTE tamanho;
+		GIRARDIREITA 90;
 		
-		SE	desenharPorta 
-		FACA
-			CORCANETA COR(0, 0, 255);
-			GIRARESQUERDA 90;
-			PARAFRENTE tamanho;
-			GIRARESQUERDA 90;
-			PARAFRENTE larguraPorta;
-			GIRARESQUERDA 90;
-			PARAFRENTE alturaPorta;
-			GIRARDIREITA 90;
-			USARCANETA VERDADEIRO;
-			
-			DESENHE retangulo(alturaPorta, larguraPorta);
-			
-			USARCANETA FALSO;
-			GIRARDIREITA 90;
-			PARAFRENTE alturaPorta;
-			GIRARDIREITA 90;
-			PARAFRENTE larguraPorta;
-			GIRARDIREITA 90;
-			PARAFRENTE tamanho;
-			GIRARDIREITA 90;
-			
-			PARAFRENTE tamanho
-		SENAOFACA
-			CORCANETA COR (255, 0, 0)	
-		FIMSE;
-		USARCANETA VERDADEIRO
-	FIMREPETIR
+		PARAFRENTE tamanho
+	SENAOFACA
+		CORCANETA COR (255, 0, 0)	
+	FIMSE;
+	
+	quantidade = quantidade - 1;
+	
+	SE quantidade > 0
+	FACA
+		DESENHE casa(tamanho, quantidade - 1)
+	SENAOFACA
+		USARCANETA FALSO
+	FIMSE
+		
 	
 FIMAPRENDA;
 
