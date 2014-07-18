@@ -15,9 +15,11 @@ Declaracao ::= DeclaracaoVariavel
 			| DeclaracaoJunta
 
 DeclaracaoVariavel ::= "VAR" Id "=" Expressao
+
 DeclaracaoProcedimento ::= "APRENDA" Id "(" [ListaParametros] ")" Comando "FIMAPRENDA"
-DeclaracaoJunta ::= "CRIA" Id "=" Expressao "JUNTA" Expressao
 ListaParametros ::= Id | Id "," ListaParametros
+
+DeclaracaoJunta ::= "CRIA" Id "=" Id "JUNTA" Id
 
 Atribuicao ::= Id "=" Expressao
 
